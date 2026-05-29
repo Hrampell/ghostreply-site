@@ -1726,14 +1726,14 @@
             <div class="installer-box" style="text-align:center; padding:40px 32px;">
                 <p style="color:var(--text-secondary); font-size:var(--text-sm); margin-bottom:var(--space-sm);">Open Terminal and paste this:</p>
                 <div class="installer-command" id="install-cmd">
-                    <span>Installer temporarily paused</span>
+                    <span>curl -sL ghostreply.lol/install.sh | bash</span>
                     <span class="copy-hint">click to copy</span>
                 </div>
                 <p style="color:var(--text-muted); font-size:var(--text-xs); margin-top:14px;">Press <strong style="color:var(--text-secondary);">Cmd + Space</strong>, type <strong style="color:var(--text-secondary);">Terminal</strong>, hit Enter. Paste with <strong style="color:var(--text-secondary);">Cmd + V</strong> and press Enter.</p>
 
                 <details class="install-explainer">
                     <summary>What does this do? &#9662;</summary>
-                    <p>GhostReply is moving to a private distribution channel so the app code is no longer public. New installs are temporarily paused while we finish that migration.</p>
+                    <p>Downloads GhostReply to your Mac, adds the <code style="background:#222; padding:2px 6px; border-radius:4px; font-size:13px; color:#4ade80;">ghostreply</code> command, and starts setup. Nothing is installed system-wide — everything lives in ~/.ghostreply/</p>
                 </details>
             </div>
 
@@ -1777,7 +1777,7 @@
             </div>
 
             <div class="installer-box" style="border-color:#4ade80; border-width:1px;">
-                <p style="color:var(--brand); font-size:var(--text-base); margin-bottom:0;">New installs are temporarily paused while we move distribution private. Existing customers can keep using their installed copy.</p>
+                <p style="color:var(--brand); font-size:var(--text-base); margin-bottom:0;">10 free replies — no credit card. Type <code style="background:var(--surface-2); padding:2px 6px; border-radius:4px; font-size:var(--text-xs); color:var(--brand);">trial</code> during setup.</p>
             </div>
 
             <div class="installer-box">
@@ -1916,7 +1916,7 @@
             </div>
             <div class="faq-item">
                 <h3>GhostReply isn't updating automatically?</h3>
-                <p>Updates are temporarily paused while GhostReply moves to a private distribution channel.</p>
+                <p>If you see "Update check skipped" or you're stuck on an old version, just re-run the install command in Terminal — it'll pull the latest version: <code style="background:#222; padding:2px 6px; border-radius:4px; font-size:14px; color:#4ade80;">curl -sL https://ghostreply.lol/install.sh | bash</code></p>
             </div>
         </div>
 
@@ -2006,7 +2006,7 @@
             cmd.addEventListener('click', function() {
                 if (busy) return;
                 busy = true;
-                navigator.clipboard.writeText('Installer temporarily paused');
+                navigator.clipboard.writeText('curl -sL ghostreply.lol/install.sh | bash');
 
                 cmd.classList.add('copied');
                 hint.textContent = 'Copied!';
@@ -2488,7 +2488,7 @@
                 var isMobile = window.innerWidth < 768;
 
                 if (!isMobile) {
-                    await player.typeCommand('Installer temporarily paused');
+                    await player.typeCommand('curl -sL ghostreply.lol/install.sh | bash');
                     if (player.aborted) return;
                     await player.wait(300);
 
@@ -2635,7 +2635,7 @@
 
             function showFinalState() {
                 setProgress(100);
-                addLine('<span class="t-green">$</span> Installer temporarily paused');
+                addLine('<span class="t-green">$</span> curl -sL ghostreply.lol/install.sh | bash');
                 addLine('');
                 addLine('<span class="t-green">\u2713</span> <span class="t-white">Python 3.12 found</span>');
                 addLine('<span class="t-green">\u2713</span> [1/4] Downloaded');
@@ -2657,7 +2657,7 @@
                 // Step 1: Run installer (0% → 25%)
                 activateStep(0);
                 setProgress(0);
-                addLine('<span class="t-green">$</span> Installer temporarily paused');
+                addLine('<span class="t-green">$</span> curl -sL ghostreply.lol/install.sh | bash');
                 await wait(600);
                 addLine('');
                 addLine('<span class="t-green">\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557</span>');
