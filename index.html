@@ -854,6 +854,66 @@
         .feature h3 { font-size: var(--text-base); font-weight: 600; margin-bottom: 6px; }
         .feature p { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.55; }
 
+        /* ===== Fast Sale Blocks ===== */
+        .fast-sale-strip {
+            margin: 0 auto var(--space-lg);
+            padding: 18px var(--space-md);
+            border: 1px solid rgba(74, 222, 128, 0.22);
+            border-radius: 14px;
+            background: rgba(74, 222, 128, 0.045);
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+            justify-content: space-between;
+        }
+        .fast-sale-strip strong {
+            display: block;
+            font-size: var(--text-base);
+            line-height: 1.35;
+        }
+        .fast-sale-strip span {
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+        }
+        .fast-sale-strip .cta-button {
+            padding: 10px 18px;
+            min-height: 42px;
+            font-size: var(--text-sm);
+            white-space: nowrap;
+        }
+        .niche-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--space-xs);
+            margin-top: var(--space-md);
+        }
+        .niche-link {
+            display: block;
+            min-height: 110px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: border-color 0.2s var(--ease-out-quart), transform 0.2s var(--ease-out-quart);
+        }
+        .niche-link:hover {
+            border-color: rgba(74, 222, 128, 0.34);
+            transform: translateY(-2px);
+        }
+        .niche-link strong {
+            display: block;
+            font-size: var(--text-sm);
+            margin-bottom: 6px;
+        }
+        .niche-link span {
+            display: block;
+            color: var(--text-secondary);
+            font-size: var(--text-xs);
+            line-height: 1.45;
+        }
+
         /* ===== FAQ ===== */
         .faq-item {
             border-bottom: 1px solid var(--border);
@@ -1314,6 +1374,12 @@
             html, body { overflow-x: hidden; }
             .container { padding: var(--space-lg) var(--space-md); }
             .features { grid-template-columns: 1fr; }
+            .fast-sale-strip {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .niche-grid { grid-template-columns: 1fr 1fr; }
             .installer-command { font-size: var(--text-xs); flex-wrap: wrap; word-break: break-all; }
             .demos-row { flex-direction: column !important; }
             .demos-row .imessage-demo { min-width: 0 !important; width: 100% !important; }
@@ -1393,6 +1459,7 @@
             .msg-bubble { font-size: 12px; padding: 6px 10px; }
 
             .cta-button { width: 100%; padding: 14px var(--space-md); }
+            .niche-grid { grid-template-columns: 1fr; }
 
             .sticky-frame { padding: var(--space-md) var(--space-sm); gap: var(--space-md); }
 
@@ -1553,7 +1620,7 @@
 
     <div class="page-content">
     <header class="top-bar" role="banner">
-        <span>Harrison Rampell &middot; v2.2.5</span>
+        <span>Harrison Rampell &middot; v2.2.10</span>
         <a href="#" style="margin-left:12px;" aria-label="Send feedback">Feedback</a>
     </header>
     <main id="main-content">
@@ -1601,6 +1668,42 @@
         </div>
 
     </div><!-- end container -->
+
+    <div class="container">
+        <section class="fast-sale-strip" aria-label="Fast purchase offer">
+            <div>
+                <strong>Need GhostReply tonight? It is $4.99 once, forever.</strong>
+                <span>Run the free trial, or buy now and paste your license key during setup.</span>
+            </div>
+            <a href="#" id="checkout-btn-fast" class="cta-button">Buy Now — $4.99</a>
+        </section>
+
+        <section class="section" style="padding-top:0;">
+            <h2>Built for texts you cannot ignore</h2>
+            <div class="niche-grid" aria-label="GhostReply use-case pages">
+                <a class="niche-link" href="/dating.html?utm_source=site&utm_medium=niche_nav&utm_campaign=fast_sales&utm_content=dating">
+                    <strong>Dating</strong>
+                    <span>When you need a better reply than “haha yeah.”</span>
+                </a>
+                <a class="niche-link" href="/realtors.html?utm_source=site&utm_medium=niche_nav&utm_campaign=fast_sales&utm_content=realtors">
+                    <strong>Realtors</strong>
+                    <span>Answer client texts while you are showing houses.</span>
+                </a>
+                <a class="niche-link" href="/recruiters.html?utm_source=site&utm_medium=niche_nav&utm_campaign=fast_sales&utm_content=recruiters">
+                    <strong>Recruiters</strong>
+                    <span>Keep candidates warm without living in Messages.</span>
+                </a>
+                <a class="niche-link" href="/sales.html?utm_source=site&utm_medium=niche_nav&utm_campaign=fast_sales&utm_content=sales">
+                    <strong>Sales</strong>
+                    <span>Reply to prospects before the thread goes cold.</span>
+                </a>
+                <a class="niche-link" href="/client-texts.html?utm_source=site&utm_medium=niche_nav&utm_campaign=fast_sales&utm_content=client_texts">
+                    <strong>Client Work</strong>
+                    <span>Polished replies for freelancers and local businesses.</span>
+                </a>
+            </div>
+        </section>
+    </div>
 
     <!-- ===== Sticky Scroll Sequence ===== -->
     <section class="sticky-sequence" id="sticky-seq">
@@ -2058,6 +2161,7 @@
         }
 
         document.getElementById('checkout-btn').addEventListener('click', (e) => openCheckout(e, 'hero'));
+        document.getElementById('checkout-btn-fast').addEventListener('click', (e) => openCheckout(e, 'fast_sale'));
         document.getElementById('checkout-btn-mid').addEventListener('click', (e) => openCheckout(e, 'pricing'));
         document.getElementById('checkout-btn-2').addEventListener('click', (e) => openCheckout(e, 'bottom'));
 
