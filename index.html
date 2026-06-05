@@ -1784,7 +1784,7 @@
                 <h3>After 10 replies</h3>
                 <p style="color:var(--text-secondary);">Buy a license for $4.99 — run <code style="background:var(--surface-2); padding:2px 6px; border-radius:4px; font-size:var(--text-xs); color:var(--brand);">ghostreply</code> again and paste your license key. Everything you set up is saved.</p>
                 <br>
-                <a href="#" class="cta-button" style="font-size:15px; padding:12px 32px;" onclick="event.preventDefault(); window.location.href=LEMONSQUEEZY_CHECKOUT;">Buy a License — $4.99</a>
+                <a href="#" id="checkout-btn-mid" class="cta-button" style="font-size:15px; padding:12px 32px;">Buy a License — $4.99</a>
             </div>
 
         </div>
@@ -1974,8 +1974,70 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
+        const GHOSTREPLY_API = 'https://ghostreply-api.rampell.workers.dev';
         const LEMONSQUEEZY_CHECKOUT = 'https://ghostreply.lemonsqueezy.com/checkout/buy/877e5f9a-3f63-4b5e-84f2-95e624643828';
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const sourceParams = new URLSearchParams(window.location.search);
+        const sourceId = (() => {
+            try {
+                const existing = localStorage.getItem('ghostreply_source_id');
+                if (existing) return existing;
+                const next = (crypto.randomUUID && crypto.randomUUID()) || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+                localStorage.setItem('ghostreply_source_id', next);
+                localStorage.setItem('ghostreply_landing_url', window.location.href);
+                localStorage.setItem('ghostreply_initial_referrer', document.referrer || '$direct');
+                return next;
+            } catch {
+                return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+            }
+        })();
+
+        function sourceValue(name) {
+            return sourceParams.get(name) || '';
+        }
+
+        function trackSiteEvent(event, properties) {
+            try {
+                navigator.sendBeacon(
+                    `${GHOSTREPLY_API}/v1/events`,
+                    new Blob([JSON.stringify({
+                        event,
+                        distinct_id: `site_${sourceId}`,
+                        properties: {
+                            source_id: sourceId,
+                            landing_url: localStorage.getItem('ghostreply_landing_url') || window.location.href,
+                            referrer: localStorage.getItem('ghostreply_initial_referrer') || document.referrer || '$direct',
+                            current_url: window.location.href,
+                            utm_source: sourceValue('utm_source'),
+                            utm_medium: sourceValue('utm_medium'),
+                            utm_campaign: sourceValue('utm_campaign'),
+                            utm_content: sourceValue('utm_content'),
+                            utm_term: sourceValue('utm_term'),
+                            ...properties,
+                        },
+                    })], { type: 'application/json' })
+                );
+            } catch {}
+        }
+
+        function checkoutUrl(buttonId) {
+            const url = new URL(LEMONSQUEEZY_CHECKOUT);
+            const custom = {
+                source_id: sourceId,
+                landing_url: localStorage.getItem('ghostreply_landing_url') || window.location.href,
+                referrer: localStorage.getItem('ghostreply_initial_referrer') || document.referrer || '$direct',
+                button_id: buttonId,
+                utm_source: sourceValue('utm_source'),
+                utm_medium: sourceValue('utm_medium'),
+                utm_campaign: sourceValue('utm_campaign'),
+                utm_content: sourceValue('utm_content'),
+                utm_term: sourceValue('utm_term'),
+            };
+            Object.entries(custom).forEach(([key, value]) => {
+                if (value) url.searchParams.set(`checkout[custom][${key}]`, value.slice(0, 500));
+            });
+            return url.toString();
+        }
 
         // ===== Console Easter Egg =====
         console.log(
@@ -1987,14 +2049,17 @@
             'color: #7a7a7a; font-family: monospace;'
         );
 
-        document.getElementById('checkout-btn').addEventListener('click', (e) => {
+        trackSiteEvent('site_pageview', {});
+
+        function openCheckout(e, buttonId) {
             e.preventDefault();
-            window.location.href = LEMONSQUEEZY_CHECKOUT;
-        });
-        document.getElementById('checkout-btn-2').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.href = LEMONSQUEEZY_CHECKOUT;
-        });
+            trackSiteEvent('checkout_clicked', { button_id: buttonId });
+            window.location.href = checkoutUrl(buttonId);
+        }
+
+        document.getElementById('checkout-btn').addEventListener('click', (e) => openCheckout(e, 'hero'));
+        document.getElementById('checkout-btn-mid').addEventListener('click', (e) => openCheckout(e, 'pricing'));
+        document.getElementById('checkout-btn-2').addEventListener('click', (e) => openCheckout(e, 'bottom'));
 
         // ===== Copy Install Command =====
         (function() {
