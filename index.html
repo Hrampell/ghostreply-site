@@ -21,7 +21,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- FAQ schema for SEO -->
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
       {"@type":"Question","name":"Is it really free to try?","acceptedAnswer":{"@type":"Answer","text":"Yes. You get 10 replies free with no credit card. After that it is 4.99 once."}},
@@ -37,7 +36,7 @@
     :root{
         --bg:#06070a; --text:#f5f7f9; --muted:#9aa3ad; --dim:#666d76;
         --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
-        --brand:#4ade80; --surface:rgba(255,255,255,.03);
+        --brand:#4ade80; --brand-2:#22d3ee; --surface:rgba(255,255,255,.03);
         --ease:cubic-bezier(.22,.7,.2,1);
     }
     *{margin:0;padding:0;box-sizing:border-box}
@@ -51,20 +50,41 @@
     video{display:block;max-width:100%}
     ::selection{background:var(--brand);color:#04210f}
 
-    .glow{position:fixed;inset:0;z-index:0;pointer-events:none;
+    .glow{position:fixed;inset:0;z-index:0;pointer-events:none;will-change:transform;
         background:radial-gradient(58% 44% at 50% 12%, rgba(74,222,128,.10), transparent 70%);}
+
+    /* scroll progress bar (Framer) */
+    .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:60;
+        background:linear-gradient(90deg,var(--brand),var(--brand-2));box-shadow:0 0 10px rgba(74,222,128,.5)}
+
+    /* buttons */
+    .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;
+        padding:14px 26px;border-radius:13px;cursor:pointer;border:1px solid var(--line-2);
+        background:var(--surface);transition:transform .25s var(--ease),border-color .25s,background .25s,color .25s;will-change:transform}
+    .btn:hover{border-color:var(--brand);color:var(--brand)}
+    .btn-fill{background:var(--brand);color:#04210f;border-color:var(--brand)}
+    .btn-fill:hover{background:#5bf08e;color:#04210f}
+    .btn-sm{padding:11px 20px;font-size:14px}
 
     /* hero */
     .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:72px 24px 96px;position:relative;z-index:2}
-    .hero .mark{font-size:clamp(56px,9vw,76px);line-height:1;margin-bottom:18px;filter:drop-shadow(0 0 22px rgba(74,222,128,.55))}
+    .hero .mark{font-size:clamp(58px,9vw,78px);line-height:1;margin-bottom:16px;filter:drop-shadow(0 0 22px rgba(74,222,128,.55))}
     .hero h1{font-size:clamp(3rem,11vw,7rem);font-weight:700;letter-spacing:-.045em;line-height:.9}
+    /* blue/green shimmer wordmark (Magic UI / Framer gradient text) */
+    .shimmer{background:linear-gradient(100deg,#fff 22%,var(--brand) 42%,var(--brand-2) 55%,#fff 74%);
+        background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+        animation:shine 7s linear infinite}
+    @keyframes shine{to{background-position:-220% center}}
     .hero p.tag{font-size:clamp(1.05rem,2.3vw,1.3rem);color:var(--muted);max-width:440px;margin:22px auto 0}
 
-    /* terminal + copy animation (reused in hero) */
+    /* terminal + hover + copy animation */
     .term{position:relative;overflow:hidden;width:100%;max-width:540px;margin:30px auto 0;border:1px solid var(--line);
         border-radius:14px;background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:space-between;
-        gap:14px;padding:17px 20px;cursor:pointer;transition:border-color .25s,box-shadow .35s}
-    .term:hover{border-color:var(--line-2)}
+        gap:14px;padding:17px 20px;cursor:pointer;
+        transition:transform .25s var(--ease),border-color .25s,box-shadow .35s,background .25s}
+    .term:hover{transform:translateY(-2px);border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.04);
+        box-shadow:0 14px 44px rgba(0,0,0,.45),0 0 0 1px rgba(74,222,128,.18)}
+    .term:hover .cp{border-color:var(--brand);color:var(--brand)}
     .term code{font-family:'Geist Mono',ui-monospace,monospace;font-size:14px;position:relative;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .term code .p{color:var(--brand)}
     .term .cp{position:relative;z-index:2;font-size:12px;color:var(--dim);border:1px solid var(--line);
@@ -77,10 +97,9 @@
     @keyframes sweep{to{transform:translateX(101%)}}
     @keyframes pop{0%{transform:scale(.86)}55%{transform:scale(1.12)}100%{transform:scale(1)}}
 
-    .free{margin-top:22px;display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--text);font-weight:600}
-    .free .pill{font-size:12px;font-weight:700;color:#04210f;background:var(--brand);padding:5px 11px;border-radius:999px}
-    .buylink{display:inline-block;margin-top:14px;color:var(--dim);font-size:13.5px;cursor:pointer;transition:.2s}
-    .buylink:hover{color:var(--brand)}
+    .free{margin-top:20px;font-size:15px;color:var(--muted)}
+    .free b{color:var(--brand);font-weight:700}
+    .hero-cta{margin-top:18px}
 
     /* down arrow */
     .arrow{position:absolute;bottom:26px;left:50%;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
@@ -90,11 +109,10 @@
     .arrow svg{width:20px;height:20px}
     @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
 
-    /* scroll roll-up video */
+    /* roll-up video */
     .stage{height:230vh;position:relative;z-index:2}
     .pin{position:sticky;top:0;height:100svh;overflow:hidden}
-    .vtitle{position:absolute;top:26px;left:0;right:0;text-align:center;z-index:3;
-        color:var(--muted);font-size:14px;font-weight:500}
+    .vtitle{position:absolute;top:26px;left:0;right:0;text-align:center;z-index:3;color:var(--muted);font-size:14px;font-weight:500}
     .pin-center{height:100%;display:grid;place-items:center;perspective:1700px;padding:64px 0 24px}
     .vcard{position:relative;width:min(93vw,1040px);border-radius:22px;overflow:hidden;
         border:1px solid var(--line-2);background:#000;line-height:0;transform-origin:50% 100%;
@@ -103,8 +121,13 @@
     .vhalo{position:absolute;inset:-60px;z-index:-1;border-radius:40px;
         background:radial-gradient(55% 55% at 50% 50%, rgba(74,222,128,.22), transparent 70%);filter:blur(40px);will-change:opacity}
 
+    /* scroll-reveal text (Framer) */
+    .reveal-text{max-width:880px;margin:0 auto;padding:110px 24px;position:relative;z-index:2}
+    .rt{font-size:clamp(1.7rem,4.6vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.18;text-align:center}
+    .rt span{opacity:.13;transition:opacity .12s linear}
+
     /* FAQ */
-    .faq{max-width:680px;margin:0 auto;padding:40px 24px 20px;position:relative;z-index:2}
+    .faq{max-width:680px;margin:0 auto;padding:20px 24px;position:relative;z-index:2}
     .faq h2{text-align:center;font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;letter-spacing:-.03em;margin-bottom:8px}
     .faq .lead{text-align:center;color:var(--muted);margin-bottom:30px}
     details{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:12px;overflow:hidden;transition:border-color .2s}
@@ -115,42 +138,53 @@
     details[open] summary .x{transform:rotate(45deg);color:var(--brand)}
     details p{padding:0 20px 18px;color:var(--muted);font-size:.98rem}
 
-    footer{padding:50px 24px;text-align:center;color:var(--dim);font-size:13px;position:relative;z-index:2}
+    /* end CTA (apparent buy / trial ran out) */
+    .endcta{max-width:680px;margin:80px auto 0;padding:0 24px;position:relative;z-index:2}
+    .endcard{position:relative;overflow:hidden;border:1px solid var(--line-2);border-radius:24px;padding:56px 32px;text-align:center;
+        background:linear-gradient(180deg,rgba(74,222,128,.07),rgba(255,255,255,.01))}
+    .endcard::before{content:"";position:absolute;inset:-40% 30% auto;height:60%;
+        background:radial-gradient(50% 60% at 50% 0,rgba(74,222,128,.22),transparent 70%);filter:blur(30px);pointer-events:none}
+    .endcard h2{font-size:clamp(1.7rem,4.4vw,2.5rem);font-weight:700;letter-spacing:-.03em;position:relative}
+    .endcard p{color:var(--muted);margin:12px auto 26px;max-width:420px;position:relative}
+    .endcard .price{font-weight:700;color:var(--text)}
+
+    footer{padding:54px 24px;text-align:center;color:var(--dim);font-size:13px;position:relative;z-index:2}
     footer a:hover{color:var(--brand)}
 
-    /* Framer blur-in reveal */
     .rise{opacity:0;transform:translateY(26px);filter:blur(8px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
     .rise.in{opacity:1;transform:none;filter:none}
 
     @media(prefers-reduced-motion:reduce){
-        .rise{opacity:1;transform:none;filter:none}.arrow{animation:none}
+        .rise{opacity:1;transform:none;filter:none}.arrow{animation:none}.shimmer{animation:none}
+        .rt span{opacity:1}
         .stage{height:auto}.pin{position:static;height:auto}.pin-center{padding:60px 0}
         .vcard{transform:none!important;opacity:1!important}
     }
     </style>
 </head>
 <body>
-    <div class="glow" aria-hidden="true"></div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+    <div class="glow" id="glow" aria-hidden="true"></div>
 
-    <!-- Hero: command first -->
+    <!-- Hero -->
     <header class="hero">
         <div class="mark rise">👻</div>
-        <h1 class="rise">ghostreply</h1>
+        <h1 class="rise shimmer">ghostreply</h1>
         <p class="tag rise">An app that answers your iMessages like you would, right from your Mac.</p>
 
         <div class="term rise" id="term">
             <code><span class="p">$</span> curl -sL ghostreply.lol/install.sh | bash</code>
             <span class="cp" id="cp">click to copy</span>
         </div>
-        <div class="free rise"><span class="pill">free</span> 10 free replies. No card.</div>
-        <a class="buylink rise" data-checkout="hero">or buy a license, $4.99</a>
+        <p class="free rise"><b>10 free replies.</b> No card.</p>
+        <div class="hero-cta rise"><a class="btn btn-sm mag" data-checkout="hero">Buy a license, $4.99</a></div>
 
         <a href="#demo" class="arrow" aria-label="Scroll to the demo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </a>
     </header>
 
-    <!-- Scroll roll-up video -->
+    <!-- Roll-up video -->
     <section class="stage" id="demo">
         <div class="pin">
             <p class="vtitle">a real session</p>
@@ -165,11 +199,15 @@
         </div>
     </section>
 
+    <!-- Scroll reveal text -->
+    <section class="reveal-text">
+        <p class="rt" id="rt">It reads how you text. Then it answers like you would. You never lift a finger.</p>
+    </section>
+
     <!-- FAQ -->
     <section class="faq" id="faq">
         <h2 class="rise">good to know</h2>
         <p class="lead rise">the short version.</p>
-
         <details class="rise"><summary>Is it really free to try? <span class="x">+</span></summary>
             <p>Yes. You get 10 replies free, no card. After that it is $4.99 once.</p></details>
         <details class="rise"><summary>What does it cost? <span class="x">+</span></summary>
@@ -184,6 +222,15 @@
             <p>Paste the command above in Terminal, add a free Groq key when asked, then type ghostreply.</p></details>
     </section>
 
+    <!-- End CTA: apparent buy -->
+    <section class="endcta">
+        <div class="endcard rise">
+            <h2>Ran out of free replies?</h2>
+            <p>Unlock it for good. <span class="price">$4.99, once.</span> Run ghostreply again and paste your key, everything you set up is saved.</p>
+            <a class="btn btn-fill mag" data-checkout="bottom">Buy a license, $4.99</a>
+        </div>
+    </section>
+
     <footer>
         <div>ghostreply, 2026, by Harrison Rampell &nbsp;·&nbsp; <a href="mailto:support@ghostreply.lol">support@ghostreply.lol</a></div>
     </footer>
@@ -193,6 +240,7 @@
         const CHECKOUT = 'https://ghostreply.lemonsqueezy.com/checkout/buy/877e5f9a-3f63-4b5e-84f2-95e624643828';
         const INSTALL = 'curl -sL ghostreply.lol/install.sh | bash';
         const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
         const params = new URLSearchParams(location.search);
         const val = (n) => params.get(n) || '';
         const sourceId = (() => { try {
@@ -231,33 +279,55 @@
         // reveals
         addEventListener('load', () => document.querySelectorAll('.hero .rise').forEach((el, i) => setTimeout(() => el.classList.add('in'), 85 * i + 120)));
         (function () {
-            const els = document.querySelectorAll('.faq .rise');
+            const els = document.querySelectorAll('.faq .rise, .endcard.rise');
             if (reduce || !('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
             const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .15 });
             els.forEach((el, i) => { el.style.transitionDelay = ((i % 6) * 55) + 'ms'; io.observe(el); });
         })();
 
-        // Framer scroll roll-up
+        // scroll-reveal words (Framer scroll reveal)
+        const rt = document.getElementById('rt');
         (function () {
-            const stage = document.getElementById('demo'), card = document.getElementById('vcard'), halo = document.getElementById('vhalo');
-            if (!stage || reduce) return;
-            const easeOut = (p) => 1 - Math.pow(1 - p, 3);
-            let ticking = false;
-            function frame() {
-                ticking = false;
+            const words = rt.textContent.trim().split(/\s+/);
+            rt.innerHTML = words.map(w => '<span>' + w + '</span>').join(' ');
+            if (reduce) { rt.querySelectorAll('span').forEach(s => s.style.opacity = 1); return; }
+        })();
+        const rtSpans = rt.querySelectorAll('span');
+
+        // roll-up + parallax + progress + word reveal in one scroll pass
+        const stage = document.getElementById('demo'), card = document.getElementById('vcard'),
+              halo = document.getElementById('vhalo'), glow = document.getElementById('glow'),
+              bar = document.getElementById('progress');
+        const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+        let ticking = false;
+        function frame() {
+            ticking = false;
+            const sy = scrollY, vh = innerHeight;
+            // progress bar
+            const max = document.documentElement.scrollHeight - vh;
+            bar.style.width = (max > 0 ? (sy / max * 100) : 0) + '%';
+            // parallax glow
+            if (!reduce) glow.style.transform = 'translateY(' + (sy * 0.12) + 'px)';
+            // roll-up
+            if (!reduce) {
                 const r = stage.getBoundingClientRect();
-                const total = stage.offsetHeight - innerHeight;
-                const p = Math.min(1, Math.max(0, -r.top / total));
+                const total = stage.offsetHeight - vh;
+                const p = clamp(-r.top / total, 0, 1);
                 const e = easeOut(Math.min(1, p / 0.7));
-                card.style.transform = `translateY(${70 * (1 - e)}px) rotateX(${34 * (1 - e)}deg) scale(${0.82 + 0.18 * e})`;
+                card.style.transform = 'translateY(' + (70 * (1 - e)) + 'px) rotateX(' + (34 * (1 - e)) + 'deg) scale(' + (0.82 + 0.18 * e) + ')';
                 card.style.opacity = (0.45 + 0.55 * e).toFixed(3);
                 halo.style.opacity = (0.25 + 0.75 * e).toFixed(3);
+                // word reveal
+                const rr = rt.getBoundingClientRect();
+                const prog = clamp((vh * 0.85 - rr.top) / (vh * 0.55 + rr.height), 0, 1);
+                const lit = prog * rtSpans.length;
+                rtSpans.forEach((s, i) => s.style.opacity = clamp(lit - i, 0.13, 1));
             }
-            addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
-            addEventListener('resize', frame); frame();
-        })();
+        }
+        addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+        addEventListener('resize', frame); frame();
 
-        // Play video only while it is on screen
+        // play video only while on screen
         (function () {
             const v = document.getElementById('demoV');
             if (!('IntersectionObserver' in window)) { v.play && v.play().catch(() => {}); return; }
@@ -270,6 +340,17 @@
             }), { threshold: [0, 0.5, 0.8] });
             io.observe(v);
         })();
+
+        // magnetic buttons
+        if (!reduce && matchMedia('(pointer:fine)').matches) {
+            document.querySelectorAll('.mag').forEach(b => {
+                b.addEventListener('pointermove', e => {
+                    const r = b.getBoundingClientRect();
+                    b.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * .25) + 'px,' + ((e.clientY - r.top - r.height / 2) * .35) + 'px)';
+                });
+                b.addEventListener('pointerleave', () => b.style.transform = '');
+            });
+        }
 
         // animated copy
         (function () {
