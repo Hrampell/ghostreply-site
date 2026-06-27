@@ -112,9 +112,7 @@
     .tw-bar .r{background:#ff5f57}.tw-bar .y{background:#febc2e}.tw-bar .g{background:#28c840}
     .tw-bar span{position:absolute;left:0;right:0;text-align:center;color:#aab0b8;font-family:'Geist Mono',monospace;font-size:12px}
     .tw-body{font-family:'Geist Mono',ui-monospace,monospace;font-size:13.5px;line-height:1.95;padding:18px 20px 22px;min-height:210px;outline:none}
-    .cmdline{color:var(--muted)}
-    .cmdline .usr{color:var(--brand)}.cmdline .pth{color:#5cc8ff}
-    .qline{margin-top:12px;color:var(--text)}
+    .qline{color:var(--text)}
     .qline .qm{color:#5cc8ff}
     .qline b{font-weight:600}
     .qline em{color:var(--dim);font-style:normal;font-size:12px}
@@ -198,7 +196,6 @@
         <div class="tw">
             <div class="tw-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>harrisonrampell · ghostreply.py · 80×24</span></div>
             <div class="tw-body" id="simBody" tabindex="0">
-                <div class="cmdline"><span class="usr">harrisonrampell@Mac</span> <span class="pth">~</span> % ghostreply</div>
                 <div class="qline"><span class="qm">?</span> <b id="simPrompt">Choose a reply mode:</b>  <em>↑/↓ move, Enter select, Backspace back, >> = submenu</em></div>
                 <div class="opts" id="simMenu"></div>
             </div>
@@ -348,7 +345,7 @@
             const PROMPT = { main: 'Choose a reply mode:', prod: 'Choose a style:', fun: 'Choose a mode:' };
             const parentIdx = { prod: 2, fun: 3 };
             const menuEl = document.getElementById('simMenu'), promptEl = document.getElementById('simPrompt');
-            let menu = 'main', sel = 0, active = false, timer = null;
+            let menu = 'main', sel = 0, active = false;
             const items = () => M[menu];
             function render() {
                 promptEl.textContent = PROMPT[menu];
@@ -359,11 +356,6 @@
                         '<span class="cur">' + cur + '</span><span class="lbl">' + it.k + (it.sub ? ' >>' : '') + '</span><span class="desc">' + desc + '</span></div>';
                 }).join('');
             }
-            const script = [['main', 0], ['main', 1], ['main', 2], ['prod', 0], ['prod', 1], ['main', 3], ['fun', 0], ['fun', 1], ['fun', 2], ['fun', 3], ['main', 0]];
-            let si = 0;
-            function step() { if (active) return; const s = script[si]; menu = s[0]; sel = s[1]; render(); si = (si + 1) % script.length; }
-            function start() { stop(); render(); timer = setInterval(step, 1300); }
-            function stop() { if (timer) clearInterval(timer); timer = null; }
             const sim = document.getElementById('sim');
             sim.addEventListener('pointerenter', () => { active = true; });
             sim.addEventListener('pointerleave', () => { active = false; });
@@ -377,12 +369,7 @@
                 else if (e.key === 'Enter') { const it = items()[sel]; if (it.sub) { e.preventDefault(); menu = it.sub; sel = 0; render(); } }
                 else if (e.key === 'Backspace') { if (menu !== 'main') { e.preventDefault(); sel = parentIdx[menu]; menu = 'main'; render(); } }
             });
-            if ('IntersectionObserver' in window && !reduce) {
-                let on = false;
-                new IntersectionObserver(es => es.forEach(en => {
-                    if (en.isIntersecting && !on) { on = true; start(); } else if (!en.isIntersecting && on) { on = false; stop(); }
-                }), { threshold: .3 }).observe(sim);
-            } else { render(); }
+            render();
         })();
 
         // magnetic buttons
