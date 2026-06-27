@@ -3,1750 +3,499 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostReply — Smart iMessage Assistant</title>
-
-    <!-- SEO -->
-    <meta name="description" content="Smart iMessage auto-replies that learn your texting style. Handles small talk, triages urgent messages, and syncs with your calendar. $4.99 one-time, 10 free replies.">
-    <meta name="keywords" content="iMessage, auto reply, AI texting bot, Mac, ghostreply">
-
-    <!-- LemonSqueezy Affiliate Tracking -->
-    <script>window.lemonSqueezyAffiliateConfig = { store: "ghostreply" };</script>
-    <script src="https://lmsqueezy.com/affiliate.js" defer></script>
+    <title>GhostReply — Your iMessages, handled.</title>
+    <meta name="description" content="GhostReply learns how you text and replies for you while you're busy — on your Mac, in your voice. $4.99 one-time, 10 free replies, no credit card.">
+    <meta name="keywords" content="iMessage, auto reply, AI texting, Mac, ghostreply">
     <meta name="author" content="Harrison Rampell">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="GhostReply — Smart iMessage Assistant">
-    <meta property="og:description" content="Smart auto-replies that learn your style, triage important messages, and sync with your calendar. $4.99 one-time.">
+    <meta property="og:title" content="GhostReply — Your iMessages, handled.">
+    <meta property="og:description" content="AI that texts like you, on your Mac. $4.99 one-time.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ghostreply.lol/">
+    <meta property="og:url" content="https://ghostreply.lol">
+    <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+    <meta name="theme-color" content="#06070a">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="GhostReply — Smart iMessage Assistant">
-    <meta name="twitter:description" content="Smart auto-replies that learn your style, triage important messages, and sync with your calendar. $4.99 one-time.">
+    <!-- LemonSqueezy affiliate -->
+    <script>window.lemonSqueezyAffiliateConfig = { store: "ghostreply" };</script>
+    <script src="https://lmsqueezy.com/affiliate.js" defer></script>
 
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
-
-    <!-- Canonical -->
-    <link rel="canonical" href="https://ghostreply.lol/">
-
-    <!-- Geist Font -->
+    <!-- Geist -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --brand: #4ade80;
-            --brand-dim: rgba(74, 222, 128, 0.08);
-            --brand-glow: rgba(74, 222, 128, 0.15);
-            --bg: #000;
-            --surface: #0d0d0d;
-            --surface-2: #141414;
-            --border: #1c1c1c;
-            --border-2: #252525;
-            --text-primary: #f0f0f0;
-            --text-secondary: #7a7a7a;
-            --text-muted: #555;
-            --blue: #0b84fe;
-            /* Spacing scale */
-            --space-xs: 8px;
-            --space-sm: 16px;
-            --space-md: 24px;
-            --space-lg: 48px;
-            --space-xl: 80px;
-            --space-2xl: 120px;
-            /* Type scale — fluid for headings, fixed for body */
-            --text-xs: 0.75rem;
-            --text-sm: 0.875rem;
-            --text-base: 1rem;
-            --text-lg: 1.125rem;
-            --text-xl: 1.25rem;
-            --text-2xl: clamp(1.5rem, 3vw, 2rem);
-            --text-3xl: clamp(2rem, 4vw, 2.5rem);
-            --text-hero: clamp(2.5rem, 6vw, 3.5rem);
-            /* Easing */
-            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: #000;
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
-            background-size: 28px 28px;
-            -webkit-font-smoothing: antialiased;
-            font-size: var(--text-base);
-            line-height: 1.6;
-        }
-
-        /* ===== Screen-reader only utility ===== */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0,0,0,0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* ===== Ghost Particle Canvas ===== */
-        /* ===== Page Content Wrapper ===== */
-        .page-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===== Glow Orbs ===== */
-        .glow-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(140px);
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.08;
-            animation: float-orb 18s ease-in-out infinite;
-        }
-        .glow-orb-hero {
-            width: 600px;
-            height: 400px;
-            background: var(--brand);
-            top: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        /* Removed blue features orb — brand-only accent */
-        .glow-orb-features {
-            display: none;
-        }
-        .glow-orb-cta {
-            width: 320px;
-            height: 320px;
-            background: var(--brand);
-            bottom: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation-delay: -9s;
-            opacity: 0.06;
-        }
-        @keyframes float-orb {
-            0%, 100% { transform: translateX(-50%) translateY(0px); }
-            40% { transform: translateX(-47%) translateY(-16px); }
-            70% { transform: translateX(-53%) translateY(12px); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .glow-orb { animation: none; }
-            .price-tag { animation: none; }
-            .hero-mockup-wrap::before { animation: none; }
-            .typing-dots span { animation: none; opacity: 0.7; }
-            * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: var(--space-xl) var(--space-md);
-        }
-
-        /* ===== Hero ===== */
-        .hero {
-            text-align: center;
-            padding: var(--space-xl) 0 var(--space-md);
-            position: relative;
-        }
-
-        .logo { font-size: 44px; margin-bottom: var(--space-xs); }
-
-        h1 {
-            font-size: var(--text-hero);
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-            margin-bottom: var(--space-sm);
-            background: linear-gradient(150deg, var(--text-primary) 40%, var(--brand) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        h2 {
-            font-size: var(--text-3xl);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
-            margin-bottom: var(--space-md);
-            text-align: center;
-            color: var(--text-primary);
-        }
-
-        h3 {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            line-height: 1.3;
-        }
-
-        .subtitle {
-            font-size: var(--text-lg);
-            color: var(--text-secondary);
-            max-width: 52ch;
-            margin: 0 auto var(--space-lg);
-            line-height: 1.65;
-        }
-
-        /* Sections */
-        .section { padding: var(--space-lg) 0; }
-
-        /* ===== Price ===== */
-        .price-tag {
-            display: inline-block;
-            border-radius: 14px;
-            padding: 14px var(--space-md);
-            margin-bottom: var(--space-md);
-            background: rgba(74, 222, 128, 0.04);
-            border: 1px solid rgba(74, 222, 128, 0.3);
-            position: relative;
-        }
-        .price-tag::after {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: inherit;
-            box-shadow: 0 0 28px rgba(74, 222, 128, 0.1);
-            pointer-events: none;
-            animation: price-glow 4s ease-in-out infinite;
-        }
-        @keyframes price-glow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .price { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-        .price-period { font-size: var(--text-sm); color: var(--text-secondary); margin-left: 4px; }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--text-primary);
-            color: #000;
-            font-size: var(--text-base);
-            font-weight: 600;
-            padding: 14px 40px;
-            min-height: 48px;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: transform 0.2s var(--ease-out-quart), box-shadow 0.2s var(--ease-out-quart), background 0.15s;
-            cursor: pointer;
-            border: none;
-            letter-spacing: -0.01em;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 32px rgba(255,255,255,0.12);
-        }
-
-        .cta-button:active {
-            transform: translateY(0px) scale(0.98);
-            box-shadow: none;
-        }
-
-        /* ===== Hero Mockup — Perspective Tilt + Glow ===== */
-        .hero-mockup-wrap {
-            perspective: 1000px;
-            margin: var(--space-lg) auto 0;
-            max-width: 900px;
-            position: relative;
-        }
-
-        .hero-mockup-wrap::before {
-            content: '';
-            position: absolute;
-            inset: 15% 20%;
-            background: radial-gradient(ellipse, rgba(74,222,128,0.14) 0%, transparent 70%);
-            filter: blur(50px);
-            pointer-events: none;
-            z-index: 0;
-            animation: glow-pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50%       { opacity: 1;   transform: scale(1.04); }
-        }
-
-        .hero-mockup {
-            width: 100%;
-            border-radius: 14px;
-            border: 1px solid var(--border-2);
-            box-shadow: 0 48px 96px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.04);
-            transform: rotateX(14deg) scale(0.93);
-            transform-origin: bottom center;
-            position: relative;
-            z-index: 1;
-            will-change: transform;
-            background: #0a0a0a;
-            overflow: hidden;
-        }
-
-        /* ===== Animated Hero Demo ===== */
-        .hero-demo {
-            display: flex;
-            gap: 16px;
-            padding: 24px;
-            height: 380px;
-        }
-
-        .hero-terminal {
-            flex: 1.5;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 16px 20px;
-            font-family: 'SF Mono', 'Menlo', monospace;
-            font-size: 13px;
-            line-height: 1.9;
-            overflow: hidden;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .term-dots { display: flex; gap: 6px; margin-bottom: 14px; flex-shrink: 0; }
-        .td { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
-        .td.r { background: #ff5f57; }
-        .td.y { background: #febc2e; }
-        .td.g { background: #28c840; }
-
-        .tp-body {
-            flex: 1;
-            overflow-y: auto;
-            min-height: 0;
-        }
-        .tp-body::-webkit-scrollbar { width: 4px; }
-        .tp-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-
-        .tp-line {
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-
-        .tp-cursor {
-            animation: blink-cursor 0.8s step-end infinite;
-        }
-        @keyframes blink-cursor {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .t-green { color: #5fff87; }
-        .t-bold { font-weight: 700; }
-        .t-cyan { color: #5fffff; }
-        .t-gray { color: #8a8a8a; }
-        .t-lgray { color: #bcbcbc; }
-        .t-white { color: #fff; }
-
-        /* Hero controls */
-        .hero-controls {
-            display: flex;
-            gap: var(--space-xs);
-            justify-content: center;
-            padding: 10px var(--space-md) 14px;
-            background: #0a0a0a;
-        }
-        .hero-ctrl-btn {
-            padding: 8px 14px;
-            min-height: 44px;
-            min-width: 44px;
-            border-radius: 6px;
-            border: 1px solid var(--border-2);
-            background: var(--surface-2);
-            color: var(--text-secondary);
-            font-size: var(--text-xs);
-            font-family: inherit;
-            cursor: pointer;
-            transition: border-color 0.2s var(--ease-out-quart), color 0.15s;
-            letter-spacing: 0.02em;
-        }
-        .hero-ctrl-btn:hover {
-            border-color: var(--brand);
-            color: var(--text-primary);
-        }
-        .hero-ctrl-btn:active {
-            transform: scale(0.96);
-        }
-
-        .hero-imsg {
-            flex: 1;
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .imsg-header {
-            text-align: center;
-            padding: 14px 16px 10px;
-            border-bottom: 1px solid #222;
-        }
-
-        .imsg-header strong { display: block; font-size: 16px; color: #fff; }
-        .imsg-header span { font-size: 12px; color: #888; }
-
-        .imsg-body {
-            padding: 10px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex: 1;
-            overflow-y: auto;
-            text-align: left;
-        }
-        .imsg-body::-webkit-scrollbar { width: 4px; }
-        .imsg-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-
-        .msg-row {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .msg-in { align-items: flex-start; }
-        .msg-out { align-items: flex-end; }
-
-        .msg-bubble {
-            max-width: 85%;
-            padding: 8px 12px;
-            border-radius: 16px;
-            font-size: 13.5px;
-            line-height: 1.35;
-        }
-
-        .gray-b {
-            background: #333;
-            color: #fff;
-            border-bottom-left-radius: 4px;
-        }
-
-        .blue-b {
-            background: #0b84fe;
-            color: #fff;
-            border-bottom-right-radius: 4px;
-        }
-
-        .ghost-tag {
-            font-size: 9px;
-            color: #4ade80;
-            letter-spacing: 0.5px;
-            margin-bottom: 1px;
-            margin-right: 4px;
-        }
-
-        /* Typing indicator */
-        .typing-row {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            height: 0;
-            overflow: visible;
-        }
-
-        .typing-dots {
-            display: inline-flex;
-            gap: 4px;
-            padding: 10px 14px;
-            background: #333;
-            border-radius: 16px;
-            border-bottom-left-radius: 4px;
-        }
-
-        .typing-dots span {
-            width: 7px;
-            height: 7px;
-            background: #888;
-            border-radius: 50%;
-            animation: typingBounce 1.2s infinite;
-        }
-
-        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typingBounce {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-4px); opacity: 1; }
-        }
-
-        /* ===== Sticky Scroll Sequence ===== */
-        .sticky-sequence {
-            height: 400vh;
-            position: relative;
-        }
-
-        .sticky-frame {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            gap: 48px;
-            padding: 0 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .sticky-images {
-            position: relative;
-            flex: 1;
-            min-width: 0;
-            aspect-ratio: 4 / 3;
-            max-height: 70vh;
-        }
-
-        .seq-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transition: none;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-        }
-
-        .seq-img.active {
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.6s ease;
-        }
-
-        .sticky-text {
-            flex: 0 0 280px;
-            position: relative;
-            min-height: 220px;
-        }
-
-        .seq-caption {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: none;
-        }
-
-        .seq-caption.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .seq-caption h3 {
-            font-size: var(--text-2xl);
-            font-weight: 700;
-            margin-bottom: 12px;
-            line-height: 1.25;
-            letter-spacing: -0.02em;
-        }
-
-        .seq-caption p {
-            color: var(--text-secondary);
-            font-size: var(--text-base);
-            line-height: 1.7;
-        }
-
-        .seq-dots {
-            display: flex;
-            gap: 8px;
-            margin-top: 24px;
-        }
-
-        .seq-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #333;
-            transition: background 0.3s;
-        }
-
-        .seq-dot.active { background: #4ade80; }
-
-        /* ===== iMessage Demos ===== */
-        .imessage-demo {
-            max-width: none;
-            margin: var(--space-md) 0;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: var(--space-md) var(--space-sm);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .imessage-demo .demo-header {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: var(--text-xs);
-            margin-bottom: var(--space-sm);
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .imessage-demo .demo-header strong {
-            color: var(--text-primary);
-            display: block;
-            font-size: var(--text-base);
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .bubble {
-            max-width: 80%;
-            padding: 10px 14px;
-            border-radius: 18px;
-            font-size: 15px;
-            line-height: 1.4;
-            margin-bottom: 10px;
-            clear: both;
-        }
-
-        .bubble-blue {
-            background: #0b84fe;
-            color: #fff;
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
-            float: right;
-        }
-
-        .bubble-gray {
-            background: #333;
-            color: #fff;
-            margin-right: auto;
-            border-bottom-left-radius: 4px;
-            float: left;
-        }
-
-        .bubble-label {
-            font-size: 11px;
-            color: #777;
-            margin-bottom: 4px;
-            margin-top: 12px;
-            clear: both;
-        }
-
-        .bubble-label.right { text-align: right; }
-
-
-        /* Installer command box (reused in install section) */
-        .installer-command {
-            background: #000;
-            border: 1px solid var(--border-2);
-            border-radius: 10px;
-            padding: 14px var(--space-md);
-            font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
-            font-size: var(--text-sm);
-            color: var(--brand);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: var(--space-sm);
-            cursor: pointer;
-            user-select: none;
-            transition: border-color 0.25s var(--ease-out-quart), box-shadow 0.25s var(--ease-out-quart);
-            min-height: 52px;
-        }
-
-        .installer-command:hover {
-            border-color: rgba(74, 222, 128, 0.5);
-        }
-
-        .installer-command.copied {
-            border-color: var(--brand);
-            box-shadow: 0 0 16px var(--brand-glow);
-        }
-
-        .installer-command .copy-hint {
-            color: var(--text-muted);
-            font-size: var(--text-xs);
-            flex-shrink: 0;
-            font-family: 'Geist', -apple-system, sans-serif;
-            transition: color 0.2s;
-        }
-
-        .installer-command.copied .copy-hint {
-            color: var(--brand);
-        }
-
-        /* ===== Terminal Demo ===== */
-        .terminal {
-            background: var(--surface-2);
-            border: 1px solid var(--border-2);
-            border-radius: 12px;
-            padding: var(--space-md) var(--space-md);
-            font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
-            font-size: var(--text-sm);
-            line-height: 1.8;
-            overflow-x: auto;
-            margin: var(--space-md) 0;
-        }
-
-        .terminal .prompt { color: var(--brand); }
-        .terminal .cmd { color: var(--text-primary); }
-        .terminal .output { color: var(--text-secondary); }
-        .terminal .success { color: var(--brand); }
-        /* Replaced yellow/blue terminal colors with green-only accent */
-        .terminal .label { color: var(--brand); }
-        .terminal .name { color: var(--text-primary); font-weight: 500; }
-
-        /* ===== Installer Boxes ===== */
-        .installer-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: var(--space-md);
-            text-align: center;
-            margin: var(--space-md) 0;
-        }
-
-        .installer-box h3 { font-size: var(--text-xl); margin-bottom: var(--space-xs); font-weight: 600; }
-        .installer-box p { color: var(--text-secondary); font-size: var(--text-base); margin-bottom: var(--space-md); }
-
-        .installer-note {
-            color: var(--text-muted);
-            font-size: var(--text-xs);
-            margin-top: 12px;
-        }
-
-        /* ===== Steps ===== */
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-        }
-
-        .step {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: var(--space-md);
-            display: flex;
-            gap: var(--space-md);
-            align-items: flex-start;
-        }
-
-        .step-number {
-            background: var(--text-primary);
-            color: #000;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: var(--text-sm);
-            flex-shrink: 0;
-        }
-
-        .step-content h3 { font-size: var(--text-lg); margin-bottom: 6px; font-weight: 600; }
-        .step-content p { color: var(--text-secondary); font-size: var(--text-base); line-height: 1.6; }
-
-        .step-content code {
-            background: #222;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-family: 'SF Mono', 'Menlo', monospace;
-            font-size: 14px;
-            color: #4ade80;
-        }
-
-        /* ===== Features ===== */
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-sm);
-            margin-top: var(--space-md);
-        }
-
-        .feature {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: var(--space-md);
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.2s var(--ease-out-quart);
-        }
-        .feature:hover {
-            border-color: var(--border-2);
-        }
-
-        /* Spotlight hover glow — follows cursor */
-        .feature::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: inherit;
-            background: radial-gradient(
-                300px circle at var(--cx, 50%) var(--cy, 50%),
-                rgba(74, 222, 128, 0.12),
-                transparent 70%
-            );
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .feature:hover::before {
-            opacity: 1;
-        }
-        /* Border glow that follows cursor */
-        .feature::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 1px;
-            background: radial-gradient(
-                250px circle at var(--cx, 50%) var(--cy, 50%),
-                rgba(74, 222, 128, 0.3),
-                transparent 70%
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .feature:hover::after {
-            opacity: 1;
-        }
-
-        .feature h3 { font-size: var(--text-base); font-weight: 600; margin-bottom: 6px; }
-        .feature p { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.55; }
-
-        /* ===== Fast Sale Blocks ===== */
-        .fast-sale-strip {
-            margin: 0 auto var(--space-lg);
-            padding: 18px var(--space-md);
-            border: 1px solid rgba(74, 222, 128, 0.22);
-            border-radius: 14px;
-            background: rgba(74, 222, 128, 0.045);
-            display: flex;
-            gap: var(--space-sm);
-            align-items: center;
-            justify-content: space-between;
-        }
-        .fast-sale-strip strong {
-            display: block;
-            font-size: var(--text-base);
-            line-height: 1.35;
-        }
-        .fast-sale-strip span {
-            color: var(--text-secondary);
-            font-size: var(--text-sm);
-        }
-        .fast-sale-strip .cta-button {
-            padding: 10px 18px;
-            min-height: 42px;
-            font-size: var(--text-sm);
-            white-space: nowrap;
-        }
-        .niche-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: var(--space-xs);
-            margin-top: var(--space-md);
-        }
-        .niche-link {
-            display: block;
-            min-height: 110px;
-            padding: 14px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--surface);
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: border-color 0.2s var(--ease-out-quart), transform 0.2s var(--ease-out-quart);
-        }
-        .niche-link:hover {
-            border-color: rgba(74, 222, 128, 0.34);
-            transform: translateY(-2px);
-        }
-        .niche-link strong {
-            display: block;
-            font-size: var(--text-sm);
-            margin-bottom: 6px;
-        }
-        .niche-link span {
-            display: block;
-            color: var(--text-secondary);
-            font-size: var(--text-xs);
-            line-height: 1.45;
-        }
-
-        /* ===== FAQ ===== */
-        .faq-item {
-            border-bottom: 1px solid var(--border);
-            padding: var(--space-md) 0;
-        }
-
-        .faq-item h3 { font-size: var(--text-base); font-weight: 600; margin-bottom: var(--space-xs); }
-        .faq-item p { color: var(--text-secondary); font-size: var(--text-base); line-height: 1.65; }
-
-        /* ===== Footer / Top bar ===== */
-        .footer {
-            text-align: center;
-            padding: var(--space-xl) 0 var(--space-lg);
-            color: var(--text-muted);
-            font-size: var(--text-sm);
-        }
-
-        .footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
-        .footer a:hover { color: var(--text-primary); }
-
-        .top-bar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            padding: 14px var(--space-md);
-            display: flex;
-            justify-content: flex-end;
-            z-index: 100;
-            pointer-events: none;
-        }
-
-        .top-bar span {
-            color: var(--text-muted);
-            font-size: var(--text-xs);
-            letter-spacing: 0.03em;
-        }
-
-        .top-bar a {
-            color: var(--text-muted);
-            font-size: var(--text-xs);
-            text-decoration: none;
-            pointer-events: auto;
-            transition: color 0.15s;
-            letter-spacing: 0.03em;
-        }
-        .top-bar a:hover { color: var(--brand); }
-
-        /* ===== Noise Grain Overlay ===== */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.025;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-size: 256px 256px;
-        }
-
-        /* ===== Text Scramble ===== */
-        .scramble-text {
-            display: inline;
-        }
-
-        /* ===== Feedback Button + Modal ===== */
-        .feedback-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--surface-2);
-            border: 1px solid var(--border-2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            text-decoration: none;
-            cursor: pointer;
-            z-index: 99;
-            transition: border-color 0.2s var(--ease-out-quart), transform 0.2s var(--ease-out-quart);
-        }
-
-        .feedback-btn:hover {
-            border-color: var(--brand);
-            transform: scale(1.08);
-        }
-
-        .feedback-btn:active {
-            transform: scale(0.94);
-        }
-
-        .feedback-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .feedback-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .feedback-modal {
-            background: var(--surface);
-            border: 1px solid var(--border-2);
-            border-radius: 16px;
-            padding: var(--space-md);
-            width: 90%;
-            max-width: 420px;
-            transform: translateY(16px) scale(0.97);
-            opacity: 0;
-            transition: transform 0.3s var(--ease-out-expo), opacity 0.25s ease;
-        }
-
-        .feedback-overlay.open .feedback-modal {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-
-        .feedback-modal h3 {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            margin-bottom: 4px;
-            letter-spacing: -0.01em;
-        }
-
-        .feedback-modal p {
-            color: var(--text-secondary);
-            font-size: var(--text-sm);
-            margin-bottom: var(--space-sm);
-        }
-
-        .feedback-modal textarea {
-            width: 100%;
-            min-height: 110px;
-            background: #000;
-            border: 1px solid var(--border-2);
-            border-radius: 8px;
-            padding: 10px 12px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: var(--text-base);
-            resize: vertical;
-            outline: none;
-            transition: border-color 0.15s;
-        }
-
-        .feedback-modal textarea:focus { border-color: var(--brand); }
-
-        .feedback-modal input[type="email"] {
-            width: 100%;
-            background: #000;
-            border: 1px solid var(--border-2);
-            border-radius: 8px;
-            padding: 10px 12px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: var(--text-base);
-            outline: none;
-            margin-top: 8px;
-            transition: border-color 0.15s;
-        }
-
-        .feedback-modal input[type="email"]:focus { border-color: var(--brand); }
-
-        .feedback-actions {
-            display: flex;
-            gap: var(--space-xs);
-            margin-top: 12px;
-            justify-content: flex-end;
-        }
-
-        .feedback-actions button {
-            padding: 10px 20px;
-            min-height: 44px;
-            border-radius: 8px;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: opacity 0.15s, transform 0.15s var(--ease-out-quart);
-            font-family: inherit;
-        }
-
-        .feedback-actions button:active {
-            transform: scale(0.97);
-        }
-
-        .fb-cancel {
-            background: var(--surface-2);
-            color: var(--text-secondary);
-        }
-
-        .fb-send {
-            background: var(--brand);
-            color: #000;
-        }
-
-        .fb-send:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        /* ===== Live Counter ===== */
-        .live-counter {
-            text-align: center;
-            padding: var(--space-md) var(--space-md);
-            max-width: 960px;
-            margin: 0 auto;
-        }
-        .live-counter .counter-number {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 700;
-            color: var(--brand);
-            font-variant-numeric: tabular-nums;
-            letter-spacing: -0.03em;
-            transition: transform 0.2s var(--ease-out-quart);
-        }
-        .live-counter .counter-label {
-            font-size: var(--text-base);
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* ===== Testimonials ===== */
-        .testimonials {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: var(--space-lg) var(--space-md);
-        }
-        .testimonial-row {
-            display: flex;
-            gap: var(--space-sm);
-        }
-        .testimonial-card {
-            flex: 1;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: var(--space-md);
-        }
-        .testimonial-card .quote-mark {
-            font-size: 28px;
-            color: var(--border-2);
-            line-height: 1;
-            margin-bottom: var(--space-xs);
-        }
-        .testimonial-card .quote-text {
-            font-size: var(--text-base);
-            color: #c0c0c0;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-        .testimonial-card .quote-author {
-            font-size: var(--text-xs);
-            color: var(--text-secondary);
-        }
-
-        /* ===== Animated Demo Bubbles ===== */
-        /* Hidden state: opacity:0 so elements reserve space (stable container height) */
-        .imessage-demo[data-animated] .anim-msg,
-        .imessage-demo[data-animated] .anim-typing {
-            opacity: 0;
-            transform: translateY(8px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .imessage-demo[data-animated] .anim-msg.visible,
-        .imessage-demo[data-animated] .anim-typing.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .anim-msg.anim-gray {
-            max-width: 80%;
-            padding: 10px 14px;
-            border-radius: 18px;
-            border-bottom-left-radius: 4px;
-            font-size: 15px;
-            line-height: 1.4;
-            margin-top: 8px;
-            background: #333;
-            color: #fff;
-            align-self: flex-start;
-        }
-        .anim-msg.anim-blue {
-            max-width: 80%;
-            padding: 10px 14px;
-            border-radius: 18px;
-            border-bottom-right-radius: 4px;
-            font-size: 15px;
-            line-height: 1.4;
-            margin-top: 8px;
-            background: #0b84fe;
-            color: #fff;
-            align-self: flex-end;
-        }
-        .anim-typing {
-            align-self: flex-end;
-            margin-top: 4px;
-            transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
-            max-height: 30px;
-            overflow: hidden;
-        }
-        .anim-label {
-            font-size: 11px;
-            color: #777;
-            align-self: flex-end;
-            margin-top: 2px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .demo-header + .anim-msg { margin-top: 4px; }
-
-        /* ===== Install Walkthrough ===== */
-        .install-walkthrough {
-            display: flex;
-            gap: 24px;
-            margin: 32px 0;
-            min-height: 320px;
-        }
-        .iw-terminal {
-            flex: 1.2;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 16px 20px;
-            font-family: 'SF Mono', 'Menlo', monospace;
-            font-size: 13px;
-            line-height: 1.8;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .iw-term-body {
-            flex: 1;
-            overflow-y: auto;
-            min-height: 0;
-        }
-        .iw-term-body::-webkit-scrollbar { width: 4px; }
-        .iw-term-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-
-        .iw-steps-panel {
-            flex: 0 0 260px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .iw-progress {
-            height: 4px;
-            background: #222;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 4px;
-        }
-        .iw-progress-fill {
-            height: 100%;
-            width: 0;
-            background: #4ade80;
-            border-radius: 4px;
-            transition: width 0.6s ease;
-        }
-        .iw-step {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            padding: 14px 16px;
-            border-radius: 10px;
-            border: 1px solid #222;
-            background: #111;
-            opacity: 0.4;
-            transition: opacity 0.3s, border-color 0.3s, background 0.3s;
-        }
-        .iw-step.iw-active {
-            opacity: 1;
-            border-color: #4ade80;
-            background: rgba(74,222,128,0.05);
-        }
-        .iw-step.iw-done {
-            opacity: 0.6;
-            border-color: #333;
-        }
-        .iw-step-num {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #222;
-            color: #888;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 13px;
-            flex-shrink: 0;
-            transition: background 0.3s, color 0.3s;
-        }
-        .iw-step.iw-active .iw-step-num {
-            background: #4ade80;
-            color: #000;
-        }
-        .iw-step.iw-done .iw-step-num {
-            background: #333;
-            color: #4ade80;
-        }
-        .iw-step-info h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-        .iw-step-info p {
-            font-size: 12px;
-            color: #777;
-            line-height: 1.3;
-        }
-
-        /* ===== Install Explainer ===== */
-        .install-explainer summary {
-            color: #777;
-            font-size: 13px;
-            cursor: pointer;
-            text-align: center;
-            list-style: none;
-            padding: 8px;
-        }
-        .install-explainer summary::-webkit-details-marker {
-            display: none;
-        }
-        .install-explainer summary:hover {
-            color: #aaa;
-        }
-        .install-explainer {
-            margin-top: 12px;
-        }
-        .install-explainer p {
-            color: #777;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-top: 12px;
-            text-align: center;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ===== Responsive ===== */
-        @media (max-width: 768px) {
-            html, body { overflow-x: hidden; }
-            .container { padding: var(--space-lg) var(--space-md); }
-            .features { grid-template-columns: 1fr; }
-            .fast-sale-strip {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            .niche-grid { grid-template-columns: 1fr 1fr; }
-            .installer-command { font-size: var(--text-xs); flex-wrap: wrap; word-break: break-all; }
-            .demos-row { flex-direction: column !important; }
-            .demos-row .imessage-demo { min-width: 0 !important; width: 100% !important; }
-
-            .hero-mockup-wrap { overflow: hidden; }
-            .hero-demo { flex-direction: column; height: auto; }
-            .hero-terminal { font-size: 11px; min-height: 180px; }
-            .hero-imsg { min-height: 200px; }
-
-            /* Disable sticky scroll — stack images and captions normally */
-            .sticky-sequence { height: auto; }
-            .sticky-frame {
-                position: relative;
-                height: auto;
-                flex-direction: column;
-                padding: var(--space-lg) var(--space-md);
-                gap: var(--space-md);
-            }
-            .sticky-images {
-                width: 100%;
-                aspect-ratio: auto;
-                max-height: none;
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-md);
-            }
-            .seq-img {
-                position: relative;
-                inset: auto;
-                opacity: 1 !important;
-                visibility: visible !important;
-                width: 100%;
-                height: auto;
-            }
-            .sticky-text { flex: none; width: 100%; min-height: auto; }
-            .seq-caption {
-                position: relative;
-                opacity: 1 !important;
-                visibility: visible !important;
-                transform: none !important;
-            }
-            /* Hide all captions except the first (redundant when images are all visible) */
-            .seq-caption:not(:first-child) { display: none; }
-            .seq-dots { display: none; }
-
-            .testimonial-row { flex-direction: column; }
-
-            /* Cards on mobile */
-            .feature,
-            .installer-box,
-            .testimonial-card,
-            .imessage-demo {
-                background: var(--surface);
-            }
-
-            /* Install walkthrough stacks */
-            .install-walkthrough {
-                flex-direction: column;
-            }
-            .iw-steps-panel {
-                flex: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container { padding: var(--space-md) var(--space-sm); }
-            .hero { padding: var(--space-lg) 0 var(--space-sm); }
-            .section { padding: var(--space-md) 0; }
-            .logo { font-size: 36px; }
-            .subtitle { font-size: var(--text-base); margin-bottom: var(--space-md); }
-            .price-tag { padding: 12px var(--space-md); }
-
-            .hero-mockup-wrap { margin-top: var(--space-md); }
-            .hero-demo { padding: var(--space-sm); gap: 12px; }
-            .hero-terminal { padding: 12px 14px; font-size: 10px; line-height: 1.7; }
-            .hero-imsg .imsg-header strong { font-size: var(--text-sm); }
-            .msg-bubble { font-size: 12px; padding: 6px 10px; }
-
-            .cta-button { width: 100%; padding: 14px var(--space-md); }
-            .niche-grid { grid-template-columns: 1fr; }
-
-            .sticky-frame { padding: var(--space-md) var(--space-sm); gap: var(--space-md); }
-
-            .feature { padding: var(--space-sm); }
-            .step { padding: var(--space-sm); gap: 12px; }
-            .step-number { width: 30px; height: 30px; }
-            .faq-item { padding: var(--space-sm) 0; }
-
-            .installer-box { padding: var(--space-sm); margin: var(--space-md) 0; }
-            .installer-command { padding: 10px var(--space-sm); font-size: 11px; gap: 8px; }
-
-            .terminal { padding: var(--space-sm); font-size: 12px; }
-
-            .footer { padding: var(--space-lg) 0 var(--space-md); }
-            .top-bar { padding: 10px var(--space-sm); }
-
-            .imessage-demo { padding: var(--space-sm) 12px; }
-            .bubble { font-size: 14px; padding: 8px 12px; }
-
-            .testimonial-card { padding: var(--space-sm); }
-            .anim-msg.anim-gray, .anim-msg.anim-blue { font-size: 14px; padding: 8px 12px; }
-
-            .feedback-btn { bottom: 16px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
-        }
-
-        /* ===== How It Works ===== */
-        .how-it-works {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-sm);
-            margin-top: var(--space-md);
-        }
-        .hiw-step {
-            text-align: center;
-            padding: var(--space-md) var(--space-sm);
-            border-radius: 14px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-        }
-        .hiw-icon {
-            font-size: 36px;
-            margin-bottom: var(--space-sm);
-        }
-        .hiw-step h3 {
-            font-size: var(--text-base);
-            font-weight: 600;
-            margin-bottom: var(--space-xs);
-        }
-        .hiw-step p {
-            color: var(--text-secondary);
-            font-size: var(--text-sm);
-            line-height: 1.6;
-        }
-        @media (max-width: 768px) {
-            .how-it-works { grid-template-columns: 1fr; gap: var(--space-sm); }
-        }
-
-        /* ===== Use Cases ===== */
-        .use-cases {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-lg);
-            margin-top: var(--space-md);
-        }
-        .use-case {
-            display: flex;
-            gap: var(--space-md);
-            align-items: center;
-        }
-        .use-case:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        .use-case-text {
-            flex: 1;
-        }
-        .use-case-text h3 {
-            font-size: var(--text-2xl);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 10px;
-        }
-        .use-case-text p {
-            color: var(--text-secondary);
-            font-size: var(--text-base);
-            line-height: 1.7;
-        }
-        .use-case .imessage-demo {
-            flex: 0 0 300px;
-            margin: 0;
-        }
-        @media (max-width: 768px) {
-            .use-case, .use-case:nth-child(even) {
-                flex-direction: column;
-            }
-            .use-case .imessage-demo {
-                flex: none;
-                width: 100%;
-            }
-        }
-
-        /* ===== Feature Groups ===== */
-        .feature-group {
-            margin-bottom: var(--space-md);
-        }
-        .feature-group-label {
-            font-size: var(--text-xs);
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            font-weight: 500;
-            color: var(--brand);
-            margin-bottom: var(--space-sm);
-        }
-
-        /* ===== Focus visible ===== */
-        :focus-visible {
-            outline: 2px solid var(--brand);
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
-
-        /* ===== Scroll-driven hero parallax (overdrive) ===== */
-        @supports (animation-timeline: scroll()) {
-            .hero-mockup-wrap::before {
-                animation: glow-pulse 4s ease-in-out infinite, hero-glow-scroll linear both;
-                animation-timeline: auto, scroll(root block);
-                animation-range: 0 40vh;
-            }
-        }
-        @keyframes hero-glow-scroll {
-            to { opacity: 0; transform: scale(0.9) translateY(-20px); }
-        }
-
-        /* ===== Privacy block ===== */
-        .privacy-block {
-            margin: var(--space-lg) auto;
-            background: rgba(74, 222, 128, 0.03);
-            border: 1px solid rgba(74, 222, 128, 0.12);
-            border-radius: 16px;
-            padding: var(--space-md);
-            text-align: center;
-            max-width: 680px;
-        }
-        .privacy-block h2 {
-            font-size: var(--text-2xl);
-            margin-bottom: 12px;
-        }
-        .privacy-block p {
-            color: var(--text-secondary);
-            font-size: var(--text-base);
-            line-height: 1.75;
-            max-width: 52ch;
-            margin: 0 auto;
-        }
+    /* Animated angle for conic borders (Magic UI border-beam / Aceternity moving-border) */
+    @property --beam-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+
+    :root{
+        --bg:#06070a; --bg-2:#0a0c10; --surface:rgba(255,255,255,.03);
+        --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.14);
+        --text:#f4f6f8; --muted:#9aa3ad; --dim:#6b727b;
+        --brand:#4ade80; --brand-2:#22d3ee; --brand-soft:rgba(74,222,128,.14);
+        --r:18px;
+        --ease:cubic-bezier(.22,.7,.2,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+        font-family:'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+        background:var(--bg); color:var(--text); line-height:1.6;
+        -webkit-font-smoothing:antialiased; overflow-x:hidden;
+        font-feature-settings:'ss01','cv01';
+    }
+    code,.mono{font-family:'Geist Mono',ui-monospace,monospace}
+    a{color:inherit;text-decoration:none}
+    ::selection{background:var(--brand);color:#04210f}
+    img,video{max-width:100%;display:block}
+
+    /* ===== Backgrounds: Aceternity Aurora + grid + spotlight ===== */
+    .bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .aurora{position:absolute;inset:-30%;filter:blur(60px);opacity:.9;
+        background:
+            radial-gradient(38% 38% at 18% 22%, rgba(74,222,128,.20), transparent 62%),
+            radial-gradient(34% 34% at 82% 16%, rgba(34,211,238,.16), transparent 60%),
+            radial-gradient(44% 44% at 64% 86%, rgba(74,222,128,.13), transparent 62%);
+        animation:aurora 20s var(--ease) infinite alternate}
+    @keyframes aurora{0%{transform:translate3d(-3%,-2%,0) rotate(0deg) scale(1)}
+        100%{transform:translate3d(3%,3%,0) rotate(7deg) scale(1.08)}}
+    .grid{position:absolute;inset:0;
+        background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+        background-size:54px 54px;
+        -webkit-mask-image:radial-gradient(ellipse 75% 55% at 50% -5%,#000 35%,transparent 80%);
+        mask-image:radial-gradient(ellipse 75% 55% at 50% -5%,#000 35%,transparent 80%)}
+    .vignette{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% -10%,transparent 40%,var(--bg) 78%)}
+
+    .wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+
+    /* ===== Nav ===== */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s}
+    .nav.scrolled{background:rgba(6,7,10,.72);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.02em;font-size:18px}
+    .brand .gho{filter:drop-shadow(0 0 10px rgba(74,222,128,.5))}
+    .nav-cta{font-size:14px;font-weight:600;padding:9px 16px;border-radius:11px;border:1px solid var(--line-2);
+        background:var(--surface);transition:.2s var(--ease)}
+    .nav-cta:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
+
+    /* ===== Buttons ===== */
+    .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;
+        padding:14px 26px;border-radius:13px;cursor:pointer;transition:.22s var(--ease);border:1px solid transparent;white-space:nowrap}
+    .btn-ghost{background:var(--surface);border-color:var(--line-2);color:var(--text)}
+    .btn-ghost:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-2px)}
+    /* Aceternity moving-border button */
+    .btn-glow{position:relative;color:#04210f;background:transparent;border:none;isolation:isolate;font-weight:700}
+    .btn-glow::before{content:"";position:absolute;inset:0;border-radius:13px;z-index:-2;
+        background:conic-gradient(from var(--beam-angle),#4ade80,#22d3ee,#4ade80,#22d3ee,#4ade80);
+        animation:spin 4.5s linear infinite}
+    .btn-glow::after{content:"";position:absolute;inset:0;border-radius:13px;z-index:-1;
+        background:linear-gradient(#5bf08e,#34d399)}
+    .btn-glow:hover{transform:translateY(-2px);filter:brightness(1.06)}
+    .btn-glow:hover::after{background:linear-gradient(#6ef79e,#3ee0a6)}
+    @keyframes spin{to{--beam-angle:360deg}}
+    .btn-lg{font-size:16px;padding:16px 30px}
+
+    /* ===== Hero ===== */
+    .hero{position:relative;padding:150px 0 90px;text-align:center}
+    .badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--muted);
+        padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02);margin-bottom:26px}
+    .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 10px var(--brand);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+    .hero h1{font-size:clamp(2.6rem,7vw,5rem);line-height:1.02;letter-spacing:-.035em;font-weight:800;margin-bottom:22px}
+    /* Magic UI shimmer/animated-gradient text */
+    .shimmer{background:linear-gradient(100deg,#fff 25%,#4ade80 42%,#22d3ee 55%,#fff 72%);
+        background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+        animation:shine 7s linear infinite}
+    @keyframes shine{to{background-position:-220% center}}
+    .hero p.sub{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);max-width:600px;margin:0 auto 34px;line-height:1.55}
+    .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .hero-note{margin-top:20px;font-size:13px;color:var(--dim)}
+    .hero-note code{background:var(--surface);border:1px solid var(--line);padding:2px 7px;border-radius:6px;color:var(--brand);font-size:12px}
+    .scroll-cue{margin-top:60px;display:inline-flex;flex-direction:column;align-items:center;gap:8px;color:var(--dim);font-size:12px}
+    .scroll-cue .mouse{width:22px;height:34px;border:1.5px solid var(--line-2);border-radius:12px;position:relative}
+    .scroll-cue .mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:6px;border-radius:2px;background:var(--brand);transform:translateX(-50%);animation:scrolldot 1.6s infinite}
+    @keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,10px)}}
+
+    /* ===== Trust strip / marquee (Magic UI marquee) ===== */
+    .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;
+        background:rgba(255,255,255,.015);overflow:hidden;position:relative;z-index:2}
+    .marquee{display:flex;width:max-content;gap:54px;animation:marq 28s linear infinite}
+    .marquee:hover{animation-play-state:paused}
+    .marquee span{display:inline-flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;font-weight:500;white-space:nowrap}
+    .marquee span b{color:var(--text);font-weight:600}
+    @keyframes marq{to{transform:translateX(calc(-50% - 27px))}}
+
+    /* ===== Section shell ===== */
+    section{position:relative;z-index:2}
+    .sec{padding:96px 0}
+    .eyebrow{color:var(--brand);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+    .sec h2{font-size:clamp(1.9rem,4vw,2.9rem);letter-spacing:-.03em;font-weight:800;line-height:1.08}
+    .sec .lead{color:var(--muted);max-width:560px;margin-top:16px;font-size:1.05rem}
+    .center{text-align:center}
+    .center .lead{margin-left:auto;margin-right:auto}
+
+    /* ===== Demo video (Magic UI border-beam frame) ===== */
+    .demo{max-width:960px;margin:40px auto 0;position:relative}
+    .beam{position:relative;border-radius:22px;padding:1.5px;background:var(--line);overflow:hidden}
+    .beam::before{content:"";position:absolute;inset:-40%;z-index:0;
+        background:conic-gradient(from var(--beam-angle),transparent 0 62%,var(--brand) 78%,var(--brand-2) 90%,transparent 100%);
+        animation:spin 7s linear infinite}
+    .beam-inner{position:relative;z-index:1;border-radius:20px;overflow:hidden;background:#000;line-height:0}
+    .beam-inner video{width:100%;height:auto;display:block}
+    .demo-glow{position:absolute;inset:-30px -10px;z-index:-1;background:radial-gradient(60% 60% at 50% 50%,rgba(74,222,128,.18),transparent 70%);filter:blur(30px)}
+    .unmute{position:absolute;bottom:16px;right:16px;z-index:3;display:inline-flex;align-items:center;gap:7px;
+        font-size:13px;font-weight:600;padding:9px 14px;border-radius:11px;cursor:pointer;
+        background:rgba(6,7,10,.7);backdrop-filter:blur(8px);border:1px solid var(--line-2);color:var(--text);transition:.2s}
+    .unmute:hover{border-color:var(--brand);color:var(--brand)}
+
+    /* ===== Bento (Aceternity bento + card-spotlight) ===== */
+    .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:46px}
+    .card{position:relative;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+        padding:26px;overflow:hidden;transition:transform .3s var(--ease),border-color .3s}
+    .card:hover{transform:translateY(-4px);border-color:var(--line-2)}
+    .card::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .35s;pointer-events:none;
+        background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(74,222,128,.13),transparent 42%)}
+    .card:hover::before{opacity:1}
+    .card .ico{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;
+        background:var(--brand-soft);border:1px solid rgba(74,222,128,.25);margin-bottom:16px}
+    .card h3{font-size:1.15rem;letter-spacing:-.02em;margin-bottom:8px}
+    .card p{color:var(--muted);font-size:.95rem}
+    .c-3{grid-column:span 3} .c-2{grid-column:span 2} .c-6{grid-column:span 6}
+    .card.feature-lg{display:flex;flex-direction:column;justify-content:flex-end;min-height:230px}
+
+    /* mode chips inside big card */
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+    .chip{font-size:12px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--muted)}
+    .chip.on{color:#04210f;background:var(--brand);border-color:var(--brand)}
+
+    /* ===== Steps + install ===== */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+    .step{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:var(--surface);position:relative}
+    .step .n{font-family:'Geist Mono';font-size:13px;color:var(--brand);border:1px solid rgba(74,222,128,.3);
+        width:30px;height:30px;border-radius:9px;display:grid;place-items:center;margin-bottom:16px;background:var(--brand-soft)}
+    .step h4{font-size:1.05rem;margin-bottom:6px;letter-spacing:-.01em}
+    .step p{color:var(--muted);font-size:.92rem}
+    .install{max-width:680px;margin:40px auto 0;border:1px solid var(--line);border-radius:var(--r);
+        background:var(--bg-2);overflow:hidden}
+    .term-bar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line)}
+    .term-bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+    .term-bar .r{background:#ff5f57}.term-bar .y{background:#febc2e}.term-bar .g{background:#28c840}
+    .term-bar span{margin-left:8px;color:var(--dim);font-size:12px;font-family:'Geist Mono'}
+    .cmd{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:22px 20px;cursor:pointer;transition:background .2s}
+    .cmd:hover{background:rgba(255,255,255,.02)}
+    .cmd code{font-size:15px;color:var(--text)}
+    .cmd code .p{color:var(--brand)}
+    .cmd .copy{font-size:12px;color:var(--dim);border:1px solid var(--line);padding:5px 10px;border-radius:8px;flex-shrink:0}
+    .install-note{text-align:center;color:var(--dim);font-size:13px;margin-top:16px}
+    .install-note code{background:var(--surface);border:1px solid var(--line);padding:2px 6px;border-radius:5px;color:var(--brand)}
+
+    /* ===== Stats (React-Bits count-up) ===== */
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+    .stat{text-align:center;border:1px solid var(--line);border-radius:var(--r);padding:30px 20px;background:var(--surface)}
+    .stat .num{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;
+        background:linear-gradient(180deg,#fff,#9fe9bd);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .stat .lbl{color:var(--muted);font-size:.9rem;margin-top:6px}
+
+    /* ===== Final CTA ===== */
+    .cta-card{position:relative;border:1px solid var(--line);border-radius:26px;padding:64px 32px;text-align:center;
+        background:linear-gradient(180deg,rgba(74,222,128,.06),rgba(255,255,255,.01));overflow:hidden}
+    .cta-card .price{font-size:3.2rem;font-weight:800;letter-spacing:-.03em}
+    .cta-card .price small{font-size:1rem;color:var(--muted);font-weight:500}
+
+    footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index:2}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--dim);font-size:14px}
+    .foot a:hover{color:var(--brand)}
+
+    /* ===== Scroll reveal (Framer-style whileInView) ===== */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .reveal.in{opacity:1;transform:none}
+
+    @media(max-width:820px){
+        .bento{grid-template-columns:repeat(2,1fr)}
+        .c-3,.c-2,.c-6{grid-column:span 2}
+        .steps,.stats{grid-template-columns:1fr}
+        .hero{padding:128px 0 70px}
+    }
+    @media(prefers-reduced-motion:reduce){
+        .aurora,.btn-glow::before,.beam::before,.marquee,.shimmer,.scroll-cue .mouse::after,.badge .dot{animation:none!important}
+        .reveal{opacity:1;transform:none}
+        .shimmer{color:#fff;-webkit-text-fill-color:#fff}
+    }
     </style>
 </head>
 <body>
-    <div class="page-content">
-    <header class="top-bar" role="banner">
-        <span>Harrison Rampell &middot; v2.3.4</span>
-        <a href="mailto:support@ghostreply.lol" style="margin-left:12px;">Feedback</a>
-    </header>
-    <main id="main-content">
-
-    <div class="container">
-
-        <!-- Hero + Price -->
-        <div class="hero">
-            <div class="glow-orb glow-orb-hero" aria-hidden="true"></div>
-            <div class="logo" aria-hidden="true">👻</div>
-            <h1>GhostReply</h1>
-            <p class="subtitle">In meetings. Driving. Deep in work.<br>Your texts pile up — GhostReply handles them.</p>
-
-            <div class="price-tag">
-                <span class="price">$4.99</span><span class="price-period">one-time</span>
-            </div>
-            <p style="color:var(--brand); font-size:var(--text-sm); margin-top:10px; margin-bottom:20px;">10 free replies — no credit card</p>
-            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                <a href="#get" class="cta-button" style="background:var(--brand); color:#000;">Try Free — 10 Replies</a>
-                <a href="#" id="checkout-btn" class="cta-button">Buy for $4.99</a>
-            </div>
-            <p style="color:var(--text-muted); font-size:var(--text-xs); margin-top:14px;">macOS Terminal app — type <code style="background:var(--surface-2); padding:2px 6px; border-radius:4px; color:var(--brand);">ghostreply</code> to start</p>
-
-        </div>
-
-    </div><!-- end container -->
-
-    <style>
-        .video-wrap{max-width:940px;margin:0 auto;border-radius:16px;overflow:hidden;
-            border:1px solid #1e1e1e;box-shadow:0 24px 70px rgba(0,0,0,.55);background:#000;line-height:0;}
-        .demo-video{display:block;width:100%;height:auto;}
-        .lead{color:var(--text-secondary);max-width:560px;margin:0 auto var(--space-lg);
-            text-align:center;font-size:var(--text-base);}
-    </style>
-
-    <div class="container">
-        <!-- ===== Demo video ===== -->
-        <section class="section" id="demo" style="padding-top:0;">
-            <div class="video-wrap">
-                <video class="demo-video" controls playsinline preload="metadata"
-                       poster="assets/ghostreply-demo-poster.jpg">
-                    <source src="assets/ghostreply-demo.mp4" type="video/mp4">
-                    Your browser can't play this video.
-                </video>
-            </div>
-        </section>
-
-        <!-- ===== Text + install ===== -->
-        <section class="section" id="get">
-            <h2>Texts handled. In your voice.</h2>
-            <p class="lead">GhostReply learns how you text and replies for you while you're busy —
-                small talk, plans, the stuff that piles up. It runs entirely on your Mac.</p>
-
-            <div class="installer-box" style="text-align:center; padding:40px 32px;">
-                <p style="color:var(--text-secondary); font-size:var(--text-sm); margin-bottom:var(--space-sm);">Open Terminal and paste this:</p>
-                <div class="installer-command" id="install-cmd">
-                    <span>curl -sL ghostreply.lol/install.sh | bash</span>
-                    <span class="copy-hint">click to copy</span>
-                </div>
-                <p style="color:var(--text-muted); font-size:var(--text-xs); margin-top:14px;">10 free replies — no credit card. Type <code style="background:var(--surface-2); padding:2px 6px; border-radius:4px; color:var(--brand);">trial</code> during setup.</p>
-            </div>
-
-            <div style="text-align:center; margin-top:var(--space-lg);">
-                <a href="#" id="checkout-btn-2" class="cta-button">Buy for $4.99 — one-time</a>
-            </div>
-        </section>
+    <div class="bg-fx" aria-hidden="true">
+        <div class="aurora"></div>
+        <div class="grid"></div>
+        <div class="vignette"></div>
     </div>
 
-        <footer class="footer">
-            <p>GhostReply &copy; 2026 &middot; <a href="mailto:support@ghostreply.lol">Support</a> &middot; <a href="mailto:support@ghostreply.lol">Feedback</a></p>
-        </footer>
+    <!-- ===== Nav ===== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="brand"><span class="gho">👻</span> GhostReply</a>
+            <a href="#" class="nav-cta" data-checkout="nav">Buy · $4.99</a>
+        </div>
+    </nav>
 
-    </main>
-    </div><!-- end page-content -->
+    <!-- ===== Hero ===== -->
+    <header class="hero">
+        <div class="wrap">
+            <div class="badge reveal"><span class="dot"></span> macOS · 10 free replies, no card</div>
+            <h1 class="reveal">Your iMessages,<br><span class="shimmer">handled.</span></h1>
+            <p class="sub reveal">GhostReply learns how you text and answers for you while you're busy —
+                small talk, plans, the stuff that piles up. On your Mac, in your voice.</p>
+            <div class="hero-cta reveal">
+                <a href="#get" class="btn btn-glow btn-lg"><span>Try free — 10 replies</span></a>
+                <a href="#" class="btn btn-ghost btn-lg" data-checkout="hero">Buy for $4.99</a>
+            </div>
+            <p class="hero-note reveal">One-time purchase · runs in your terminal — just type <code>ghostreply</code></p>
+            <div class="scroll-cue reveal"><span class="mouse"></span> see it work</div>
+        </div>
+    </header>
+
+    <!-- ===== Marquee ===== -->
+    <div class="strip" aria-hidden="true">
+        <div class="marquee" id="marquee"></div>
+    </div>
+
+    <!-- ===== Demo video ===== -->
+    <section class="sec" id="demo">
+        <div class="wrap center">
+            <div class="eyebrow reveal">See it live</div>
+            <h2 class="reveal">Watch it reply, in real time</h2>
+            <p class="lead reveal">A real session — GhostReply reading messages and answering as you.</p>
+            <div class="demo reveal">
+                <div class="demo-glow"></div>
+                <div class="beam">
+                    <div class="beam-inner">
+                        <video id="demoVideo" autoplay muted loop playsinline preload="auto"
+                               poster="assets/ghostreply-demo-poster.jpg">
+                            <source src="assets/ghostreply-demo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <button class="unmute" id="unmuteBtn" aria-label="Unmute video">🔇 Tap for sound</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Features bento ===== -->
+    <section class="sec" id="features">
+        <div class="wrap">
+            <div class="center">
+                <div class="eyebrow reveal">Why it's different</div>
+                <h2 class="reveal">Not a chatbot. A clone of how <i>you</i> text.</h2>
+            </div>
+            <div class="bento" id="bento">
+                <div class="card c-3 feature-lg reveal">
+                    <div class="chips">
+                        <span class="chip on">Autopilot</span><span class="chip">Rizz</span>
+                        <span class="chip">Ragebait</span><span class="chip">Drunk</span>
+                        <span class="chip">Breakup</span><span class="chip">Busy</span>
+                    </div>
+                    <h3>Modes for every mood</h3>
+                    <p>Reply exactly like yourself — or pick a persona. From "texts like you" to flirty, formal, or unhinged.</p>
+                </div>
+                <div class="card c-3 feature-lg reveal">
+                    <div class="ico">🧠</div>
+                    <h3>Learns your real voice</h3>
+                    <p>It reads how you actually text each person — slang, length, emojis, even punctuation — and matches it per contact.</p>
+                </div>
+                <div class="card c-2 reveal">
+                    <div class="ico">🔒</div>
+                    <h3>On-device</h3>
+                    <p>Runs entirely on your Mac. Your messages never touch our servers.</p>
+                </div>
+                <div class="card c-2 reveal">
+                    <div class="ico">📅</div>
+                    <h3>Calendar-aware</h3>
+                    <p>Knows when you're free and answers "you around?" with a real time.</p>
+                </div>
+                <div class="card c-2 reveal">
+                    <div class="ico">⚡</div>
+                    <h3>Zero setup friction</h3>
+                    <p>One curl command. Bring a free Groq key. Running in under a minute.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Stats ===== -->
+    <section class="sec" style="padding-top:0">
+        <div class="wrap">
+            <div class="stats">
+                <div class="stat reveal"><div class="num" data-count="10">0</div><div class="lbl">free replies to start</div></div>
+                <div class="stat reveal"><div class="num" data-prefix="$" data-count="4.99" data-dec="2">0</div><div class="lbl">one-time — yours forever</div></div>
+                <div class="stat reveal"><div class="num" data-count="100" data-suffix="%">0</div><div class="lbl">on your device</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== How it works ===== -->
+    <section class="sec" id="get">
+        <div class="wrap">
+            <div class="center">
+                <div class="eyebrow reveal">Get started</div>
+                <h2 class="reveal">Running in under a minute</h2>
+            </div>
+            <div class="steps">
+                <div class="step reveal"><div class="n">1</div><h4>Paste one command</h4><p>One curl line installs GhostReply into <code>~/.ghostreply</code>. Nothing system-wide.</p></div>
+                <div class="step reveal"><div class="n">2</div><h4>Add a free Groq key</h4><p>One click, no credit card. GhostReply walks you through it.</p></div>
+                <div class="step reveal"><div class="n">3</div><h4>Type <code>ghostreply</code></h4><p>Pick a contact and a mode. It starts replying as you.</p></div>
+            </div>
+
+            <div class="install reveal">
+                <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>terminal</span></div>
+                <div class="cmd" id="installCmd">
+                    <code><span class="p">$</span> curl -sL ghostreply.lol/install.sh | bash</code>
+                    <span class="copy" id="copyHint">copy</span>
+                </div>
+            </div>
+            <p class="install-note reveal">10 free replies — no card. Type <code>trial</code> during setup.</p>
+        </div>
+    </section>
+
+    <!-- ===== Final CTA ===== -->
+    <section class="sec">
+        <div class="wrap">
+            <div class="cta-card reveal">
+                <div class="demo-glow" style="inset:0;opacity:.6"></div>
+                <div class="eyebrow">Stop drowning in unreads</div>
+                <h2 style="margin-bottom:10px">Let GhostReply text back</h2>
+                <div class="price">$4.99 <small>once · forever</small></div>
+                <div class="hero-cta" style="margin-top:28px">
+                    <a href="#get" class="btn btn-glow btn-lg"><span>Try free now</span></a>
+                    <a href="#" class="btn btn-ghost btn-lg" data-checkout="pricing">Buy a license</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap foot">
+            <span>GhostReply © 2026 · made by Harrison Rampell</span>
+            <span><a href="mailto:support@ghostreply.lol">Support</a> · <a href="mailto:support@ghostreply.lol">Feedback</a></span>
+        </div>
+    </footer>
 
     <script>
         const GHOSTREPLY_API = 'https://ghostreply-api.rampell.workers.dev';
         const LEMONSQUEEZY_CHECKOUT = 'https://ghostreply.lemonsqueezy.com/checkout/buy/877e5f9a-3f63-4b5e-84f2-95e624643828';
-        const sourceParams = new URLSearchParams(window.location.search);
+        const INSTALL = 'curl -sL ghostreply.lol/install.sh | bash';
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const params = new URLSearchParams(location.search);
+        const val = (n) => params.get(n) || '';
         const sourceId = (() => { try {
-            const existing = localStorage.getItem('ghostreply_source_id');
-            if (existing) return existing;
-            const next = (crypto.randomUUID && crypto.randomUUID()) || (Date.now() + '-' + Math.random().toString(16).slice(2));
-            localStorage.setItem('ghostreply_source_id', next);
-            localStorage.setItem('ghostreply_landing_url', window.location.href);
+            const e = localStorage.getItem('ghostreply_source_id'); if (e) return e;
+            const n = (crypto.randomUUID && crypto.randomUUID()) || (Date.now() + '-' + Math.random().toString(16).slice(2));
+            localStorage.setItem('ghostreply_source_id', n);
+            localStorage.setItem('ghostreply_landing_url', location.href);
             localStorage.setItem('ghostreply_initial_referrer', document.referrer || '$direct');
-            return next;
+            return n;
         } catch { return Date.now() + '-' + Math.random().toString(16).slice(2); } })();
-        const sourceValue = (n) => sourceParams.get(n) || '';
-        function trackSiteEvent(event, properties) { try {
+        function track(event, props) { try {
             navigator.sendBeacon(GHOSTREPLY_API + '/v1/events', new Blob([JSON.stringify({
                 event, distinct_id: 'site_' + sourceId,
                 properties: { source_id: sourceId,
-                    landing_url: localStorage.getItem('ghostreply_landing_url') || window.location.href,
+                    landing_url: localStorage.getItem('ghostreply_landing_url') || location.href,
                     referrer: localStorage.getItem('ghostreply_initial_referrer') || document.referrer || '$direct',
-                    current_url: window.location.href,
-                    utm_source: sourceValue('utm_source'), utm_medium: sourceValue('utm_medium'),
-                    utm_campaign: sourceValue('utm_campaign'), utm_content: sourceValue('utm_content'),
-                    utm_term: sourceValue('utm_term'), ...properties },
+                    current_url: location.href, utm_source: val('utm_source'), utm_medium: val('utm_medium'),
+                    utm_campaign: val('utm_campaign'), utm_content: val('utm_content'), utm_term: val('utm_term'), ...props },
             })], { type: 'application/json' }));
         } catch {} }
-        function checkoutUrl(buttonId) {
+        function checkoutUrl(loc) {
             const url = new URL(LEMONSQUEEZY_CHECKOUT);
-            const custom = { source_id: sourceId,
-                landing_url: localStorage.getItem('ghostreply_landing_url') || window.location.href,
+            const c = { source_id: sourceId, button_id: loc,
+                landing_url: localStorage.getItem('ghostreply_landing_url') || location.href,
                 referrer: localStorage.getItem('ghostreply_initial_referrer') || document.referrer || '$direct',
-                button_id: buttonId, utm_source: sourceValue('utm_source'), utm_medium: sourceValue('utm_medium'),
-                utm_campaign: sourceValue('utm_campaign'), utm_content: sourceValue('utm_content'), utm_term: sourceValue('utm_term') };
-            Object.entries(custom).forEach(([k, v]) => { if (v) url.searchParams.set('checkout[custom][' + k + ']', v.slice(0, 500)); });
+                utm_source: val('utm_source'), utm_medium: val('utm_medium'), utm_campaign: val('utm_campaign'),
+                utm_content: val('utm_content'), utm_term: val('utm_term') };
+            Object.entries(c).forEach(([k, v]) => { if (v) url.searchParams.set('checkout[custom][' + k + ']', v.slice(0, 500)); });
             return url.toString();
         }
-        function openCheckout(e, buttonId) { e.preventDefault(); trackSiteEvent('checkout_clicked', { button_id: buttonId }); window.location.href = checkoutUrl(buttonId); }
-        const heroBtn = document.getElementById('checkout-btn');
-        if (heroBtn) heroBtn.addEventListener('click', (e) => openCheckout(e, 'hero'));
-        const bottomBtn = document.getElementById('checkout-btn-2');
-        if (bottomBtn) bottomBtn.addEventListener('click', (e) => openCheckout(e, 'bottom'));
-        trackSiteEvent('site_pageview', {});
+        document.querySelectorAll('[data-checkout]').forEach(el => el.addEventListener('click', e => {
+            e.preventDefault(); track('checkout_clicked', { button_id: el.dataset.checkout }); location.href = checkoutUrl(el.dataset.checkout);
+        }));
+        track('site_pageview', {});
 
-        // Copy install command
+        // Nav scrolled state
+        const nav = document.getElementById('nav');
+        const onScroll = () => nav.classList.toggle('scrolled', scrollY > 24);
+        onScroll(); addEventListener('scroll', onScroll, { passive: true });
+
+        // Marquee (Magic UI) — duplicated for seamless loop
         (function () {
-            const cmd = document.getElementById('install-cmd');
-            if (!cmd) return;
-            cmd.style.cursor = 'pointer';
-            cmd.addEventListener('click', () => {
-                navigator.clipboard && navigator.clipboard.writeText('curl -sL ghostreply.lol/install.sh | bash');
-                const hint = cmd.querySelector('.copy-hint');
-                if (hint) { const o = hint.textContent; hint.textContent = 'copied!'; setTimeout(() => hint.textContent = o, 1500); }
-                trackSiteEvent('install_copied', {});
+            const items = ['👻 Texts like you', '🔥 Ragebait mode', '💘 Rizz mode', '🍸 Drunk mode',
+                '💔 Breakup mode', '📅 Calendar-aware', '🔒 100% on-device', '⚡ Groq AI', '$4.99 once'];
+            const row = items.map(t => `<span><b>${t.split(' ')[0]}</b> ${t.split(' ').slice(1).join(' ')}</span>`).join('');
+            document.getElementById('marquee').innerHTML = row + row;
+        })();
+
+        // Scroll reveal (Framer whileInView)
+        (function () {
+            const els = document.querySelectorAll('.reveal');
+            if (reduce || !('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+            const io = new IntersectionObserver((ents) => ents.forEach(en => {
+                if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+            }), { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+            els.forEach((el, i) => { el.style.transitionDelay = ((i % 5) * 60) + 'ms'; io.observe(el); });
+        })();
+
+        // Card spotlight (Aceternity) — follow cursor
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('pointermove', e => {
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            });
+        });
+
+        // Count-up stats (React-Bits)
+        (function () {
+            const nums = document.querySelectorAll('[data-count]');
+            const run = (el) => {
+                const end = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0);
+                const pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+                if (reduce) { el.textContent = pre + end.toFixed(dec) + suf; return; }
+                const t0 = performance.now(), dur = 1400;
+                const tick = (t) => { const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+                    el.textContent = pre + (end * e).toFixed(dec) + suf;
+                    if (p < 1) requestAnimationFrame(tick); };
+                requestAnimationFrame(tick);
+            };
+            const io = new IntersectionObserver((ents) => ents.forEach(en => {
+                if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
+            }), { threshold: .6 });
+            nums.forEach(n => io.observe(n));
+        })();
+
+        // Video: autoplay muted; tap for sound
+        (function () {
+            const v = document.getElementById('demoVideo'), btn = document.getElementById('unmuteBtn');
+            v.play && v.play().catch(() => {});
+            v.addEventListener('play', () => track('demo_played', {}), { once: true });
+            btn.addEventListener('click', () => {
+                v.muted = !v.muted;
+                if (!v.muted) { v.play().catch(() => {}); btn.textContent = '🔊 Sound on'; track('demo_unmuted', {}); }
+                else { btn.textContent = '🔇 Tap for sound'; }
             });
         })();
 
-        // Track demo play (once)
+        // Copy install command
         (function () {
-            const v = document.querySelector('.demo-video');
-            if (v) v.addEventListener('play', () => trackSiteEvent('demo_played', {}), { once: true });
+            const cmd = document.getElementById('installCmd'), hint = document.getElementById('copyHint');
+            cmd.addEventListener('click', () => {
+                navigator.clipboard && navigator.clipboard.writeText(INSTALL);
+                const o = hint.textContent; hint.textContent = 'copied ✓'; setTimeout(() => hint.textContent = o, 1500);
+                track('install_copied', {});
+            });
         })();
 
-        console.log('%c\uD83D\uDC7B GhostReply', 'color:#4ade80;font-size:20px;font-weight:700;font-family:monospace;');
+        console.log('%c👻 GhostReply', 'color:#4ade80;font-size:22px;font-weight:800;font-family:monospace');
+        console.log('%ccurl -sL ghostreply.lol/install.sh | bash', 'color:#7a7a7a;font-family:monospace');
     </script>
 </body>
 </html>
