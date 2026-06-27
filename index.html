@@ -52,12 +52,9 @@
 
     .glow{position:fixed;inset:0;z-index:0;pointer-events:none;will-change:transform;
         background:radial-gradient(58% 44% at 50% 12%, rgba(74,222,128,.10), transparent 70%);}
-
-    /* scroll progress bar (Framer) */
     .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:60;
         background:linear-gradient(90deg,var(--brand),var(--brand-2));box-shadow:0 0 10px rgba(74,222,128,.5)}
 
-    /* buttons */
     .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;
         padding:14px 26px;border-radius:13px;cursor:pointer;border:1px solid var(--line-2);
         background:var(--surface);transition:transform .25s var(--ease),border-color .25s,background .25s,color .25s;will-change:transform}
@@ -69,29 +66,26 @@
     /* hero */
     .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:72px 24px 96px;position:relative;z-index:2}
     .hero .mark{font-size:clamp(58px,9vw,78px);line-height:1;margin-bottom:16px;filter:drop-shadow(0 0 22px rgba(74,222,128,.55))}
-    .hero h1{font-size:clamp(3rem,11vw,7rem);font-weight:700;letter-spacing:-.045em;line-height:.9}
-    /* blue/green shimmer wordmark (Magic UI / Framer gradient text) */
+    .hero h1{font-size:clamp(3rem,11vw,7rem);font-weight:700;letter-spacing:-.045em;line-height:1.04;padding-bottom:.12em}
     .shimmer{background:linear-gradient(100deg,#fff 22%,var(--brand) 42%,var(--brand-2) 55%,#fff 74%);
         background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
         animation:shine 7s linear infinite}
     @keyframes shine{to{background-position:-220% center}}
-    .hero p.tag{font-size:clamp(1.05rem,2.3vw,1.3rem);color:var(--muted);max-width:440px;margin:22px auto 0}
+    .hero p.tag{font-size:clamp(1.05rem,2.3vw,1.3rem);color:var(--muted);max-width:440px;margin:18px auto 0}
+    .term-label{margin:34px auto 10px;color:var(--dim);font-size:13px}
 
-    /* terminal + hover + copy animation */
-    .term{position:relative;overflow:hidden;width:100%;max-width:540px;margin:30px auto 0;border:1px solid var(--line);
+    /* terminal command (simple hover) */
+    .term{position:relative;overflow:hidden;width:100%;max-width:540px;margin:0 auto;border:1px solid var(--line);
         border-radius:14px;background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:space-between;
-        gap:14px;padding:17px 20px;cursor:pointer;
-        transition:transform .25s var(--ease),border-color .25s,box-shadow .35s,background .25s}
-    .term:hover{transform:translateY(-2px);border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.04);
-        box-shadow:0 14px 44px rgba(0,0,0,.45),0 0 0 1px rgba(74,222,128,.18)}
-    .term:hover .cp{border-color:var(--brand);color:var(--brand)}
+        gap:14px;padding:17px 20px;cursor:pointer;transition:border-color .2s,background .2s}
+    .term:hover{border-color:var(--line-2);background:rgba(255,255,255,.05)}
     .term code{font-family:'Geist Mono',ui-monospace,monospace;font-size:14px;position:relative;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .term code .p{color:var(--brand)}
     .term .cp{position:relative;z-index:2;font-size:12px;color:var(--dim);border:1px solid var(--line);
         padding:6px 13px;border-radius:9px;flex-shrink:0;transition:.25s var(--ease);white-space:nowrap}
     .term::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;transform:translateX(-101%);
         background:linear-gradient(90deg,transparent,rgba(74,222,128,.18),transparent)}
-    .term.copied{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand),0 0 34px rgba(74,222,128,.22)}
+    .term.copied{border-color:var(--brand)}
     .term.copied::after{animation:sweep .7s var(--ease)}
     .term.copied .cp{background:var(--brand);color:#04210f;border-color:var(--brand);animation:pop .32s var(--ease)}
     @keyframes sweep{to{transform:translateX(101%)}}
@@ -101,7 +95,6 @@
     .free b{color:var(--brand);font-weight:700}
     .hero-cta{margin-top:18px}
 
-    /* down arrow */
     .arrow{position:absolute;bottom:26px;left:50%;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
         display:grid;place-items:center;color:var(--muted);background:rgba(255,255,255,.02);
         transform:translateX(-50%);animation:bob 1.9s var(--ease) infinite;transition:color .2s,border-color .2s}
@@ -112,22 +105,36 @@
     /* roll-up video */
     .stage{height:230vh;position:relative;z-index:2}
     .pin{position:sticky;top:0;height:100svh;overflow:hidden}
-    .vtitle{position:absolute;top:26px;left:0;right:0;text-align:center;z-index:3;color:var(--muted);font-size:14px;font-weight:500}
-    .pin-center{height:100%;display:grid;place-items:center;perspective:1700px;padding:64px 0 24px}
+    .pin-center{height:100%;display:grid;place-items:center;perspective:1700px;padding:40px 0}
     .vcard{position:relative;width:min(93vw,1040px);border-radius:22px;overflow:hidden;
-        border:1px solid var(--line-2);background:#000;line-height:0;transform-origin:50% 100%;
-        box-shadow:0 50px 130px rgba(0,0,0,.65);will-change:transform,opacity}
+        border:1px solid var(--line-2);background:#0a0c10;line-height:0;transform-origin:50% 100%;
+        box-shadow:0 30px 80px rgba(0,0,0,.5);will-change:transform,opacity}
     .vcard video{width:100%;height:auto}
     .vhalo{position:absolute;inset:-60px;z-index:-1;border-radius:40px;
-        background:radial-gradient(55% 55% at 50% 50%, rgba(74,222,128,.22), transparent 70%);filter:blur(40px);will-change:opacity}
+        background:radial-gradient(55% 55% at 50% 50%, rgba(74,222,128,.20), transparent 70%);filter:blur(40px);will-change:opacity}
 
-    /* scroll-reveal text (Framer) */
-    .reveal-text{max-width:880px;margin:0 auto;padding:110px 24px;position:relative;z-index:2}
-    .rt{font-size:clamp(1.7rem,4.6vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.18;text-align:center}
-    .rt span{opacity:.13;transition:opacity .12s linear}
+    /* terminal simulator (modes + process) */
+    .termsim{max-width:760px;margin:40px auto 0;padding:0 24px;position:relative;z-index:2}
+    .tw{border:1px solid var(--line-2);border-radius:16px;overflow:hidden;background:#0a0c10;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+    .tw-bar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+    .tw-bar i{width:11px;height:11px;border-radius:50%}
+    .tw-bar .r{background:#ff5f57}.tw-bar .y{background:#febc2e}.tw-bar .g{background:#28c840}
+    .tw-bar span{margin-left:8px;color:var(--dim);font-family:'Geist Mono',monospace;font-size:12px}
+    .tw-body{font-family:'Geist Mono',ui-monospace,monospace;font-size:13.5px;line-height:1.7;padding:22px 22px 26px;min-height:330px;white-space:pre-wrap}
+    .tl{min-height:1.7em}
+    .tl.g{color:var(--brand)} .tl.dim{color:var(--dim)} .tl.sel{color:var(--brand);font-weight:600}
+    .tl.them{color:#cdd3da} .tl.you{color:#9fe9bd}
+    .cursor{display:inline-block;width:8px;height:15px;background:var(--brand);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    /* features (word reveal on scroll) */
+    .features{max-width:880px;margin:0 auto;padding:30px 24px}
+    .feat{font-size:clamp(1.5rem,4.4vw,2.7rem);font-weight:700;letter-spacing:-.03em;line-height:1.22;text-align:center;margin:96px 0}
+    .wordreveal span{opacity:.13;transition:opacity .12s linear}
+    .feat b{color:var(--brand);font-weight:700}
 
     /* FAQ */
-    .faq{max-width:680px;margin:0 auto;padding:20px 24px;position:relative;z-index:2}
+    .faq{max-width:680px;margin:0 auto;padding:30px 24px}
     .faq h2{text-align:center;font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;letter-spacing:-.03em;margin-bottom:8px}
     .faq .lead{text-align:center;color:var(--muted);margin-bottom:30px}
     details{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:12px;overflow:hidden;transition:border-color .2s}
@@ -138,7 +145,7 @@
     details[open] summary .x{transform:rotate(45deg);color:var(--brand)}
     details p{padding:0 20px 18px;color:var(--muted);font-size:.98rem}
 
-    /* end CTA (apparent buy / trial ran out) */
+    /* end CTA */
     .endcta{max-width:680px;margin:80px auto 0;padding:0 24px;position:relative;z-index:2}
     .endcard{position:relative;overflow:hidden;border:1px solid var(--line-2);border-radius:24px;padding:56px 32px;text-align:center;
         background:linear-gradient(180deg,rgba(74,222,128,.07),rgba(255,255,255,.01))}
@@ -156,7 +163,7 @@
 
     @media(prefers-reduced-motion:reduce){
         .rise{opacity:1;transform:none;filter:none}.arrow{animation:none}.shimmer{animation:none}
-        .rt span{opacity:1}
+        .wordreveal span{opacity:1}.cursor{animation:none}
         .stage{height:auto}.pin{position:static;height:auto}.pin-center{padding:60px 0}
         .vcard{transform:none!important;opacity:1!important}
     }
@@ -172,6 +179,7 @@
         <h1 class="rise shimmer">ghostreply</h1>
         <p class="tag rise">An app that answers your iMessages like you would, right from your Mac.</p>
 
+        <p class="term-label rise">paste this in your terminal</p>
         <div class="term rise" id="term">
             <code><span class="p">$</span> curl -sL ghostreply.lol/install.sh | bash</code>
             <span class="cp" id="cp">click to copy</span>
@@ -187,7 +195,6 @@
     <!-- Roll-up video -->
     <section class="stage" id="demo">
         <div class="pin">
-            <p class="vtitle">a real session</p>
             <div class="pin-center">
                 <div class="vcard" id="vcard">
                     <div class="vhalo" id="vhalo"></div>
@@ -199,9 +206,19 @@
         </div>
     </section>
 
-    <!-- Scroll reveal text -->
-    <section class="reveal-text">
-        <p class="rt" id="rt">It reads how you text. Then it answers like you would. You never lift a finger.</p>
+    <!-- Terminal simulator: modes + process -->
+    <section class="termsim" id="sim">
+        <div class="tw">
+            <div class="tw-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>ghostreply</span></div>
+            <div class="tw-body" id="tw"></div>
+        </div>
+    </section>
+
+    <!-- Features (word reveal) -->
+    <section class="features">
+        <p class="feat wordreveal">It reads how you text, then answers like you would.</p>
+        <p class="feat wordreveal">Modes for any mood. Autopilot, rizz, busy, or pure chaos.</p>
+        <p class="feat wordreveal">It all runs on your Mac. Your texts stay yours.</p>
     </section>
 
     <!-- FAQ -->
@@ -222,7 +239,7 @@
             <p>Paste the command above in Terminal, add a free Groq key when asked, then type ghostreply.</p></details>
     </section>
 
-    <!-- End CTA: apparent buy -->
+    <!-- End CTA -->
     <section class="endcta">
         <div class="endcard rise">
             <h2>Ran out of free replies?</h2>
@@ -285,16 +302,13 @@
             els.forEach((el, i) => { el.style.transitionDelay = ((i % 6) * 55) + 'ms'; io.observe(el); });
         })();
 
-        // scroll-reveal words (Framer scroll reveal)
-        const rt = document.getElementById('rt');
-        (function () {
-            const words = rt.textContent.trim().split(/\s+/);
-            rt.innerHTML = words.map(w => '<span>' + w + '</span>').join(' ');
-            if (reduce) { rt.querySelectorAll('span').forEach(s => s.style.opacity = 1); return; }
-        })();
-        const rtSpans = rt.querySelectorAll('span');
+        // word-reveal: split every .wordreveal into word spans
+        const wrEls = [...document.querySelectorAll('.wordreveal')];
+        wrEls.forEach(el => { el.innerHTML = el.textContent.trim().replace(/(Mac|like you|10|chaos|yours)/g, '$1')
+            .split(/\s+/).map(w => '<span>' + w + '</span>').join(' '); });
+        if (reduce) wrEls.forEach(el => el.querySelectorAll('span').forEach(s => s.style.opacity = 1));
 
-        // roll-up + parallax + progress + word reveal in one scroll pass
+        // roll-up + parallax + progress + word reveal (one scroll pass)
         const stage = document.getElementById('demo'), card = document.getElementById('vcard'),
               halo = document.getElementById('vhalo'), glow = document.getElementById('glow'),
               bar = document.getElementById('progress');
@@ -303,25 +317,22 @@
         function frame() {
             ticking = false;
             const sy = scrollY, vh = innerHeight;
-            // progress bar
             const max = document.documentElement.scrollHeight - vh;
             bar.style.width = (max > 0 ? (sy / max * 100) : 0) + '%';
-            // parallax glow
-            if (!reduce) glow.style.transform = 'translateY(' + (sy * 0.12) + 'px)';
-            // roll-up
-            if (!reduce) {
-                const r = stage.getBoundingClientRect();
-                const total = stage.offsetHeight - vh;
-                const p = clamp(-r.top / total, 0, 1);
-                const e = easeOut(Math.min(1, p / 0.7));
-                card.style.transform = 'translateY(' + (70 * (1 - e)) + 'px) rotateX(' + (34 * (1 - e)) + 'deg) scale(' + (0.82 + 0.18 * e) + ')';
-                card.style.opacity = (0.45 + 0.55 * e).toFixed(3);
-                halo.style.opacity = (0.25 + 0.75 * e).toFixed(3);
-                // word reveal
-                const rr = rt.getBoundingClientRect();
-                const prog = clamp((vh * 0.85 - rr.top) / (vh * 0.55 + rr.height), 0, 1);
-                const lit = prog * rtSpans.length;
-                rtSpans.forEach((s, i) => s.style.opacity = clamp(lit - i, 0.13, 1));
+            if (reduce) return;
+            glow.style.transform = 'translateY(' + (sy * 0.12) + 'px)';
+            const r = stage.getBoundingClientRect();
+            const total = stage.offsetHeight - vh;
+            const p = clamp(-r.top / total, 0, 1);
+            const e = easeOut(Math.min(1, p / 0.7));
+            card.style.transform = 'translateY(' + (60 * (1 - e)) + 'px) rotateX(' + (32 * (1 - e)) + 'deg) scale(' + (0.84 + 0.16 * e) + ')';
+            card.style.opacity = (0.6 + 0.4 * e).toFixed(3);
+            halo.style.opacity = (0.3 + 0.7 * e).toFixed(3);
+            for (const el of wrEls) {
+                const rr = el.getBoundingClientRect();
+                const prog = clamp((vh * 0.82 - rr.top) / (vh * 0.5 + rr.height), 0, 1);
+                const lit = prog * el.children.length;
+                let i = 0; for (const s of el.children) { s.style.opacity = clamp(lit - i, 0.13, 1); i++; }
             }
         }
         addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
@@ -339,6 +350,51 @@
                 } else v.pause && v.pause();
             }), { threshold: [0, 0.5, 0.8] });
             io.observe(v);
+        })();
+
+        // terminal simulator typewriter
+        (function () {
+            const body = document.getElementById('tw');
+            const LINES = [
+                { t: '$ ghostreply', type: true },
+                { t: '✓ learned how you text', c: 'g' },
+                { t: '' },
+                { t: 'pick a mode', c: 'dim' },
+                { t: '  ● Autopilot   texts exactly like you', c: 'sel' },
+                { t: '    Rizz        smooth and flirty' },
+                { t: '    Ragebait    pure chaos' },
+                { t: '    Busy        short, you are slammed' },
+                { t: '' },
+                { t: '▸ watching Messages for Jordan', c: 'g', type: true },
+                { t: 'Jordan   you coming tonight?', c: 'them', type: true },
+                { t: 'you      yeah what time', c: 'you', type: true },
+                { t: 'Jordan   9ish', c: 'them', type: true },
+                { t: 'you      bet, see u there', c: 'you', type: true },
+            ];
+            const cur = document.createElement('span'); cur.className = 'cursor';
+            function run() {
+                body.innerHTML = ''; body.appendChild(cur);
+                let li = 0;
+                function line() {
+                    if (li >= LINES.length) return;
+                    const L = LINES[li]; const div = document.createElement('div');
+                    div.className = 'tl ' + (L.c || ''); body.insertBefore(div, cur);
+                    if (reduce || !L.type) { div.textContent = L.t; li++; setTimeout(line, L.t ? 230 : 110); return; }
+                    let ci = 0;
+                    (function ch() {
+                        div.textContent = L.t.slice(0, ci);
+                        if (ci++ <= L.t.length) setTimeout(ch, 18);
+                        else { li++; setTimeout(line, 240); }
+                    })();
+                }
+                line();
+            }
+            let done = false;
+            if (!('IntersectionObserver' in window)) { run(); return; }
+            const io = new IntersectionObserver(es => es.forEach(en => {
+                if (en.isIntersecting && !done) { done = true; run(); io.disconnect(); }
+            }), { threshold: .35 });
+            io.observe(document.getElementById('sim'));
         })();
 
         // magnetic buttons
