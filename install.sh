@@ -4,13 +4,16 @@
 
 echo ""
 echo "  ╔══════════════════════════════════╗"
-echo "  ║     GhostReply Installer v2.2.5  ║"
+echo "  ║       GhostReply Installer        ║"
 echo "  ║   iMessage Auto-Reply on Mac     ║"
 echo "  ╚══════════════════════════════════╝"
 echo ""
 
-# Analytics: track install event (non-blocking)
-curl -s "https://ghostreply.lol/ping?e=install" >/dev/null 2>&1 &
+# Analytics: track install event (non-blocking, best-effort)
+curl -s -m 5 -X POST "https://ghostreply-api.rampell.workers.dev/v1/events" \
+    -H "Content-Type: application/json" \
+    -H "X-GR-Token: gr_evt_48c4fbe37569c91b563caf53a696ffcb3d14c1ef" \
+    -d '{"event":"install_started","distinct_id":"installer","properties":{"channel":"curl"}}' >/dev/null 2>&1 &
 
 # Check macOS
 if [[ "$(uname)" != "Darwin" ]]; then
@@ -201,11 +204,18 @@ PY
 
 if dependencies_present; then
     echo "  ✓ Dependencies already installed."
+    # Best-effort: make sure 'rich' is present for the polished UI (optional —
+    # the app falls back to plain text if it's missing, so never block on it).
+    ( "$PYTHON" -c "import rich" >/dev/null 2>&1 \
+        || "$PYTHON" -m pip install --break-system-packages -q rich 2>/dev/null \
+        || "$PYTHON" -m pip install --user -q rich 2>/dev/null \
+        || "$PYTHON" -m pip install -q rich 2>/dev/null ) &
 else
     # Run pip in background with spinner. Try Homebrew/PEP 668, user installs, then plain pip.
-    ( "$PYTHON" -m pip install --break-system-packages -q openai certifi 2>/dev/null \
-        || "$PYTHON" -m pip install --user -q openai certifi 2>/dev/null \
-        || "$PYTHON" -m pip install -q openai certifi 2>/dev/null ) &
+    # 'rich' powers the polished terminal UI; openai + certifi are the hard requirements.
+    ( "$PYTHON" -m pip install --break-system-packages -q openai certifi rich 2>/dev/null \
+        || "$PYTHON" -m pip install --user -q openai certifi rich 2>/dev/null \
+        || "$PYTHON" -m pip install -q openai certifi rich 2>/dev/null ) &
     PIP_PID=$!
 
     SPINNER='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
