@@ -22,8 +22,17 @@ function withoutComments(source) {
 }
 
 function withoutRawTextElements(source) {
-  return source.replace(
-    /<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,
+  let withoutScripts = '';
+  let cursor = 0;
+
+  for (const element of scriptElements(source)) {
+    withoutScripts += source.slice(cursor, element.start);
+    cursor = element.end;
+  }
+  withoutScripts += source.slice(cursor);
+
+  return withoutScripts.replace(
+    /<style\b[^>]*>[\s\S]*?<\/style\s*>/gi,
     '',
   );
 }
@@ -84,18 +93,94 @@ function canonicalLinks(source) {
   return canonicals;
 }
 
+function openingTagEnd(source, start) {
+  let quote = null;
+
+  for (let index = start; index < source.length; index += 1) {
+    const character = source[index];
+    if (quote) {
+      if (character === quote) {
+        quote = null;
+      }
+    } else if (character === '"' || character === "'") {
+      quote = character;
+    } else if (character === '>') {
+      return index;
+    }
+  }
+
+  return -1;
+}
+
+function scriptElements(source) {
+  const elements = [];
+  let cursor = 0;
+
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start === -1) {
+      break;
+    }
+
+    if (source.startsWith('<!--', start)) {
+      const commentEnd = source.indexOf('-->', start + 4);
+      if (commentEnd === -1) {
+        break;
+      }
+      cursor = commentEnd + 3;
+      continue;
+    }
+
+    if (!/^<script\b/i.test(source.slice(start))) {
+      cursor = start + 1;
+      continue;
+    }
+
+    const openingEnd = openingTagEnd(source, start);
+    if (openingEnd === -1) {
+      break;
+    }
+
+    const closingPattern = /<\/script\s*>/gi;
+    closingPattern.lastIndex = openingEnd + 1;
+    const closingMatch = closingPattern.exec(source);
+    if (!closingMatch) {
+      break;
+    }
+
+    elements.push({
+      start,
+      end: closingPattern.lastIndex,
+      attributes: parseAttributes(source.slice(start, openingEnd + 1)),
+      content: source.slice(openingEnd + 1, closingMatch.index),
+    });
+    cursor = closingPattern.lastIndex;
+  }
+
+  return elements;
+}
+
 function jsonLdBlocks(source) {
   const blocks = [];
-  const scriptPattern = /<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;
 
-  for (const match of source.matchAll(scriptPattern)) {
-    const attributes = parseAttributes(`<script ${match[1]}>`);
-    if (attributes.get('type')?.trim().toLowerCase() === 'application/ld+json') {
-      blocks.push(match[2]);
+  for (const element of scriptElements(source)) {
+    if (
+      element.attributes.get('type')?.trim().toLowerCase()
+      === 'application/ld+json'
+    ) {
+      blocks.push(element.content);
     }
   }
 
   return blocks;
+}
+
+function decodedLinkPath(href) {
+  try {
+    return decodeURIComponent(new URL(href, 'https://local.invalid').pathname);
+  } catch {
+    return null;
+  }
 }
 
 function extractInternalHtmlLinks(source) {
@@ -108,7 +193,7 @@ function extractInternalHtmlLinks(source) {
       continue;
     }
 
-    const pathOnly = href.split(/[?#]/, 1)[0];
+    const pathOnly = decodedLinkPath(href) ?? href.split(/[?#]/, 1)[0];
     if (/\.html$/i.test(pathOnly)) {
       links.push(href);
     }
@@ -134,7 +219,7 @@ export function extractCanonical(source) {
 }
 
 export function extractJsonLd(source) {
-  return jsonLdBlocks(withoutComments(source)).map((block) => JSON.parse(block));
+  return jsonLdBlocks(source).map((block) => JSON.parse(block));
 }
 
 export function inspectHtml(filePath, source) {
@@ -150,7 +235,7 @@ export function inspectHtml(filePath, source) {
   const errors = [];
   const jsonLd = [];
 
-  jsonLdBlocks(cleanSource).forEach((block, index) => {
+  jsonLdBlocks(source).forEach((block, index) => {
     try {
       jsonLd.push(JSON.parse(block));
     } catch (error) {
@@ -245,11 +330,8 @@ function sitemapLocations(rootDir, errors) {
 }
 
 function internalLinkResolves(rootDir, href) {
-  let pathName;
-
-  try {
-    pathName = decodeURIComponent(new URL(href, 'https://local.invalid').pathname);
-  } catch {
+  const pathName = decodedLinkPath(href);
+  if (pathName === null) {
     return false;
   }
 

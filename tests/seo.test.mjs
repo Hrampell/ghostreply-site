@@ -87,6 +87,30 @@ test('extractJsonLd parses every JSON-LD block', () => {
   ]);
 });
 
+test('extractJsonLd handles greater-than signs inside quoted script attributes', () => {
+  const source = `
+    <script data-note="a > b" type="application/ld+json">
+      {"@type":"SoftwareApplication"}
+    </script>
+  `;
+
+  assert.deepEqual(extractJsonLd(source), [
+    { '@type': 'SoftwareApplication' },
+  ]);
+});
+
+test('extractJsonLd preserves HTML-comment-like text inside JSON strings', () => {
+  const source = `
+    <script type="application/ld+json">
+      {"text":"before <!--keep--> after"}
+    </script>
+  `;
+
+  assert.deepEqual(extractJsonLd(source), [
+    { text: 'before <!--keep--> after' },
+  ]);
+});
+
 test('inspectHtml reports extracted metadata and links', () => {
   const source = htmlPage({
     body: '<a href="/sales.html?ref=footer#demo">Sales</a>',
@@ -189,6 +213,20 @@ test('validateSite rejects a missing root-relative HTML link target', (t) => {
   );
 });
 
+test('validateSite URL-decodes links before identifying HTML targets', (t) => {
+  const root = fixture(t, {
+    'index.html': htmlPage({
+      body: '<a href="/missing%2Ehtml">Missing encoded page</a>',
+    }),
+    'sitemap.xml': sitemap('https://ghostreply.lol/'),
+  });
+
+  assertHasError(
+    validateSite(root),
+    /index\.html: internal link \/missing%2Ehtml does not resolve/i,
+  );
+});
+
 test('validateSite rejects a canonical content page omitted from sitemap.xml', (t) => {
   const root = fixture(t, {
     'index.html': htmlPage(),
@@ -221,6 +259,21 @@ test('HTML-like JSON-LD strings do not count as headings or internal links', (t)
         headline: '<h1>Not document markup</h1>',
         example: '<a href="/missing.html">Example</a>',
       }),
+    }),
+    'sitemap.xml': sitemap('https://ghostreply.lol/'),
+  });
+
+  const result = validateSite(root);
+
+  assert.equal(result.pages[0].h1Count, 1);
+  assert.deepEqual(result.pages[0].internalHtmlLinks, []);
+  assert.deepEqual(result.errors, []);
+});
+
+test('HTML comments do not count as headings or internal links', (t) => {
+  const root = fixture(t, {
+    'index.html': htmlPage({
+      body: '<!-- <h1>Hidden heading</h1><a href="/missing.html">Hidden link</a> -->',
     }),
     'sitemap.xml': sitemap('https://ghostreply.lol/'),
   });
