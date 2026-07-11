@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostReply, AI iMessage auto-reply for Mac (texts back in your style)</title>
-    <meta name="description" content="GhostReply answers your iMessages like you would, right from your Mac. Ten free replies, no card, then 4.99 once. macOS, on-device, private.">
-    <meta name="keywords" content="ghostreply, imessage auto reply, ai texting mac, auto reply imessage, text back app">
+    <title>AI iMessage Auto-Reply for Mac | GhostReply</title>
+    <meta name="description" content="GhostReply is an AI iMessage auto-reply app for Mac that learns how you text. Try 10 replies free, then pay $4.99 once.">
     <meta name="author" content="Harrison Rampell">
-    <meta property="og:title" content="ghostreply">
-    <meta property="og:description" content="An app that answers your iMessages like you would.">
+    <link rel="canonical" href="https://ghostreply.lol/">
+    <meta property="og:site_name" content="GhostReply">
+    <meta property="og:title" content="AI iMessage Auto-Reply for Mac | GhostReply">
+    <meta property="og:description" content="It learns how you text, then answers iMessages like you would. Ten replies free, then $4.99 once.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ghostreply.lol">
+    <meta property="og:url" content="https://ghostreply.lol/">
     <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="GhostReply replying to iMessages from a Mac terminal">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI iMessage Auto-Reply for Mac | GhostReply">
+    <meta name="twitter:description" content="It learns how you text, then answers iMessages like you would.">
+    <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+    <meta name="twitter:image:alt" content="GhostReply replying to iMessages from a Mac terminal">
     <meta name="theme-color" content="#06070a">
 
     <script>window.lemonSqueezyAffiliateConfig = { store: "ghostreply" };</script>
@@ -23,13 +33,46 @@
 
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-      {"@type":"Question","name":"Is it really free to try?","acceptedAnswer":{"@type":"Answer","text":"Yes. You get 10 replies free with no credit card. After that it is 4.99 once."}},
-      {"@type":"Question","name":"What does GhostReply cost?","acceptedAnswer":{"@type":"Answer","text":"4.99, one time. You own it. There is no subscription."}},
-      {"@type":"Question","name":"Does it work on Windows?","acceptedAnswer":{"@type":"Answer","text":"No. GhostReply is macOS only because it uses iMessage."}},
-      {"@type":"Question","name":"Do my messages leave my Mac?","acceptedAnswer":{"@type":"Answer","text":"No. It runs on your Mac and reads iMessage locally. Your texts never touch our servers."}},
+      {"@type":"Question","name":"Is it really free to try?","acceptedAnswer":{"@type":"Answer","text":"Yes. You get 10 replies free, no card. After that it is $4.99 once."}},
+      {"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"$4.99, one time. You own it. There is no subscription."}},
+      {"@type":"Question","name":"Does it work on Windows?","acceptedAnswer":{"@type":"Answer","text":"No, macOS only. It works through iMessage on your Mac."}},
+      {"@type":"Question","name":"How does GhostReply handle my messages?","acceptedAnswer":{"@type":"Answer","text":"GhostReply reads iMessage history locally on your Mac. Your reply profile is stored locally too. Relevant message context goes directly to Groq for the AI reply and does not pass through GhostReply's servers. Groq uses your API key for that request."}},
       {"@type":"Question","name":"How does it sound like me?","acceptedAnswer":{"@type":"Answer","text":"It reads how you already text each person and matches your style, slang, length, and emojis."}},
-      {"@type":"Question","name":"How do I start it?","acceptedAnswer":{"@type":"Answer","text":"Paste the install command in Terminal, add a free Groq key when asked, then type ghostreply."}}
+      {"@type":"Question","name":"How do I start it?","acceptedAnswer":{"@type":"Answer","text":"Paste the command above in Terminal, add a free Groq key when asked, then type ghostreply."}}
     ]}
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"SoftwareApplication",
+      "name":"GhostReply",
+      "operatingSystem":"macOS",
+      "applicationCategory":"UtilitiesApplication",
+      "description":"GhostReply is an AI iMessage auto-reply app for Mac that learns how you text. Try 10 replies free, then pay $4.99 once.",
+      "image":"https://ghostreply.lol/assets/ghostreply-demo-poster.jpg",
+      "url":"https://ghostreply.lol/",
+      "offers":{
+        "@type":"Offer",
+        "price":"4.99",
+        "priceCurrency":"USD",
+        "availability":"https://schema.org/InStock",
+        "url":"https://ghostreply.lol/"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"VideoObject",
+      "name":"GhostReply AI iMessage Auto-Reply Demo",
+      "description":"See GhostReply learn a conversation's texting style and reply to new iMessages on a Mac.",
+      "thumbnailUrl":"https://ghostreply.lol/assets/ghostreply-demo-poster.jpg",
+      "uploadDate":"2026-07-11",
+      "contentUrl":"https://ghostreply.lol/assets/ghostreply-demo.mp4",
+      "duration":"PT46S"
+    }
     </script>
 
     <style>
@@ -63,7 +106,8 @@
     /* hero */
     .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:72px 24px 96px;position:relative;z-index:2}
     .hero .mark{font-size:clamp(58px,9vw,78px);line-height:1;margin-bottom:14px;filter:drop-shadow(0 0 22px rgba(74,222,128,.55))}
-    .hero h1{font-size:clamp(3rem,11vw,7rem);font-weight:700;letter-spacing:-.045em;line-height:1.08;padding-bottom:.14em}
+    .hero .wordmark{font-size:clamp(3rem,11vw,7rem);font-weight:700;letter-spacing:-.045em;line-height:1.08;padding-bottom:.14em}
+    .hero h1{font-size:clamp(1.55rem,3.8vw,2.35rem);font-weight:700;letter-spacing:-.03em;line-height:1.18}
     .shimmer{background:linear-gradient(100deg,#fff 22%,var(--brand) 42%,var(--brand-2) 55%,#fff 74%);
         background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite}
     @keyframes shine{to{background-position:-220% center}}
@@ -103,6 +147,8 @@
         transition:transform 1.1s var(--ease),opacity .9s var(--ease)}
     .vwrap.in{transform:rotateX(0) scale(1) translateY(0);opacity:1}
     .vwrap video{width:100%;height:auto}
+    .demo-summary{max-width:760px;margin:16px auto 0;text-align:center;color:var(--dim);font-size:13px;line-height:1.55}
+    .demo-summary strong{color:var(--muted);font-weight:600}
 
     /* terminal simulator: exact replica of the ghostreply mode picker */
     .simwrap{max-width:680px;margin:50px auto 0;padding:0 24px;position:relative;z-index:2}
@@ -169,7 +215,8 @@
     <!-- Hero -->
     <header class="hero">
         <div class="mark rise">👻</div>
-        <h1 class="rise shimmer">ghostreply</h1>
+        <div class="wordmark rise shimmer">ghostreply</div>
+        <h1 class="rise">AI iMessage auto-reply for Mac</h1>
         <p class="tag rise">An app that answers your iMessages like you would, right from your Mac.</p>
 
         <p class="term-label rise">paste this in your terminal</p>
@@ -188,10 +235,11 @@
     <!-- Video (rolls up on scroll-in) -->
     <section class="demo" id="demo">
         <div class="vwrap" id="vwrap">
-            <video id="demoV" muted loop playsinline preload="auto" poster="assets/ghostreply-demo-poster.jpg">
+            <video id="demoV" muted loop playsinline preload="metadata" poster="assets/ghostreply-demo-poster.jpg" width="1920" height="1080">
                 <source src="assets/ghostreply-demo.mp4" type="video/mp4">
             </video>
         </div>
+        <p class="demo-summary"><strong>Demo summary:</strong> In 46 seconds, GhostReply selects Autopilot for an iMessage contact, learns that conversation's style, and writes replies as new messages arrive.</p>
     </section>
 
     <!-- Terminal simulator: the real mode picker -->
@@ -220,8 +268,8 @@
             <p>$4.99, one time. You own it. There is no subscription.</p></details>
         <details class="rise"><summary>Does it work on Windows? <span class="x">+</span></summary>
             <p>No, macOS only. It works through iMessage on your Mac.</p></details>
-        <details class="rise"><summary>Do my messages leave my Mac? <span class="x">+</span></summary>
-            <p>No. It runs on your Mac and reads iMessage locally. Your texts never touch our servers.</p></details>
+        <details class="rise"><summary>How does GhostReply handle my messages? <span class="x">+</span></summary>
+            <p>GhostReply reads iMessage history locally on your Mac. Your reply profile is stored locally too. Relevant message context goes directly to Groq for the AI reply and does not pass through GhostReply's servers. Groq uses your API key for that request.</p></details>
         <details class="rise"><summary>How does it sound like me? <span class="x">+</span></summary>
             <p>It reads how you already text each person and matches your style, slang, length, and emojis.</p></details>
         <details class="rise"><summary>How do I start it? <span class="x">+</span></summary>
