@@ -1,48 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GhostReply for Recruiters - AI Candidate Text Replies</title>
-  <meta name="description" content="GhostReply helps recruiters keep candidate text threads moving from iMessage on Mac. 10 free replies, then $4.99 one-time.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI iMessage Auto-Reply for Recruiters on Mac | GhostReply</title>
+  <meta name="description" content="Acknowledge routine candidate iMessages from your Mac with GhostReply. Try 10 automatic replies free, then buy a license for $4.99 once.">
   <link rel="canonical" href="https://ghostreply.lol/recruiters.html">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
-  <style>
-    :root{--brand:#4ade80;--surface:#0d0d0d;--surface2:#151515;--border:#242424;--text:#f2f2f2;--muted:#8a8a8a}*{box-sizing:border-box;margin:0;padding:0}body{font-family:Geist,-apple-system,BlinkMacSystemFont,sans-serif;background:#000;color:var(--text);line-height:1.6;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:28px 28px}.wrap{max-width:1040px;margin:0 auto;padding:32px 20px 56px}nav{display:flex;justify-content:space-between;margin-bottom:56px;color:var(--muted);font-size:14px}nav a{color:var(--muted);text-decoration:none}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}.eyebrow{color:var(--brand);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}h1{font-size:clamp(42px,7vw,74px);line-height:1;letter-spacing:-.04em;margin-bottom:22px}.lead{color:#b8b8b8;font-size:20px;max-width:620px;margin-bottom:26px}.price{display:inline-flex;gap:8px;align-items:baseline;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.05);border-radius:14px;padding:12px 18px;margin-bottom:22px}.price strong{font-size:30px}.price span{color:var(--muted);font-size:14px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 22px;border-radius:10px;background:#f2f2f2;color:#000;text-decoration:none;font-weight:700;border:0;cursor:pointer}.button.secondary{background:var(--brand)}.note{color:#666;font-size:13px}.panel{border:1px solid var(--border);border-radius:18px;padding:20px;background:linear-gradient(180deg,#111,#070707);box-shadow:0 36px 90px rgba(0,0,0,.75)}.msgbox{background:#101010;border:1px solid #262626;border-radius:22px;padding:18px;min-height:450px;display:flex;flex-direction:column;gap:12px}.header{text-align:center;border-bottom:1px solid #242424;padding-bottom:12px;color:#aaa}.bubble{max-width:86%;padding:10px 14px;border-radius:18px;font-size:15px}.in{background:#333;align-self:flex-start;border-bottom-left-radius:5px}.out{background:#0b84fe;align-self:flex-end;border-bottom-right-radius:5px}.tag{align-self:flex-end;color:var(--brand);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-top:6px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px}.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}.card h2{font-size:18px;margin-bottom:8px}.card p{color:#a6a6a6;font-size:15px}.install{margin-top:48px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}code{color:var(--brand);background:var(--surface2);padding:3px 7px;border-radius:5px}.cmd{display:inline-flex;margin-top:14px;padding:13px 16px;border:1px solid #2a2a2a;border-radius:10px;background:#050505;color:var(--brand);font-family:"SF Mono",Menlo,monospace;cursor:pointer;word-break:break-all}footer{margin-top:42px;color:#666;font-size:13px;text-align:center}@media(max-width:860px){.hero,.grid{grid-template-columns:1fr}.panel{order:-1}}
-  </style>
+  <meta property="og:site_name" content="GhostReply">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ghostreply.lol/recruiters.html">
+  <meta property="og:title" content="AI iMessage Auto-Reply for Recruiters on Mac">
+  <meta property="og:description" content="Keep routine scheduling threads moving while employment decisions, compensation, and sensitive candidate data stay human.">
+  <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta property="og:image:alt" content="GhostReply sending a routine candidate iMessage reply from a Mac">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI iMessage Auto-Reply for Recruiters on Mac">
+  <meta name="twitter:description" content="Try 10 routine candidate auto-replies free, then pay $4.99 once.">
+  <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta name="twitter:image:alt" content="GhostReply sending a routine candidate iMessage reply from a Mac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/seo-pages.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can GhostReply automatically text candidates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GhostReply can answer eligible incoming one-to-one iMessages while the Mac and app are running. Use it for routine acknowledgment and scheduling, not outreach, screening, employment decisions, or offers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does GhostReply connect to an ATS or recruiting team inbox?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. GhostReply is a personal Mac Messages tool. It does not provide ATS sync, a shared inbox, candidate records, approval workflows, team permissions, or compliance features."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can GhostReply discuss compensation or hiring status?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It should not. Keep compensation, benefits, work authorization, interview evaluation, hiring decisions, rejections, accommodations, and other consequential candidate communication manual."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does GhostReply cost for a recruiter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body data-page="recruiters">
-  <div class="wrap">
-    <nav><a href="/">GhostReply</a><span>$4.99 once</span></nav>
-    <main class="hero">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-nav__brand" href="/">GhostReply</a>
+      <div class="site-nav__links">
+        <a href="/how-to-auto-reply-imessage-mac.html">How it works</a>
+        <a href="#examples">Examples</a>
+        <a href="#safety">Safety</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="seo-hero">
+      <p class="seo-hero__eyebrow">For routine candidate coordination</p>
+      <h1>AI iMessage Auto-Reply for Recruiters on Mac</h1>
+      <p class="seo-hero__lead">Keep simple scheduling and receipt confirmations moving, while hiring decisions, compensation, and sensitive candidate conversations stay with a person.</p>
+      <div class="seo-hero__actions">
+        <button class="button" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Try 10 free replies</button>
+        <button class="button button--primary" type="button" data-checkout="recruiters_hero">Buy once for $4.99</button>
+      </div>
+      <p class="seo-hero__note">Built for one recruiter on one Mac, not an ATS or team workflow.</p>
+    </section>
+
+    <article class="content">
       <section>
-        <div class="eyebrow">For recruiters texting candidates</div>
-        <h1>Keep candidate threads warm without babysitting Messages.</h1>
-        <p class="lead">GhostReply helps draft fast, natural iMessage replies for scheduling, follow-ups, and candidate check-ins from your Mac.</p>
-        <div class="price"><strong>$4.99</strong><span>one-time</span></div>
-        <div class="actions"><a class="button secondary" href="#install">Try 10 Free Replies</a><button class="button" data-checkout="recruiters_hero">Buy for $4.99</button></div>
-        <p class="note">Works from Terminal on Mac. No monthly seat fee.</p>
+        <h2>Reduce scheduling lag without automating judgment</h2>
+        <p>Candidates often text while a recruiter is in an interview, on a call, or moving between meetings. A short acknowledgment can reduce uncertainty until the recruiter can check the calendar or open the candidate record.</p>
+        <p>GhostReply runs in Terminal on a Mac and watches eligible one-to-one iMessage conversations. It uses the local thread and relevant context to generate a response through Groq, then sends that response in Messages. This can help with ordinary coordination, but it is not a recruiting system and should not make or communicate employment decisions.</p>
       </section>
-      <section class="panel">
-        <div class="msgbox">
-          <div class="header"><strong>Candidate</strong><br>iMessage</div>
-          <div class="bubble in">Can we move the screen to tomorrow?</div>
-          <div class="tag">GhostReply</div>
-          <div class="bubble out">Absolutely. I can make tomorrow work. Are you better earlier morning or late afternoon?</div>
-          <div class="bubble in">Late afternoon</div>
-          <div class="tag">GhostReply</div>
-          <div class="bubble out">Great, I will send over a new time shortly.</div>
+
+      <section class="examples" id="examples" aria-labelledby="recruiter-examples-heading">
+        <h2 id="recruiter-examples-heading">Three routine candidate text examples</h2>
+        <p>These are examples, not guaranteed output. Verify that the suggested wording does not imply confirmed availability, status, or a decision that has not been approved.</p>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Incoming:</strong> Could we move tomorrow's screen to later?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> i can check the afternoon options and send you a confirmed time shortly</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Incoming:</strong> Just sent the updated resume</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> got it thank you, ill take a look and follow up directly</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Incoming:</strong> Is the video link the same for tomorrow?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> im checking the invite now and will confirm the link with you</p>
         </div>
       </section>
-    </main>
-    <section class="grid">
-      <div class="card"><h2>Schedule faster</h2><p>Draft clean back-and-forth replies when candidates move times or ask next steps.</p></div>
-      <div class="card"><h2>Stay human</h2><p>Replies are based on your style, not generic corporate templates.</p></div>
-      <div class="card"><h2>Cheap enough to test</h2><p>At $4.99 once, one saved candidate conversation pays for it.</p></div>
-    </section>
-    <section class="install" id="install"><h2>Try it on your Mac</h2><p>Paste this in Terminal, then type <code>trial</code>.</p><div class="cmd" data-copy-install>curl -sL ghostreply.lol/install.sh | bash</div><p style="margin-top:18px"><button class="button" data-checkout="recruiters_bottom">Buy once - $4.99</button></p></section>
-    <footer><div class="niche-cross" style="margin-bottom:10px;color:#666">GhostReply for: <a href="/" style="color:#888;text-decoration:none">Home</a> · <a href="/dating.html" style="color:#888;text-decoration:none">Dating</a> · <a href="/realtors.html" style="color:#888;text-decoration:none">Realtors</a> · <a href="/sales.html" style="color:#888;text-decoration:none">Sales</a> · <a href="/client-texts.html" style="color:#888;text-decoration:none">Client work</a></div><a href="/" style="color:#888">GhostReply</a> for Mac iMessage</footer>
-  </div>
-  <script src="/landing.js"></script>
+
+      <section>
+        <h2>Limit the first session to one candidate</h2>
+        <p>One-person mode is the safest way to test a candidate workflow. Select a contact, choose the reply style and delay, and watch the first trial session. When you send a manual reply after GhostReply has answered, the one-person session stops.</p>
+        <p>All-contacts mode can answer across incoming one-to-one iMessage chats, which may mix personal and professional contacts. In that mode, a manual message pauses the contact for 30 minutes while other eligible chats continue. Group chats are skipped. The <a href="/imessage-auto-reply-business.html">small-business auto-reply guide</a> explains why this is a personal utility rather than a team system.</p>
+      </section>
+
+      <section id="requirements">
+        <h2>Requirements and setup for recruiting texts</h2>
+        <ol>
+          <li>Use an awake, internet-connected Mac with Messages signed in to the iMessage account you intend to monitor.</li>
+          <li>Install GhostReply in Terminal and give that terminal app Full Disk Access to read local Messages history.</li>
+          <li>Grant Messages Automation permission so the terminal can send. Contacts access helps match handles to names.</li>
+          <li>Provide your own Groq API key, choose one person or all eligible one-to-one chats, and set a style and delay.</li>
+        </ol>
+        <p>GhostReply keeps history access, the learned profile, configuration, and statistics local on your Mac. Selected conversation samples and relevant context go directly from the Mac to Groq for profile and reply generation. Message content does not pass through GhostReply servers. License validation, trial accounting, and analytics data can reach GhostReply services.</p>
+        <p>The app only sends while the Mac is awake, online, and running GhostReply. Close it to stop. See every step in <a href="/how-to-auto-reply-imessage-mac.html">the iMessage auto-reply setup guide for Mac</a>.</p>
+      </section>
+
+      <section id="safety">
+        <h2>Keep candidate decisions and sensitive data human</h2>
+        <p>Do not let GhostReply screen applicants, evaluate qualifications, promise compensation or benefits, confirm employment terms, decide interview outcomes, reject a candidate, discuss accommodations, or handle work authorization and protected information. Avoid sending resumes, identification, background details, health information, or other sensitive candidate data into an automatic conversation.</p>
+        <p>Urgent and sensitive checks are heuristic keyword rules. They can miss context and are not HR, legal, privacy, or compliance controls. Follow your employer's communication and recordkeeping policies, get approval for any AI use that requires it, and review the <a href="/is-ai-imessage-auto-reply-safe.html">AI iMessage auto-reply safety guide</a> before testing.</p>
+      </section>
+
+      <section class="cta" aria-label="Try GhostReply for candidate texts">
+        <div class="cta__inner">
+          <h2>Test it on routine scheduling</h2>
+          <p>Try 10 automatic replies free, then keep GhostReply for <span class="cta__price">$4.99 once</span>. There is no GhostReply subscription.</p>
+          <div class="install-command">
+            <code>curl -sL ghostreply.lol/install.sh | bash</code>
+            <button class="install-command__copy" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install><span data-copy-label>Copy install command</span></button>
+          </div>
+          <button class="button button--primary" type="button" data-checkout="recruiters_bottom">Buy once for $4.99</button>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2>Recruiter iMessage auto-reply FAQ</h2>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can GhostReply automatically text candidates?</button>
+          <div data-disclosure-panel><p>GhostReply can answer eligible incoming one-to-one iMessages while the Mac and app are running. Use it for routine acknowledgment and scheduling, not outreach, screening, employment decisions, or offers.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply connect to an ATS or recruiting team inbox?</button>
+          <div data-disclosure-panel><p>No. GhostReply is a personal Mac Messages tool. It does not provide ATS sync, a shared inbox, candidate records, approval workflows, team permissions, or compliance features.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can GhostReply discuss compensation or hiring status?</button>
+          <div data-disclosure-panel><p>It should not. Keep compensation, benefits, work authorization, interview evaluation, hiring decisions, rejections, accommodations, and other consequential candidate communication manual.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">How much does GhostReply cost for a recruiter?</button>
+          <div data-disclosure-panel><p>You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms.</p></div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <a href="/">GhostReply</a>
+    <div class="site-footer__links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
+    </div>
+  </footer>
+  <script src="/assets/seo-pages.js" defer></script>
+  <script src="/landing.js" defer></script>
 </body>
 </html>

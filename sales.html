@@ -1,48 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GhostReply for Sales Texts - AI iMessage Follow-Up Assistant</title>
-  <meta name="description" content="GhostReply helps salespeople draft faster iMessage replies to prospects and customers on Mac. 10 free replies, then $4.99 one-time.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI iMessage Auto-Reply for Sales on Mac | GhostReply</title>
+  <meta name="description" content="Acknowledge routine prospect and customer iMessages from your Mac. Try 10 GhostReply auto-replies free, then buy a license for $4.99 once.">
   <link rel="canonical" href="https://ghostreply.lol/sales.html">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
-  <style>
-    :root{--brand:#4ade80;--surface:#0d0d0d;--surface2:#151515;--border:#242424;--text:#f2f2f2;--muted:#8a8a8a}*{box-sizing:border-box;margin:0;padding:0}body{font-family:Geist,-apple-system,BlinkMacSystemFont,sans-serif;background:#000;color:var(--text);line-height:1.6;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:28px 28px}.wrap{max-width:1040px;margin:0 auto;padding:32px 20px 56px}nav{display:flex;justify-content:space-between;margin-bottom:56px;color:var(--muted);font-size:14px}nav a{color:var(--muted);text-decoration:none}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}.eyebrow{color:var(--brand);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}h1{font-size:clamp(42px,7vw,74px);line-height:1;letter-spacing:-.04em;margin-bottom:22px}.lead{color:#b8b8b8;font-size:20px;max-width:620px;margin-bottom:26px}.price{display:inline-flex;gap:8px;align-items:baseline;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.05);border-radius:14px;padding:12px 18px;margin-bottom:22px}.price strong{font-size:30px}.price span{color:var(--muted);font-size:14px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 22px;border-radius:10px;background:#f2f2f2;color:#000;text-decoration:none;font-weight:700;border:0;cursor:pointer}.button.secondary{background:var(--brand)}.note{color:#666;font-size:13px}.panel{border:1px solid var(--border);border-radius:18px;padding:20px;background:linear-gradient(180deg,#111,#070707);box-shadow:0 36px 90px rgba(0,0,0,.75)}.msgbox{background:#101010;border:1px solid #262626;border-radius:22px;padding:18px;min-height:450px;display:flex;flex-direction:column;gap:12px}.header{text-align:center;border-bottom:1px solid #242424;padding-bottom:12px;color:#aaa}.bubble{max-width:86%;padding:10px 14px;border-radius:18px;font-size:15px}.in{background:#333;align-self:flex-start;border-bottom-left-radius:5px}.out{background:#0b84fe;align-self:flex-end;border-bottom-right-radius:5px}.tag{align-self:flex-end;color:var(--brand);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-top:6px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px}.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}.card h2{font-size:18px;margin-bottom:8px}.card p{color:#a6a6a6;font-size:15px}.install{margin-top:48px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}code{color:var(--brand);background:var(--surface2);padding:3px 7px;border-radius:5px}.cmd{display:inline-flex;margin-top:14px;padding:13px 16px;border:1px solid #2a2a2a;border-radius:10px;background:#050505;color:var(--brand);font-family:"SF Mono",Menlo,monospace;cursor:pointer;word-break:break-all}footer{margin-top:42px;color:#666;font-size:13px;text-align:center}@media(max-width:860px){.hero,.grid{grid-template-columns:1fr}.panel{order:-1}}
-  </style>
+  <meta property="og:site_name" content="GhostReply">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ghostreply.lol/sales.html">
+  <meta property="og:title" content="AI iMessage Auto-Reply for Sales on Mac">
+  <meta property="og:description" content="Keep expected sales conversations acknowledged without automating spam, pricing promises, or deceptive commitments.">
+  <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta property="og:image:alt" content="GhostReply sending a routine sales iMessage reply from a Mac">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI iMessage Auto-Reply for Sales on Mac">
+  <meta name="twitter:description" content="Try 10 routine sales auto-replies free, then pay $4.99 once.">
+  <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta name="twitter:image:alt" content="GhostReply sending a routine sales iMessage reply from a Mac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/seo-pages.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can GhostReply send sales follow-ups automatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GhostReply reacts to eligible incoming one-to-one iMessages while the Mac and app are running. It is not a cold outreach, bulk messaging, prospecting, or spam tool."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does GhostReply connect to a CRM or sales team inbox?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. GhostReply is a personal Mac Messages tool. It does not provide CRM sync, shared inboxes, sequences, lead routing, team permissions, approval workflows, or compliance controls."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can GhostReply promise pricing, features, or delivery dates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It should not. Generated replies can be wrong or too confident. Keep pricing, discounts, contracts, product claims, delivery dates, guarantees, and other commitments manual."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does GhostReply cost for sales texts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can try 10 automatic replies free, then a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body data-page="sales">
-  <div class="wrap">
-    <nav><a href="/">GhostReply</a><span>$4.99 once</span></nav>
-    <main class="hero">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-nav__brand" href="/">GhostReply</a>
+      <div class="site-nav__links">
+        <a href="/how-to-auto-reply-imessage-mac.html">How it works</a>
+        <a href="#examples">Examples</a>
+        <a href="#safety">Safety</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="seo-hero">
+      <p class="seo-hero__eyebrow">For expected one-to-one sales texts</p>
+      <h1>AI iMessage Auto-Reply for Sales on Mac</h1>
+      <p class="seo-hero__lead">Acknowledge simple questions and scheduling texts while you are on a call, then take over before a reply creates a price, product, or delivery commitment.</p>
+      <div class="seo-hero__actions">
+        <button class="button" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Try 10 free replies</button>
+        <button class="button button--primary" type="button" data-checkout="sales_hero">Buy once for $4.99</button>
+      </div>
+      <p class="seo-hero__note">Reactive replies for one person on one Mac, not automated prospecting.</p>
+    </section>
+
+    <article class="content">
       <section>
-        <div class="eyebrow">For sales follow-ups by text</div>
-        <h1>Reply before the prospect goes cold.</h1>
-        <p class="lead">GhostReply drafts quick iMessage replies for follow-ups, scheduling, and soft nudges when you are in calls or away from your Mac.</p>
-        <div class="price"><strong>$4.99</strong><span>one-time</span></div>
-        <div class="actions"><a class="button secondary" href="#install">Try 10 Free Replies</a><button class="button" data-checkout="sales_hero">Buy for $4.99</button></div>
-        <p class="note">One-time price. Good for solo sellers, founders, and small teams that text from Mac.</p>
+        <h2>Keep warm conversations acknowledged</h2>
+        <p>A prospect or customer may text while you are presenting, driving, or handling another account. A simple receipt confirmation can preserve momentum until you have time to check the CRM, price sheet, or product details yourself.</p>
+        <p>GhostReply watches eligible incoming one-to-one iMessages while it runs on your Mac. It reads local thread history, sends selected relevant context directly to Groq for generation, and auto-sends the reply through Messages. It is useful for low-stakes coordination with people who expect to hear from you, not for cold outreach or unattended selling.</p>
       </section>
-      <section class="panel">
-        <div class="msgbox">
-          <div class="header"><strong>Prospect</strong><br>iMessage</div>
-          <div class="bubble in">Can you send pricing again?</div>
-          <div class="tag">GhostReply</div>
-          <div class="bubble out">Of course. I will send it over now. Are you mainly comparing the monthly or one-time option?</div>
-          <div class="bubble in">One-time probably</div>
-          <div class="tag">GhostReply</div>
-          <div class="bubble out">Makes sense. I will point you to that version so you do not have to dig for it.</div>
+
+      <section class="examples" id="examples" aria-labelledby="sales-examples-heading">
+        <h2 id="sales-examples-heading">Three routine sales text examples</h2>
+        <p>These are illustrative replies, not guaranteed output. Each answer avoids inventing a fact and leaves the specific commitment for a person to verify.</p>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Incoming:</strong> Can you resend the overview?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> absolutely, ill pull it up and send it over shortly</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Incoming:</strong> Could we move the call to Thursday afternoon?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> im checking Thursday now and will confirm a time with you</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Incoming:</strong> Does the plan include that integration?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> let me verify the current plan details and get you the right answer</p>
         </div>
       </section>
-    </main>
-    <section class="grid">
-      <div class="card"><h2>Fast follow-ups</h2><p>Keep threads moving even when you cannot write the perfect answer on the spot.</p></div>
-      <div class="card"><h2>Less copy-paste</h2><p>No jumping between iMessage and ChatGPT for every prospect text.</p></div>
-      <div class="card"><h2>Easy impulse buy</h2><p>$4.99 once is low enough for people to try without a procurement conversation.</p></div>
-    </section>
-    <section class="install" id="install"><h2>Try it on your Mac</h2><p>Paste this in Terminal, then type <code>trial</code>.</p><div class="cmd" data-copy-install>curl -sL ghostreply.lol/install.sh | bash</div><p style="margin-top:18px"><button class="button" data-checkout="sales_bottom">Buy once - $4.99</button></p></section>
-    <footer><div class="niche-cross" style="margin-bottom:10px;color:#666">GhostReply for: <a href="/" style="color:#888;text-decoration:none">Home</a> · <a href="/dating.html" style="color:#888;text-decoration:none">Dating</a> · <a href="/realtors.html" style="color:#888;text-decoration:none">Realtors</a> · <a href="/recruiters.html" style="color:#888;text-decoration:none">Recruiters</a> · <a href="/client-texts.html" style="color:#888;text-decoration:none">Client work</a></div><a href="/" style="color:#888">GhostReply</a> for Mac iMessage</footer>
-  </div>
-  <script src="/landing.js"></script>
+
+      <section>
+        <h2>Scope automation to the conversation you know</h2>
+        <p>Start in One person mode with a trusted prospect or customer who is already in an active conversation. Choose the style and reply delay, then monitor the first trial session. A manual reply after GhostReply sends stops the one-person session.</p>
+        <p>All-contacts mode responds across eligible incoming one-to-one chats. In that mode, your manual message pauses that contact for 30 minutes while other chats may continue. Group chats are skipped. If sales texting is only one part of your work, review the broader <a href="/imessage-auto-reply-business.html">iMessage auto-reply guide for small business</a>.</p>
+      </section>
+
+      <section id="requirements">
+        <h2>Requirements and setup for sales texts</h2>
+        <ol>
+          <li>Use an awake, internet-connected Mac with Messages signed in to the iMessage account you want to monitor.</li>
+          <li>Install GhostReply in Terminal and grant that terminal app Full Disk Access to read local Messages history.</li>
+          <li>Grant Messages Automation permission so the terminal can send. Contacts access helps map handles to names.</li>
+          <li>Add your own Groq API key, select one person or all eligible one-to-one chats, and set a reply style and delay.</li>
+        </ol>
+        <p>History access, the learned profile, configuration, and statistics remain local on your Mac. Selected conversation samples and relevant context go directly from the Mac to Groq for profile and reply generation. Message content does not pass through GhostReply servers. License validation, trial accounting, and analytics data can reach GhostReply services.</p>
+        <p>The Mac must stay awake, online, and running GhostReply. Close the app to stop all replies. Follow the complete process in <a href="/how-to-auto-reply-imessage-mac.html">the Mac iMessage auto-reply setup guide</a>.</p>
+      </section>
+
+      <section id="safety">
+        <h2>Do not automate claims, commitments, or spam</h2>
+        <p>Keep pricing, discounts, availability, contracts, renewal terms, refunds, security answers, product capabilities, delivery dates, performance guarantees, and any other material promise manual. Do not use GhostReply to impersonate a relationship, create fake urgency, conceal limitations, or send unsolicited messages. It reacts to incoming texts and should only be used where the recipient reasonably expects a response.</p>
+        <p>GhostReply's urgent and sensitive checks are keyword heuristics, not legal, sales, or messaging compliance controls. They can miss context and make mistakes. Respect consent and opt-outs, follow applicable communication rules, and review the <a href="/is-ai-imessage-auto-reply-safe.html">AI iMessage auto-reply safety guide</a> before enabling automatic sending.</p>
+      </section>
+
+      <section class="cta" aria-label="Try GhostReply for sales texts">
+        <div class="cta__inner">
+          <h2>Test it on one active conversation</h2>
+          <p>Try 10 automatic replies free, then keep GhostReply for <span class="cta__price">$4.99 once</span>. There is no GhostReply subscription.</p>
+          <div class="install-command">
+            <code>curl -sL ghostreply.lol/install.sh | bash</code>
+            <button class="install-command__copy" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install><span data-copy-label>Copy install command</span></button>
+          </div>
+          <button class="button button--primary" type="button" data-checkout="sales_bottom">Buy once for $4.99</button>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2>Sales iMessage auto-reply FAQ</h2>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can GhostReply send sales follow-ups automatically?</button>
+          <div data-disclosure-panel><p>GhostReply reacts to eligible incoming one-to-one iMessages while the Mac and app are running. It is not a cold outreach, bulk messaging, prospecting, or spam tool.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply connect to a CRM or sales team inbox?</button>
+          <div data-disclosure-panel><p>No. GhostReply is a personal Mac Messages tool. It does not provide CRM sync, shared inboxes, sequences, lead routing, team permissions, approval workflows, or compliance controls.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can GhostReply promise pricing, features, or delivery dates?</button>
+          <div data-disclosure-panel><p>It should not. Generated replies can be wrong or too confident. Keep pricing, discounts, contracts, product claims, delivery dates, guarantees, and other commitments manual.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">How much does GhostReply cost for sales texts?</button>
+          <div data-disclosure-panel><p>You can try 10 automatic replies free, then a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms.</p></div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <a href="/">GhostReply</a>
+    <div class="site-footer__links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
+    </div>
+  </footer>
+  <script src="/assets/seo-pages.js" defer></script>
+  <script src="/landing.js" defer></script>
 </body>
 </html>
