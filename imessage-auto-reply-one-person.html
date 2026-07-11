@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auto-Reply to One Person in iMessage | GhostReply</title>
+  <meta name="description" content="Set GhostReply to answer one iMessage contact on your Mac in your texting style. Try 10 replies free, then unlock it for $4.99 once.">
+  <link rel="canonical" href="https://ghostreply.lol/imessage-auto-reply-one-person.html">
+  <meta property="og:site_name" content="GhostReply">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ghostreply.lol/imessage-auto-reply-one-person.html">
+  <meta property="og:title" content="iMessage Auto-Reply for One Person on Mac">
+  <meta property="og:description" content="Choose one contact, let GhostReply match that conversation, and step back in whenever you send a manual reply.">
+  <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta property="og:image:alt" content="GhostReply replying to a selected iMessage contact on a Mac">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="iMessage Auto-Reply for One Person on Mac">
+  <meta name="twitter:description" content="Target one contact instead of every conversation. Ten replies free, then $4.99 once.">
+  <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta name="twitter:image:alt" content="GhostReply replying to a selected iMessage contact on a Mac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="/assets/seo-pages.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can GhostReply auto-reply to one person only?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Choose One person during setup, select a contact, and GhostReply will process incoming one-to-one iMessages from that contact while the app is running."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does GhostReply keep working when my Mac sleeps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Your Mac must be awake, online, signed in to iMessage, and running GhostReply for it to read a new message, ask Groq for a reply, and send it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I reply to that person myself?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After GhostReply has sent a reply in one-person mode, a manual message from you tells it that you have taken over. GhostReply stops, and you can run it again later."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does one-person mode include group chats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. GhostReply targets one-to-one iMessage conversations and skips group chats."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-page="imessage_auto_reply_one_person">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-nav__brand" href="/">GhostReply</a>
+      <div class="site-nav__links">
+        <a href="/how-to-auto-reply-imessage-mac.html">How it works</a>
+        <a href="#requirements">Requirements</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="seo-hero">
+      <p class="seo-hero__eyebrow">One contact, not your whole inbox</p>
+      <h1>How to Auto-Reply to One Person in iMessage</h1>
+      <p class="seo-hero__lead">Choose one contact and let GhostReply answer only that conversation while you are busy. It uses the way you already text that person to shape each reply, then stops when you step back in.</p>
+      <div class="seo-hero__actions">
+        <button class="button" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Try 10 free replies</button>
+        <button class="button button--primary" type="button" data-checkout="one_person_hero">Buy once for $4.99</button>
+      </div>
+      <p class="seo-hero__note">No subscription. A Groq API key and Mac permissions are required.</p>
+    </section>
+
+    <article class="content">
+      <section>
+        <h2>Why target one contact?</h2>
+        <p>A broad away message can be useful, but it is often more automation than you want. Maybe one client is waiting for updates while you work. Maybe your partner is texting during a long meeting. Maybe a family member needs quick acknowledgments while you drive home. One-person mode keeps every other chat untouched.</p>
+        <p>GhostReply watches for new one-to-one iMessages from the contact you select. It reads recent history for that conversation from the Messages database on your Mac, builds the relevant context, and asks Groq for a reply in your established style. The result is sent through Messages while GhostReply remains open. It is an automatic sender, not merely a suggestion that waits in the text field.</p>
+        <p>This narrow scope is also easier to supervise. You know exactly which relationship is automated, you can watch the live reply log in Terminal, and a manual message from you ends the session after GhostReply has replied. Run the command again whenever you want it back.</p>
+      </section>
+
+      <section class="examples" aria-labelledby="one-person-examples">
+        <h2 id="one-person-examples">What the replies can look like</h2>
+        <p>GhostReply generates each answer from the current message and conversation context. These examples show the intended shape, not guaranteed wording.</p>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Partner incoming:</strong> Are we still good for 6?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> yep 6 still works, ill text when im leaving</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Client incoming:</strong> Did you get a chance to review the draft?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> looking at it now, ill send notes this afternoon</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Friend incoming:</strong> Can you call when you are done?</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> yeah give me like 20 and ill call</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Contact-specific style, not a universal template</h2>
+        <p>The wording may be shorter, more formal, or more casual depending on your history with that person. GhostReply can draw on the slang, length, punctuation, and tone already present in that conversation. AI can still misunderstand a message, invent a detail, or choose the wrong tone, so use this feature only where an imperfect automatic reply is an acceptable risk.</p>
+      </section>
+
+      <section>
+        <h2>Set up one-person mode</h2>
+        <ol>
+          <li>Install GhostReply, run <code>ghostreply</code>, and choose the 10-reply trial or enter a paid license.</li>
+          <li>Add your Groq API key when prompted. The key stays in your local GhostReply configuration.</li>
+          <li>Allow your terminal app to read Messages and control Messages when macOS asks.</li>
+          <li>Choose Autopilot or another reply style, select <strong>One person</strong>, then choose the contact.</li>
+          <li>Pick a reply speed and leave GhostReply running. Close it or press the stop control to turn it off.</li>
+        </ol>
+        <p>GhostReply can also target all one-to-one chats. If that is your use case, read the <a href="/imessage-auto-reply-business.html">business auto-reply guide</a> before widening the scope.</p>
+      </section>
+
+      <section id="requirements">
+        <h2>Requirements and data flow</h2>
+        <ul>
+          <li>A Mac that is awake, online, and signed in to iMessage in the Messages app.</li>
+          <li>Full Disk Access for the terminal app that runs GhostReply, so it can read the local Messages database.</li>
+          <li>Automation permission for that terminal app to control Messages and send the reply. Contacts access helps show names instead of handles.</li>
+          <li>A Groq account and API key. Relevant message context travels directly from your Mac to Groq for inference.</li>
+        </ul>
+        <p>Your reply profile, configuration, and usage statistics are stored under <code>~/.ghostreply</code>. Message content does not pass through GhostReply's servers. Trial state, license checks, and analytics data can reach GhostReply services. Review <a href="/privacy.html">the GhostReply privacy page</a> and <a href="https://console.groq.com/docs/your-data">Groq's current data documentation</a> before using real conversations.</p>
+      </section>
+
+      <section>
+        <h2>Controls and limits</h2>
+        <p>One-person mode skips group chats. It auto-sends only while the Mac is awake and GhostReply is running. After GhostReply has sent a message, sending your own message to the selected contact makes the app step aside and stop. In all-contacts mode, manually replying after GhostReply has answered that contact pauses the contact for 30 minutes while other eligible chats can continue.</p>
+        <p>GhostReply uses keyword heuristics for urgent and sensitive messages. An urgent match is skipped and produces a notification. A sensitive match can receive a short holding reply and a notification. These checks are not a safety guarantee. They can miss unusual wording or classify a normal message incorrectly. Do not rely on GhostReply for emergencies, medical matters, legal commitments, financial instructions, consent, or any conversation that needs human judgment.</p>
+      </section>
+
+      <section class="cta" aria-label="Try GhostReply">
+        <h2>Start with one conversation</h2>
+        <p>Try 10 automatic replies free. If the workflow fits, GhostReply costs $4.99 once, with no recurring subscription.</p>
+        <div class="install-command">
+          <code>curl -sL ghostreply.lol/install.sh | bash</code>
+          <button class="install-command__copy" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Copy install command</button>
+        </div>
+        <button class="button button--primary" type="button" data-checkout="one_person_bottom">Buy once for $4.99</button>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2>One-person auto-reply FAQ</h2>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can GhostReply auto-reply to one person only?</button>
+          <div data-disclosure-panel><p>Yes. Choose One person during setup, select a contact, and GhostReply will process incoming one-to-one iMessages from that contact while the app is running.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply keep working when my Mac sleeps?</button>
+          <div data-disclosure-panel><p>No. Your Mac must be awake, online, signed in to iMessage, and running GhostReply for it to read a new message, ask Groq for a reply, and send it.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">What happens if I reply to that person myself?</button>
+          <div data-disclosure-panel><p>After GhostReply has sent a reply in one-person mode, a manual message from you tells it that you have taken over. GhostReply stops, and you can run it again later.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Does one-person mode include group chats?</button>
+          <div data-disclosure-panel><p>No. GhostReply targets one-to-one iMessage conversations and skips group chats.</p></div>
+        </div>
+      </section>
+
+      <nav class="related" aria-label="Related GhostReply guides">
+        <h2>Related guides</h2>
+        <ul>
+          <li><a href="/imessage-out-of-office-reply.html">Set an iMessage out-of-office workflow</a></li>
+          <li><a href="/is-ai-imessage-auto-reply-safe.html">Review AI auto-reply safety and privacy</a></li>
+          <li><a href="/how-to-auto-reply-imessage-mac.html">Learn how to auto-reply to iMessage on Mac</a></li>
+        </ul>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="/">GhostReply</a> for Mac</p>
+    <div class="site-footer__links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
+    </div>
+  </footer>
+  <script src="/assets/seo-pages.js" defer></script>
+  <script src="/landing.js" defer></script>
+</body>
+</html>

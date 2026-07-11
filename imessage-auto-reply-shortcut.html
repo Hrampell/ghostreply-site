@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iMessage Auto-Reply Shortcut: What Works | GhostReply</title>
+  <meta name="description" content="Learn what Apple Shortcuts can automate for incoming messages, where it falls short, and how GhostReply adds contact-aware AI replies on Mac.">
+  <link rel="canonical" href="https://ghostreply.lol/imessage-auto-reply-shortcut.html">
+  <meta property="og:site_name" content="GhostReply">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ghostreply.lol/imessage-auto-reply-shortcut.html">
+  <meta property="og:title" content="iMessage Auto-Reply Shortcut: iPhone vs Mac">
+  <meta property="og:description" content="A practical guide to Message-triggered iPhone automations, Mac Shortcuts, fixed responses, and contextual AI replies.">
+  <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta property="og:image:alt" content="An iMessage auto-reply workflow running on a Mac">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="iMessage Auto-Reply Shortcut: iPhone vs Mac">
+  <meta name="twitter:description" content="Use a fixed iPhone automation or a contextual Mac auto-reply workflow. Here is the difference.">
+  <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta name="twitter:image:alt" content="An iMessage auto-reply workflow running on a Mac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="/assets/seo-pages.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can an iPhone Shortcut auto-reply to a message?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Apple documents a Message communication trigger for personal automations on iPhone and iPad, and lists Message among automations that can run without asking. Individual actions can still require their own permission or setup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the same incoming-message automation documented for Mac?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Apple's Mac Shortcuts guide describes manual launch points such as Quick Actions, Services, the Dock, the menu bar, the share sheet, and a keyboard shortcut. Apple's personal Message trigger documentation is for iPhone and iPad."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a basic Shortcut match how I text each person?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A basic Message automation normally sends text you define. Matching each conversation requires more context and model logic than a fixed template provides."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does GhostReply use Apple Shortcuts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. GhostReply runs on a Mac, reads eligible iMessage history locally, sends relevant context directly to Groq with your API key, and controls Messages after you grant macOS permission."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-page="imessage_auto_reply_shortcut">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-nav__brand" href="/">GhostReply</a>
+      <div class="site-nav__links">
+        <a href="/how-to-auto-reply-imessage-mac.html">How it works</a>
+        <a href="#requirements">Requirements</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="seo-hero">
+      <p class="seo-hero__eyebrow">Shortcut or context-aware reply?</p>
+      <h1>Can You Make an iMessage Auto-Reply Shortcut?</h1>
+      <p class="seo-hero__lead">For a fixed response on iPhone, start with Apple's Message personal automation. For conversation-aware replies that send from a running Mac, use a workflow built for iMessage history and per-contact context.</p>
+      <div class="seo-hero__actions">
+        <a class="button" href="#iphone-shortcut">Build the iPhone automation</a>
+        <button class="button button--primary" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Try 10 GhostReply replies</button>
+      </div>
+      <p class="seo-hero__note">GhostReply is $4.99 once after the 10-reply trial.</p>
+    </section>
+
+    <article class="content">
+      <section id="iphone-shortcut">
+        <h2>The official iPhone Shortcuts route</h2>
+        <p>Apple describes personal automation as a shortcut that starts from an event instead of a manual launch. Its <a href="https://support.apple.com/en-ie/guide/shortcuts/apdd711f9dff/ios">communication trigger guide</a> says a Message trigger can react to messages from selected senders, messages containing selected text, or both. This feature is documented for iPhone and iPad.</p>
+        <ol>
+          <li>Open Shortcuts on iPhone, choose Automation, and create a new personal automation.</li>
+          <li>Select Message as the trigger. Choose a sender, a phrase, or both. If you select one sender, use that same contact as the recipient in your send action.</li>
+          <li>Add a Text action with your away message, then add the Messages Send Message action and set its recipient.</li>
+          <li>Test with a trusted contact. Check every recipient and condition before allowing automatic runs.</li>
+          <li>Open the automation settings and choose the automatic option if it is available for your configuration.</li>
+        </ol>
+        <p>Apple's <a href="https://support.apple.com/en-nz/guide/shortcuts/apd602971e63/9.0/ios/26">automation settings guide</a> lists Message among triggers that can run without asking, while warning that individual actions may also need to be configured to run automatically. Apple also says a personal automation is specific to one device. It can be backed up, but does not sync as a live automation to other devices. Interface wording can vary by system version, so test the complete path before depending on it.</p>
+      </section>
+
+      <section class="examples" aria-labelledby="shortcut-examples">
+        <h2 id="shortcut-examples">Where a fixed Shortcut works well</h2>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Trigger:</strong> A selected family member messages while you are driving.</p>
+          <p class="examples__message"><strong>Fixed reply:</strong> I am driving right now and will reply when I stop.</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Trigger:</strong> A message contains "appointment" from a selected client.</p>
+          <p class="examples__message"><strong>Fixed reply:</strong> Thanks, I saw this. I will check my schedule and get back to you.</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Trigger:</strong> A selected contact messages during a planned break.</p>
+          <p class="examples__message"><strong>Fixed reply:</strong> I am away from my phone for a bit and will text you later.</p>
+        </div>
+        <p>Fixed text is predictable, easy to audit, and often safer than generative text. Its weakness is context. The same line may feel awkward when the incoming message is a yes-or-no question, a simple update, or something emotional. Separate automations can reduce that mismatch, but every condition adds maintenance.</p>
+      </section>
+
+      <section>
+        <h2>What changes on a Mac</h2>
+        <p>Apple's current <a href="https://support.apple.com/en-mide/guide/shortcuts-mac/apd163eb9f95/mac">Shortcuts guide for working on a Mac</a> documents launching shortcuts from places such as Quick Actions, Services, the Dock, and a keyboard shortcut. The incoming Message personal automation is documented in the iPhone and iPad guide, not the Mac guide.</p>
+        <p>A Mac shortcut can still send a prepared message when you run it. That is useful for a repeated check-in, a manual away response, or a keyboard-driven template. It is not the same workflow as a process that continuously listens for new iMessages on the Mac and decides whether and how to answer each conversation.</p>
+      </section>
+
+      <section class="comparison">
+        <h2>Shortcut vs GhostReply</h2>
+        <table>
+          <thead><tr><th>Need</th><th>Basic Shortcut</th><th>GhostReply</th></tr></thead>
+          <tbody>
+            <tr><td>Predictable fixed wording</td><td>Strong fit</td><td>Not guaranteed</td></tr>
+            <tr><td>Context from recent conversation</td><td>Requires custom logic</td><td>Built in</td></tr>
+            <tr><td>Match a contact's texting style</td><td>Not in a basic template</td><td>Uses local history</td></tr>
+            <tr><td>Run from incoming message on iPhone</td><td>Apple documents Message triggers</td><td>Mac only</td></tr>
+            <tr><td>Auto-send from a running Mac</td><td>Not the documented personal automation path</td><td>Built in</td></tr>
+          </tbody>
+        </table>
+        <p>Choose the Shortcut when you want a known sentence and can define the sender in advance. Consider GhostReply when the response must address the message, sound closer to the relevant conversation, and run from your Mac. The tradeoff is that generative replies can be wrong.</p>
+      </section>
+
+      <section id="requirements">
+        <h2>GhostReply requirements and data path</h2>
+        <p>GhostReply needs an awake, online Mac with Messages signed in, Full Disk Access for the terminal app that reads the local Messages database, and Automation permission for that terminal app to control Messages. Contacts access helps resolve names. You also provide a Groq API key.</p>
+        <p>iMessage history is read locally. GhostReply stores its configuration, reply profile, and statistics under <code>~/.ghostreply</code>. Relevant context goes directly from your Mac to Groq for inference using your key. Message content does not pass through GhostReply's servers, although trial, license, and analytics data can reach those services. Read <a href="https://console.groq.com/docs/your-data">Groq's data documentation</a> and the <a href="/privacy.html">GhostReply privacy page</a>.</p>
+        <p>GhostReply runs only while the Mac is awake and the app is open. It can target one person or all one-to-one chats; group chats are skipped. After GhostReply has replied, your manual message stops one-person mode or pauses that contact for 30 minutes in all-contacts mode. Urgent and sensitive controls are keyword heuristics, not guarantees.</p>
+      </section>
+
+      <section class="cta" aria-label="Try GhostReply">
+        <h2>Try the contextual Mac workflow</h2>
+        <p>Use 10 GhostReply replies free. If it fits better than a fixed template, pay $4.99 once with no subscription.</p>
+        <div class="install-command">
+          <code>curl -sL ghostreply.lol/install.sh | bash</code>
+          <button class="install-command__copy" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Copy install command</button>
+        </div>
+        <button class="button button--primary" type="button" data-checkout="shortcut_bottom">Buy once for $4.99</button>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2>iMessage auto-reply Shortcut FAQ</h2>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can an iPhone Shortcut auto-reply to a message?</button>
+          <div data-disclosure-panel><p>Apple documents a Message communication trigger for personal automations on iPhone and iPad, and lists Message among automations that can run without asking. Individual actions can still require their own permission or setup.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Is the same incoming-message automation documented for Mac?</button>
+          <div data-disclosure-panel><p>Apple's Mac Shortcuts guide describes manual launch points such as Quick Actions, Services, the Dock, the menu bar, the share sheet, and a keyboard shortcut. Apple's personal Message trigger documentation is for iPhone and iPad.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can a basic Shortcut match how I text each person?</button>
+          <div data-disclosure-panel><p>A basic Message automation normally sends text you define. Matching each conversation requires more context and model logic than a fixed template provides.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply use Apple Shortcuts?</button>
+          <div data-disclosure-panel><p>No. GhostReply runs on a Mac, reads eligible iMessage history locally, sends relevant context directly to Groq with your API key, and controls Messages after you grant macOS permission.</p></div>
+        </div>
+      </section>
+
+      <nav class="related" aria-label="Related GhostReply guides">
+        <h2>Related guides</h2>
+        <ul>
+          <li><a href="/imessage-out-of-office-reply.html">Build a contextual iMessage away workflow</a></li>
+          <li><a href="/imessage-auto-reply-one-person.html">Auto-reply to one selected contact on Mac</a></li>
+          <li><a href="/is-ai-imessage-auto-reply-safe.html">Review AI auto-reply privacy and risk</a></li>
+        </ul>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="/">GhostReply</a> for Mac</p>
+    <div class="site-footer__links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
+    </div>
+  </footer>
+  <script src="/assets/seo-pages.js" defer></script>
+  <script src="/landing.js" defer></script>
+</body>
+</html>

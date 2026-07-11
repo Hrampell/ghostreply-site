@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Is AI iMessage Auto-Reply Safe? | GhostReply</title>
+  <meta name="description" content="Understand the privacy, accuracy, consent, and auto-send risks of AI iMessage replies, plus the controls GhostReply provides on Mac.">
+  <link rel="canonical" href="https://ghostreply.lol/is-ai-imessage-auto-reply-safe.html">
+  <meta property="og:site_name" content="GhostReply">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ghostreply.lol/is-ai-imessage-auto-reply-safe.html">
+  <meta property="og:title" content="Is AI iMessage Auto-Reply Safe?">
+  <meta property="og:description" content="A plain-language look at local history access, Groq inference, automatic sending, human takeover, and the limits of heuristic safeguards.">
+  <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta property="og:image:alt" content="GhostReply showing an automatic iMessage reply on a Mac">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Is AI iMessage Auto-Reply Safe?">
+  <meta name="twitter:description" content="Know where messages go, what can go wrong, and how to keep automatic replies low risk.">
+  <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta name="twitter:image:alt" content="GhostReply showing an automatic iMessage reply on a Mac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="/assets/seo-pages.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does GhostReply upload my full iMessage history?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GhostReply does not send your entire Messages database to GhostReply servers. It reads history locally, then sends selected conversation samples and relevant context directly from your Mac to Groq using your API key."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can the AI send a wrong reply?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A generated reply can misunderstand context, invent a detail, choose the wrong tone, or make an unintended commitment. Only use auto-send where an imperfect reply is an acceptable risk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I stop GhostReply or take over a conversation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Close or stop GhostReply to end the session. After it has replied in one-person mode, your manual message stops the session. In all-contacts mode, replying after GhostReply has answered that contact pauses the contact for 30 minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do the urgent and sensitive filters guarantee safety?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. They are keyword heuristics. They can miss unusual language or classify a normal message incorrectly, so they are not suitable as an emergency, medical, legal, financial, or crisis response system."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-page="is_ai_imessage_auto_reply_safe">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-nav__brand" href="/">GhostReply</a>
+      <div class="site-nav__links">
+        <a href="/how-to-auto-reply-imessage-mac.html">How it works</a>
+        <a href="#checklist">Safe-use checklist</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="seo-hero">
+      <p class="seo-hero__eyebrow">Automatic sending needs clear boundaries</p>
+      <h1>Is AI iMessage Auto-Reply Safe?</h1>
+      <p class="seo-hero__lead">It can be reasonable for low-stakes conversations when you understand the data path, limit who can receive replies, and accept that the model and safeguards can make mistakes. It is not safe for every message.</p>
+      <div class="seo-hero__actions">
+        <a class="button" href="#data-flow">See where messages go</a>
+        <button class="button button--primary" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Try 10 replies free</button>
+      </div>
+      <p class="seo-hero__note">After the trial, GhostReply costs $4.99 once.</p>
+    </section>
+
+    <article class="content">
+      <section>
+        <h2>The main risk is the automatic send</h2>
+        <p>An AI draft gives you a chance to catch a bad answer. An AI auto-reply removes that review step. GhostReply can send a message that sounds plausible but is wrong, too confident, mistimed, or inappropriate for the relationship. It may infer a schedule, name, promise, or emotional meaning that was never stated.</p>
+        <p>That does not make every use unsafe. A low-stakes acknowledgment to a trusted friend may have a small downside. A response about money, health, an emergency, consent, a contract, a client deadline, or a confidential matter can have a large downside. Judge safety by the cost of the worst plausible reply, not by how good the average reply looks.</p>
+      </section>
+
+      <section class="examples" aria-labelledby="risk-examples">
+        <h2 id="risk-examples">Three messages, three different risk levels</h2>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Lower stakes:</strong> running about 10 late</p>
+          <p class="examples__message examples__message--reply"><strong>Possible reply:</strong> no worries see you soon</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>Needs human review:</strong> Can you guarantee delivery by Friday?</p>
+          <p class="examples__message"><strong>Risk:</strong> A generated yes could create a commitment you did not approve.</p>
+        </div>
+        <div class="examples__item">
+          <p class="examples__message"><strong>High stakes:</strong> I am at the hospital, please call now.</p>
+          <p class="examples__message"><strong>Risk:</strong> GhostReply has an urgent keyword check, but no heuristic should be trusted as an emergency response system.</p>
+        </div>
+        <p>Images, voice notes, sarcasm, coded language, typos, and relationship-specific meaning can all defeat simple checks. If a person could reasonably need you, your professional judgment, or immediate help, keep automatic sending off.</p>
+      </section>
+
+      <section id="data-flow">
+        <h2>Where your iMessage data goes</h2>
+        <ol>
+          <li>GhostReply reads the Messages database locally on your Mac after you grant Full Disk Access to the terminal app.</li>
+          <li>It stores configuration, a reply profile, and local usage statistics under <code>~/.ghostreply</code>.</li>
+          <li>For profile and reply generation, selected conversation samples and relevant context go directly from your Mac to Groq using your API key.</li>
+          <li>Message content does not pass through GhostReply's servers. Trial accounting, license validation, and analytics data can reach GhostReply services.</li>
+        </ol>
+        <p>This means GhostReply is not a fully local AI system. History access and stored profile data are local, while inference is a cloud request to Groq. You should have the right to process the conversation content you send and consider whether the other person's expectations, your contracts, or applicable rules permit that processing.</p>
+        <p><a href="https://console.groq.com/docs/your-data">Groq's current data documentation</a> says usage metadata is retained and inference customer data is not retained by default, but it also describes limited temporary logging for reliability or abuse monitoring and optional account controls. Policies and settings can change. Review the current document and your Groq data controls instead of assuming zero retention. Also read the <a href="/privacy.html">GhostReply privacy page</a>.</p>
+      </section>
+
+      <section id="requirements">
+        <h2>Permissions are powerful by design</h2>
+        <p>GhostReply needs a Mac signed in to Messages, Terminal or another supported terminal app, an internet connection, and your Groq key. Full Disk Access lets the terminal read the local Messages database. Messages Automation permission lets that terminal control Messages and send. Contacts access helps display names instead of raw handles.</p>
+        <p>Only grant these permissions to a terminal and software source you trust. It auto-sends only while the Mac is awake and GhostReply is running. Closing the app stops the session. Revoke Full Disk Access or Automation in macOS System Settings if you no longer want the software to have that capability.</p>
+      </section>
+
+      <section>
+        <h2>Controls GhostReply provides</h2>
+        <ul>
+          <li><strong>Scope:</strong> Choose one person or all incoming one-to-one chats. Group chats are skipped.</li>
+          <li><strong>Visible session:</strong> GhostReply runs in Terminal and prints the incoming text and sent reply.</li>
+          <li><strong>Manual takeover:</strong> After GhostReply has answered a contact, your reply stops one-person mode or pauses that contact for 30 minutes in all-contacts mode.</li>
+          <li><strong>Urgent heuristic:</strong> Keyword matches are skipped and surfaced as a notification.</li>
+          <li><strong>Sensitive heuristic:</strong> Keyword matches can receive a generic holding reply and a notification.</li>
+          <li><strong>Off switch:</strong> Stop or close the running app to end automatic replies.</li>
+        </ul>
+        <p>These controls reduce risk, but none guarantees accuracy, correct classification, delivery, or appropriate tone. Generated safeguards are not a substitute for direct monitoring.</p>
+      </section>
+
+      <section id="checklist">
+        <h2>Safe-use checklist</h2>
+        <ul>
+          <li>Start with <a href="/imessage-auto-reply-one-person.html">one trusted contact</a>, not everyone.</li>
+          <li>Use the 10 free replies while you can watch the session and verify the actual outputs.</li>
+          <li>Tell the contact when AI assistance would be material to their expectations or consent.</li>
+          <li>Avoid children, vulnerable people, strangers, disputes, sensitive personal data, and high-stakes topics.</li>
+          <li>Do not treat urgent or sensitive heuristics as guaranteed detection.</li>
+          <li>Stop GhostReply before a conversation becomes consequential or emotionally complex.</li>
+          <li>Review your local profile and configuration, Groq controls, and granted macOS permissions periodically.</li>
+        </ul>
+      </section>
+
+      <section class="cta" aria-label="Try GhostReply">
+        <h2>Test the boundaries before you buy</h2>
+        <p>Try 10 replies free with a trusted contact. If the tradeoff works for your low-stakes use case, GhostReply costs $4.99 once.</p>
+        <div class="install-command">
+          <code>curl -sL ghostreply.lol/install.sh | bash</code>
+          <button class="install-command__copy" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Copy install command</button>
+        </div>
+        <button class="button button--primary" type="button" data-checkout="safety_bottom">Buy once for $4.99</button>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2>AI iMessage safety FAQ</h2>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply upload my full iMessage history?</button>
+          <div data-disclosure-panel><p>GhostReply does not send your entire Messages database to GhostReply servers. It reads history locally, then sends selected conversation samples and relevant context directly from your Mac to Groq using your API key.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Can the AI send a wrong reply?</button>
+          <div data-disclosure-panel><p>Yes. A generated reply can misunderstand context, invent a detail, choose the wrong tone, or make an unintended commitment. Only use auto-send where an imperfect reply is an acceptable risk.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">How do I stop GhostReply or take over a conversation?</button>
+          <div data-disclosure-panel><p>Close or stop GhostReply to end the session. After it has replied in one-person mode, your manual message stops the session. In all-contacts mode, replying after GhostReply has answered that contact pauses the contact for 30 minutes.</p></div>
+        </div>
+        <div data-disclosure>
+          <button type="button" data-disclosure-toggle aria-expanded="false">Do the urgent and sensitive filters guarantee safety?</button>
+          <div data-disclosure-panel><p>No. They are keyword heuristics. They can miss unusual language or classify a normal message incorrectly, so they are not suitable as an emergency, medical, legal, financial, or crisis response system.</p></div>
+        </div>
+      </section>
+
+      <nav class="related" aria-label="Related GhostReply guides">
+        <h2>Related guides</h2>
+        <ul>
+          <li><a href="/how-to-auto-reply-imessage-mac.html">Learn the complete Mac setup</a></li>
+          <li><a href="/imessage-out-of-office-reply.html">Use a limited out-of-office workflow</a></li>
+          <li><a href="/imessage-auto-reply-business.html">Read the small-business limitations</a></li>
+        </ul>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="/">GhostReply</a> for Mac</p>
+    <div class="site-footer__links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
+    </div>
+  </footer>
+  <script src="/assets/seo-pages.js" defer></script>
+  <script src="/landing.js" defer></script>
+</body>
+</html>
