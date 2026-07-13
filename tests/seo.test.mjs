@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -378,5 +378,16 @@ test('direct CLI prints counts and exits nonzero when validation fails', (t) => 
     multilineJsonRun.stdout.trim().split(/\r?\n/).length,
     2,
     multilineJsonRun.stdout,
+  );
+});
+
+test('homepage demo exposes controls and respects reduced motion', () => {
+  const indexPath = fileURLToPath(new URL('../index.html', import.meta.url));
+  const source = readFileSync(indexPath, 'utf8');
+
+  assert.match(source, /<video[^>]+id="demoV"[^>]+controls[^>]*>/);
+  assert.match(
+    source,
+    /if \(reduce\) \{ wrap\.classList\.add\('in'\); v\.pause && v\.pause\(\); return; \}/,
   );
 });

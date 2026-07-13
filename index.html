@@ -235,7 +235,7 @@
     <!-- Video (rolls up on scroll-in) -->
     <section class="demo" id="demo">
         <div class="vwrap" id="vwrap">
-            <video id="demoV" muted loop playsinline preload="metadata" poster="assets/ghostreply-demo-poster.jpg" width="1920" height="1080">
+            <video id="demoV" muted loop playsinline controls preload="metadata" poster="assets/ghostreply-demo-poster.jpg" width="1920" height="1080" aria-label="GhostReply product demo">
                 <source src="assets/ghostreply-demo.mp4" type="video/mp4">
             </video>
         </div>
@@ -345,6 +345,7 @@
         // video roll-up on scroll-in + play only while on screen
         (function () {
             const wrap = document.getElementById('vwrap'), v = document.getElementById('demoV');
+            if (reduce) { wrap.classList.add('in'); v.pause && v.pause(); return; }
             if ('IntersectionObserver' in window) {
                 new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) en.target.classList.add('in'); }), { threshold: .25 }).observe(wrap);
                 let played = false;
