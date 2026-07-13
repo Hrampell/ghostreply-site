@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GhostReply Support: Install, Permissions, Keys, and Stop</title>
+  <meta name="description" content="Install and run GhostReply on Mac, fix Full Disk Access or Messages Automation, troubleshoot Groq and license keys, stop replies, or uninstall.">
+  <link rel="canonical" href="https://ghostreply.lol/support.html">
+  <meta property="og:site_name" content="GhostReply">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GhostReply Installation and Support">
+  <meta property="og:description" content="Exact setup commands plus help with macOS permissions, Groq keys, license recovery, stopping, and uninstalling.">
+  <meta property="og:url" content="https://ghostreply.lol/support.html">
+  <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta property="og:image:alt" content="GhostReply setup on a Mac">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GhostReply Installation and Support">
+  <meta name="twitter:description" content="Setup, permission fixes, key help, stopping, and uninstalling GhostReply on Mac.">
+  <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta name="twitter:image:alt" content="GhostReply setup on a Mac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/seo-pages.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What is the GhostReply install command?","acceptedAnswer":{"@type":"Answer","text":"Open Terminal on your Mac and run: curl -sL ghostreply.lol/install.sh | bash. The installer downloads GhostReply, checks the download, installs required Python packages, creates the ghostreply command, and starts setup."}},
+      {"@type":"Question","name":"How do I stop GhostReply immediately?","acceptedAnswer":{"@type":"Answer","text":"Click the Terminal window that is running GhostReply, type stop and press Return, or press Control-C. You can also reply manually to take over a conversation, but use stop or Control-C when you need the clearest immediate shutdown."}},
+      {"@type":"Question","name":"How do I recover a license?","acceptedAnswer":{"@type":"Answer","text":"Find the LemonSqueezy purchase receipt in the email used at checkout and paste its license key when GhostReply asks. If the receipt is missing or activation still fails, email support@ghostreply.lol from the purchase email with the receipt or order reference, but never send the license key itself."}},
+      {"@type":"Question","name":"How do I uninstall GhostReply?","acceptedAnswer":{"@type":"Answer","text":"Run ghostreply --uninstall in Terminal and confirm the prompt. It removes the main ~/.ghostreply folder and the ghostreply shell alias. Restart Terminal after it finishes."}}
+    ]
+  }
+  </script>
+</head>
+<body data-page="support">
+  <a class="skip-link" href="#main">Skip to support</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="site-nav__brand" href="/">GhostReply</a>
+    <div class="site-nav__links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html" aria-current="page">Support</a>
+    </div>
+  </nav>
+
+  <header class="seo-hero">
+    <p class="seo-hero__eyebrow">Mac setup and support</p>
+    <h1>Install, Run, or Fix GhostReply</h1>
+    <p class="seo-hero__lead">Start with the exact Terminal command, then use the checks below for macOS permissions, Groq setup, license recovery, stopping, and removal.</p>
+  </header>
+
+  <main class="content" id="main">
+    <section>
+      <h2>Install and start</h2>
+      <p>GhostReply requires a Mac with Messages signed in, an internet connection, and a terminal app such as Terminal, iTerm, Warp, Visual Studio Code, Cursor, or Ghostty. It also needs Python and permission to read Messages and tell Messages to send. If Python is missing, the installer can download the official macOS package from python.org and install it after asking for your Mac password.</p>
+      <ol class="steps">
+        <li>Open Terminal or the terminal app you plan to use.</li>
+        <li>Paste the command below and press Return. The installer verifies the downloaded app before it runs.</li>
+        <li>Follow the prompts for the 10-reply trial or license, your Groq API key, permissions, contact choice, reply mode, and speed.</li>
+        <li>After setup, run <code>ghostreply</code> whenever you want the listener on. Keep that Terminal process running.</li>
+      </ol>
+      <div class="install-command">
+        <code id="support-install">curl -sL ghostreply.lol/install.sh | bash</code>
+        <button class="install-command__copy" type="button" data-copy-command data-copy-target="#support-install" aria-label="Copy install command"><span data-copy-label>Copy command</span></button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Fix Full Disk Access</h2>
+      <p>If GhostReply says the iMessage database is missing, permission is denied, or it cannot scan messages, grant Full Disk Access to the exact app that runs the command. Granting it to Terminal does not help if you actually run GhostReply inside Warp, Cursor, or another app.</p>
+      <ol class="steps">
+        <li>Open System Settings, then Privacy &amp; Security, then Full Disk Access.</li>
+        <li>Turn on your terminal app. If it is not listed, add the application.</li>
+        <li>Quit that app completely when macOS asks. Reopen it and run <code>ghostreply</code> again.</li>
+      </ol>
+      <p>Full Disk Access exposes sensitive files to that terminal app, not only to GhostReply. Only grant it to software you trust. Revoking it later prevents GhostReply from reading new messages.</p>
+    </section>
+
+    <section>
+      <h2>Fix Messages Automation</h2>
+      <p>macOS normally asks whether your terminal app can control Messages. Choose Allow. If a reply is generated but does not send, open System Settings, Privacy &amp; Security, then Automation. Find your terminal app and turn on Messages beneath it. Make sure Messages is signed in and can send a normal iMessage manually.</p>
+      <p>If no Automation entry appears, run <code>ghostreply</code> and complete setup again so macOS can show the request. If the app still cannot send, quit and reopen both Messages and the terminal after changing permission.</p>
+    </section>
+
+    <section>
+      <h2>Fix a Groq key</h2>
+      <p>Create or manage the key in the <a href="https://console.groq.com/keys">Groq console</a>. Paste it only into the GhostReply prompt. The key is stored in the local GhostReply configuration and used for requests sent directly from your Mac to Groq.</p>
+      <ul>
+        <li>If a newly created key returns 403, wait about 30 seconds and try it again.</li>
+        <li>If verification fails, copy the full key again without spaces or line breaks and confirm the Mac is online.</li>
+        <li>For an SSL certificate error, follow the app's suggested certificate-package update, then restart setup.</li>
+        <li>Do not paste a Groq key into an email, screenshot, support form, public post, or shared terminal transcript.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Find or recover a license</h2>
+      <p>LemonSqueezy sends the purchase receipt and license information to the email used at checkout. Search that inbox for the GhostReply or LemonSqueezy receipt, then paste the license key only into GhostReply's Terminal prompt. The app checks activation through the GhostReply backend and LemonSqueezy.</p>
+      <p>If the receipt is missing, the key is rejected, or a reinstall reaches an activation limit, email <a href="mailto:support@ghostreply.lol">support@ghostreply.lol</a> from the purchase email. Include the receipt or order reference and a short description of the error. Never email the license key itself.</p>
+    </section>
+
+    <section>
+      <h2>Stop, take over, or uninstall</h2>
+      <p>To stop the active listener, click its Terminal window, type <code>stop</code>, and press Return. Control-C also stops it. A manual reply should make GhostReply step aside for that conversation, but if timing matters, stop the process before typing in Messages. Closing the Terminal process turns the listener off too.</p>
+      <p>To remove GhostReply, run <code>ghostreply --uninstall</code> and confirm. This removes the main <code>~/.ghostreply</code> folder and the command alias from the supported shell configuration, including the local profile, configuration, statistics, and downloaded script in that folder. Restart Terminal when it finishes. Read the <a href="/privacy.html">privacy page</a> for what uninstalling does not remove from providers or system records.</p>
+    </section>
+
+    <section>
+      <h2>Contact support safely</h2>
+      <p>Email <a href="mailto:support@ghostreply.lol">support@ghostreply.lol</a> with the Mac version, terminal app, GhostReply version from <code>ghostreply --version</code>, the step that failed, and the exact error after removing personal data. Do not send message contents, phone numbers, contact names, Groq API keys, license keys, or unredacted screenshots. A cropped or redacted screenshot is useful only when the remaining text cannot identify a person or expose a secret.</p>
+    </section>
+
+    <section class="faq" aria-labelledby="support-faq">
+      <h2 id="support-faq">Support questions</h2>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">What is the GhostReply install command?</button><div data-disclosure-panel><p>Open Terminal on your Mac and run: <code>curl -sL ghostreply.lol/install.sh | bash</code>. The installer downloads GhostReply, checks the download, installs required Python packages, creates the <code>ghostreply</code> command, and starts setup.</p></div></div>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">How do I stop GhostReply immediately?</button><div data-disclosure-panel><p>Click the Terminal window that is running GhostReply, type <code>stop</code> and press Return, or press Control-C. You can also reply manually to take over a conversation, but use <code>stop</code> or Control-C when you need the clearest immediate shutdown.</p></div></div>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">How do I recover a license?</button><div data-disclosure-panel><p>Find the LemonSqueezy purchase receipt in the email used at checkout and paste its license key when GhostReply asks. If the receipt is missing or activation still fails, email support@ghostreply.lol from the purchase email with the receipt or order reference, but never send the license key itself.</p></div></div>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">How do I uninstall GhostReply?</button><div data-disclosure-panel><p>Run <code>ghostreply --uninstall</code> in Terminal and confirm the prompt. It removes the main <code>~/.ghostreply</code> folder and the <code>ghostreply</code> shell alias. Restart Terminal after it finishes.</p></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><a href="/">GhostReply</a> | <a href="/how-to-auto-reply-imessage-mac.html">Setup guide</a> | <a href="/is-ai-imessage-auto-reply-safe.html">Safety guide</a></div>
+    <div><a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a> | <a href="/support.html">Support</a></div>
+    <p>GhostReply for macOS. 10 free replies, then $4.99 once.</p>
+  </footer>
+  <script src="/assets/seo-pages.js" defer></script>
+  <script src="/landing.js" defer></script>
+</body>
+</html>

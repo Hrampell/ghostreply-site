@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GhostReply Privacy: Messages, Groq, and Analytics</title>
+  <meta name="description" content="See what GhostReply keeps on your Mac, what goes directly to Groq, and what non-message data its license and analytics services receive.">
+  <link rel="canonical" href="https://ghostreply.lol/privacy.html">
+  <meta property="og:site_name" content="GhostReply">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How GhostReply Handles Your Data">
+  <meta property="og:description" content="A plain-language map of local message access, direct Groq inference, licensing, and analytics.">
+  <meta property="og:url" content="https://ghostreply.lol/privacy.html">
+  <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta property="og:image:alt" content="GhostReply running on a Mac">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How GhostReply Handles Your Data">
+  <meta name="twitter:description" content="What stays on your Mac, what goes to Groq, and what GhostReply services receive.">
+  <meta name="twitter:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
+  <meta name="twitter:image:alt" content="GhostReply running on a Mac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/seo-pages.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Does GhostReply send my message content through its own servers?","acceptedAnswer":{"@type":"Answer","text":"No. Relevant conversation samples and current context go directly from your Mac to Groq using your Groq API key. GhostReply's license, trial, and analytics services do not receive the content of those messages."}},
+      {"@type":"Question","name":"Is GhostReply completely offline?","acceptedAnswer":{"@type":"Answer","text":"No. Message history access and the saved reply profile are local, but AI inference uses Groq's cloud API. License checks, trial accounting, analytics, downloads, and checkout also require third-party network services."}},
+      {"@type":"Question","name":"What does uninstalling remove?","acceptedAnswer":{"@type":"Answer","text":"Running ghostreply --uninstall removes the main ~/.ghostreply directory and the shell alias. It does not promise deletion of records held by GhostReply's backend, macOS, Groq, PostHog, LemonSqueezy, GitHub, or other service providers."}}
+    ]
+  }
+  </script>
+</head>
+<body data-page="privacy">
+  <a class="skip-link" href="#main">Skip to privacy details</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="site-nav__brand" href="/">GhostReply</a>
+    <div class="site-nav__links">
+      <a href="/privacy.html" aria-current="page">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
+    </div>
+  </nav>
+
+  <header class="seo-hero">
+    <p class="seo-hero__eyebrow">Privacy details | Updated July 11, 2026</p>
+    <h1>How GhostReply Handles Your Data</h1>
+    <p class="seo-hero__lead">GhostReply reads iMessage history on your Mac, stores its working profile locally, and sends selected context directly to Groq for each AI reply. Message content does not pass through GhostReply's own servers.</p>
+  </header>
+
+  <main class="content" id="main">
+    <section>
+      <h2>The short version</h2>
+      <p>GhostReply needs access to private information to do its job. It reads the Messages database on your Mac so it can understand a conversation and learn how you write. The app keeps its configuration, reply profile, and usage statistics in your home folder. When it needs an AI answer, it sends relevant conversation material from your Mac to Groq under your own Groq account and API key.</p>
+      <p>GhostReply also uses network services for the free trial, license checks, software delivery, checkout, and basic product analytics. Those services receive identifiers and event information, but GhostReply does not send them your iMessage text. This page separates those data paths so you can decide whether the tradeoff works for you.</p>
+    </section>
+
+    <section>
+      <h2>Information that stays on your Mac</h2>
+      <p>With Full Disk Access, the terminal app running GhostReply can read the local Messages database. GhostReply uses that access to load recent one-to-one conversation history, identify new incoming messages, and build examples of your writing style. It may also use local Contacts data to replace phone numbers or email handles with names. Group chats are not a supported auto-reply target.</p>
+      <p>The main GhostReply folder is <code>~/.ghostreply</code>. It contains the downloaded app plus local files such as <code>config.json</code>, <code>profile.json</code>, and <code>stats.json</code>. These files can include the Groq API key, license or trial state, preferences, a learned writing profile, contact examples, and reply counts. Sensitive configuration fields are obfuscated and tied to the Mac, but you should not treat that as a substitute for securing your macOS account and backups.</p>
+      <p>Anyone or any software with sufficient access to your Mac account may be able to inspect local files. Use a strong Mac password, keep the system current, and do not share your user account with people who should not see this information.</p>
+    </section>
+
+    <section>
+      <h2>Information sent directly to Groq</h2>
+      <p>GhostReply uses Groq for cloud AI inference. Depending on the feature and reply mode, the request can contain selected conversation samples, recent messages, the message that needs a reply, local style or life-profile instructions, and instructions for the chosen tone. The request goes from the GhostReply app on your Mac to the Groq API using the API key you supplied. GhostReply's backend does not proxy or receive that message content.</p>
+      <p>This means GhostReply is not a completely offline or on-device AI product. Groq controls how its service processes and retains API data. Review <a href="https://console.groq.com/docs/your-data">Groq's current data documentation</a> and your Groq Data Controls before using GhostReply. Groq can change its service and policies, so its own documentation is the current source of truth.</p>
+    </section>
+
+    <section>
+      <h2>GhostReply license, trial, and event data</h2>
+      <p>GhostReply's backend handles license activation and the 10-reply trial. Those requests can include a machine identifier, trial token and reply count, app version, license key for validation, activation status, and error information. The backend may store a shortened hash of a license key, the machine identifier, validation results, version, timestamps, and non-content product events. It does not need the text of the messages you send or receive.</p>
+      <p>The app and backend may send product analytics to PostHog. Examples include the app version, trial status, reply mode, discovery source, whether a reply was sent, and whether a license was activated. If you give GhostReply an optional email or buy a license, the email associated with that flow may also be attached to analytics. Reply event analytics do not include the reply text, incoming message text, or contact name.</p>
+      <p>On the website, GhostReply creates a random source identifier in local browser storage. Page and checkout events can include that source ID, the current and first landing page, referrer, UTM campaign values, page name, and the button used. This helps connect a visit with an installation or purchase without adding message content.</p>
+    </section>
+
+    <section>
+      <h2>Services involved</h2>
+      <ul>
+        <li><strong>Groq</strong> receives AI inputs and returns generated replies under your Groq account.</li>
+        <li><strong>LemonSqueezy</strong> handles checkout, payment, customer, receipt, and license records.</li>
+        <li><strong>PostHog</strong> may receive the non-content product and website analytics described above.</li>
+        <li><strong>GitHub</strong> hosts the installer and app updates that GhostReply downloads.</li>
+        <li><strong>GhostReply's backend</strong> handles trial state, license validation, and non-content events.</li>
+      </ul>
+      <p>Each provider has its own terms, security practices, and retention rules. GhostReply cannot promise how a third party will handle data beyond the controls and agreements that provider offers.</p>
+    </section>
+
+    <section>
+      <h2>Retention, removal, and support</h2>
+      <p>GhostReply does not publish a fixed deletion schedule for backend license, trial, or analytics records. Provider records follow each provider's policies and legal obligations. Running <code>ghostreply --uninstall</code> removes the main local GhostReply folder and shell alias, but it does not erase provider records, macOS logs or backups, or every trial-related system record.</p>
+      <p>For a privacy question, email <a href="mailto:support@ghostreply.lol">support@ghostreply.lol</a>. Do not include message contents, a Groq API key, a license key, or an unredacted screenshot. Explain the issue in general terms and include only the minimum account or purchase information needed to find the relevant record.</p>
+    </section>
+
+    <section class="faq" aria-labelledby="privacy-faq">
+      <h2 id="privacy-faq">Privacy questions</h2>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply send my message content through its own servers?</button><div data-disclosure-panel><p>No. Relevant conversation samples and current context go directly from your Mac to Groq using your Groq API key. GhostReply's license, trial, and analytics services do not receive the content of those messages.</p></div></div>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Is GhostReply completely offline?</button><div data-disclosure-panel><p>No. Message history access and the saved reply profile are local, but AI inference uses Groq's cloud API. License checks, trial accounting, analytics, downloads, and checkout also require third-party network services.</p></div></div>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">What does uninstalling remove?</button><div data-disclosure-panel><p>Running <code>ghostreply --uninstall</code> removes the main <code>~/.ghostreply</code> directory and the shell alias. It does not promise deletion of records held by GhostReply's backend, macOS, Groq, PostHog, LemonSqueezy, GitHub, or other service providers.</p></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><a href="/">GhostReply</a> | <a href="/how-to-auto-reply-imessage-mac.html">Setup guide</a> | <a href="/is-ai-imessage-auto-reply-safe.html">Safety guide</a></div>
+    <div><a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a> | <a href="/support.html">Support</a></div>
+    <p>GhostReply for macOS. 10 free replies, then $4.99 once.</p>
+  </footer>
+  <script src="/assets/seo-pages.js" defer></script>
+  <script src="/landing.js" defer></script>
+</body>
+</html>
