@@ -1,0 +1,19 @@
+# GhostReply campaign log
+
+Do not store passwords, API keys, login cookies, private lead data, or other credentials in this file.
+
+| date | channel | target | action | UTM URL | status | final URL | notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-07-12 | Search | Google Search Console | Replace the old sitemap and request indexing after production deploy | https://ghostreply.lol/?utm_source=google&utm_medium=organic&utm_campaign=seo_launch | Pending deploy |  | Current production sitemap has 6 URLs. Record accepted, queued, and blocked URLs after submission. |
+| 2026-07-12 | Search | Bing Webmaster Tools | Resubmit the production sitemap after deploy | https://ghostreply.lol/?utm_source=bing&utm_medium=organic&utm_campaign=seo_launch | Existing sitemap successful, update pending | https://ghostreply.lol/sitemap.xml | Bing currently reports Success with 6 discovered URLs. |
+| 2026-07-12 | Launch directory | Product Hunt | Correct the listing, video, pricing, and maker comment | https://ghostreply.lol/?utm_source=producthunt&utm_medium=referral&utm_campaign=seo_launch | Pending manual update | https://www.producthunt.com/products/ghostreply-2?launch=1085454 | Remove stale 24-hour trial, fully local, and open source claims. Use the maker disclosure in the correction comment. |
+| 2026-07-12 | Social | X original demo post | Review, attach the canonical video, and publish with Harrison's final click | https://ghostreply.lol/?utm_source=x&utm_medium=organic&utm_campaign=seo_launch&utm_content=demo | Manual publication pending |  | No X API and no scripted browser actions. Draft is in x-original-posts.md. |
+| 2026-07-12 | Social research | X post by @Elizaluv001 | Review for a genuinely helpful, disclosed response |  | Manual review pending | https://x.com/Elizaluv001/status/2074536034625364353 | High-intent conversation found. Do not auto-reply or post an unsolicited template. |
+| 2026-07-12 | Social research | X post by @BaronVonNorris | Review for a genuinely helpful, disclosed response |  | Manual review pending | https://x.com/BaronVonNorris/status/2063047375233425829 | High-intent conversation found. Do not auto-reply or post an unsolicited template. |
+| 2026-07-12 | Growth automation | GhostReply hourly growth queue | Keep the recurring queue stopped |  | PAUSED |  | Hourly growth tasks are paused by user request. Do not resume without explicit approval. |
+| 2026-07-12 | SaaS directory | SaaSHub | Submit the live product and verify the listing | https://ghostreply.lol/?utm_source=saashub&utm_medium=referral&utm_campaign=seo_launch | Pending |  | Free web route. Use the focused Mac alternative angle. |
+| 2026-07-12 | Software directory | AlternativeTo | Create a product entry when the account is eligible | https://ghostreply.lol/?utm_source=alternativeto&utm_medium=referral&utm_campaign=seo_launch | Pending |  | Free. A new account may have a one-week waiting period. |
+| 2026-07-12 | Mac directory | MacUpdate | Check package fit, then submit only if eligible | https://ghostreply.lol/?utm_source=macupdate&utm_medium=referral&utm_campaign=seo_launch | Pending fit check |  | Package suitability is uncertain. |
+| 2026-07-12 | AI directory | ToolDirectory.ai | Send a reviewed submission manually | https://ghostreply.lol/?utm_source=tooldirectory_ai&utm_medium=referral&utm_campaign=seo_launch | Pending |  | Free email route. Do not use Gmail MCP or any email connector. |
+| 2026-07-12 | AI directory | ToolScout | Submit through the web form if the category fits | https://ghostreply.lol/?utm_source=toolscout&utm_medium=referral&utm_campaign=seo_launch | Pending fit check |  | Free web route. Confirm it accepts Mac utilities. |
+| 2026-07-12 | Directory screening | Futurepedia, Toolify, BetaList | Skip paid or unclear placements |  | Skipped |  | Futurepedia reports $247 or $497, Toolify reports $99, and BetaList has an unclear free path. No payment approved. |
