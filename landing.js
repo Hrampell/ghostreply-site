@@ -16,20 +16,31 @@
       return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
     }
   })();
+  let initialized = false;
 
   function sourceValue(name) {
     return params.get(name) || '';
   }
 
+  function creatorId() {
+    try {
+      const attribution = window.GhostReplyAttribution;
+      const id = attribution && attribution.attribution && attribution.attribution.creator_id;
+      return typeof id === 'string' && /^[A-Za-z0-9_-]{1,200}$/.test(id) ? id : '';
+    } catch {}
+    return '';
+  }
+
   function event(name, properties = {}) {
     try {
       navigator.sendBeacon(
-        `${api}/v1/events`,
+        `${api}/v1/site-events`,
         new Blob([JSON.stringify({
           event: name,
           distinct_id: `site_${sourceId}`,
           properties: {
             source_id: sourceId,
+            creator_id: creatorId(),
             page,
             landing_url: localStorage.getItem('ghostreply_landing_url') || window.location.href,
             referrer: localStorage.getItem('ghostreply_initial_referrer') || document.referrer || '$direct',
@@ -41,9 +52,20 @@
             utm_term: sourceValue('utm_term'),
             ...properties,
           },
-        })], { type: 'application/json' })
+        })], { type: 'text/plain;charset=UTF-8' })
       );
     } catch {}
+  }
+
+  function checkoutUrlWithAttribution(raw, custom) {
+    try {
+      const attribution = window.GhostReplyAttribution;
+      if (attribution && typeof attribution.buildCheckoutUrl === 'function') {
+        const enriched = attribution.buildCheckoutUrl(raw, custom);
+        if (typeof enriched === 'string' && enriched) return enriched;
+      }
+    } catch {}
+    return raw;
   }
 
   function checkoutUrl(buttonId) {
@@ -62,25 +84,37 @@
     Object.entries(custom).forEach(([key, value]) => {
       if (value) url.searchParams.set(`checkout[custom][${key}]`, String(value).slice(0, 500));
     });
-    return url.toString();
+    const raw = url.toString();
+    return checkoutUrlWithAttribution(raw, custom);
   }
 
-  document.querySelectorAll('[data-checkout]').forEach((button) => {
-    button.addEventListener('click', (eventObject) => {
-      eventObject.preventDefault();
-      const buttonId = button.dataset.checkout || `${page}_checkout`;
-      event('checkout_clicked', { button_id: buttonId });
-      window.location.href = checkoutUrl(buttonId);
-    });
-  });
+  function initialize() {
+    if (initialized) return;
+    initialized = true;
 
-  document.querySelectorAll('[data-copy-install]').forEach((button) => {
-    button.addEventListener('click', () => {
-      navigator.clipboard.writeText('curl -sL ghostreply.lol/install.sh | bash');
-      button.textContent = 'Copied: curl -sL ghostreply.lol/install.sh | bash';
-      event('install_copied', {});
+    document.querySelectorAll('[data-checkout]').forEach((button) => {
+      button.addEventListener('click', (eventObject) => {
+        eventObject.preventDefault();
+        const buttonId = button.dataset.checkout || `${page}_checkout`;
+        event('checkout_clicked', { button_id: buttonId });
+        window.location.href = checkoutUrl(buttonId);
+      });
     });
-  });
 
-  event('site_pageview', {});
+    document.querySelectorAll('[data-copy-install]').forEach((button) => {
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText('curl -sL ghostreply.lol/install.sh | bash');
+        button.textContent = 'Copied: curl -sL ghostreply.lol/install.sh | bash';
+        event('install_copied', {});
+      });
+    });
+
+    event('site_pageview', {});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize, { once: true });
+  } else {
+    initialize();
+  }
 })();

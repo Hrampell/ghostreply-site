@@ -26,6 +26,8 @@
 
     <script>window.lemonSqueezyAffiliateConfig = { store: "ghostreply" };</script>
     <script src="https://lmsqueezy.com/affiliate.js" defer></script>
+    <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+    <script type="module" src="/creator-attribution.mjs"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -308,30 +310,58 @@
             localStorage.setItem('ghostreply_initial_referrer', document.referrer || '$direct');
             return n;
         } catch { return Date.now() + '-' + Math.random().toString(16).slice(2); } })();
+        let initialized = false;
+        function creatorId() { try {
+            const attribution = window.GhostReplyAttribution;
+            const id = attribution && attribution.attribution && attribution.attribution.creator_id;
+            return typeof id === 'string' && /^[A-Za-z0-9_-]{1,200}$/.test(id) ? id : '';
+        } catch {} return ''; }
         function track(event, props) { try {
-            navigator.sendBeacon(API + '/v1/events', new Blob([JSON.stringify({
+            navigator.sendBeacon(API + '/v1/site-events', new Blob([JSON.stringify({
                 event, distinct_id: 'site_' + sourceId,
                 properties: { source_id: sourceId,
+                    creator_id: creatorId(),
                     landing_url: localStorage.getItem('ghostreply_landing_url') || location.href,
                     referrer: localStorage.getItem('ghostreply_initial_referrer') || document.referrer || '$direct',
                     current_url: location.href, utm_source: val('utm_source'), utm_medium: val('utm_medium'),
                     utm_campaign: val('utm_campaign'), utm_content: val('utm_content'), utm_term: val('utm_term'), ...props },
-            })], { type: 'application/json' }));
+            })], { type: 'text/plain;charset=UTF-8' }));
         } catch {} }
+        function checkoutUrlWithAttribution(raw, custom) {
+            try {
+                const attribution = window.GhostReplyAttribution;
+                if (attribution && typeof attribution.buildCheckoutUrl === 'function') {
+                    const enriched = attribution.buildCheckoutUrl(raw, custom);
+                    if (typeof enriched === 'string' && enriched) return enriched;
+                }
+            } catch {}
+            return raw;
+        }
         function checkoutUrl(loc) {
             const url = new URL(CHECKOUT);
-            const c = { source_id: sourceId, button_id: loc,
+            const custom = { source_id: sourceId, button_id: loc,
                 landing_url: localStorage.getItem('ghostreply_landing_url') || location.href,
                 referrer: localStorage.getItem('ghostreply_initial_referrer') || document.referrer || '$direct',
                 utm_source: val('utm_source'), utm_medium: val('utm_medium'), utm_campaign: val('utm_campaign'),
                 utm_content: val('utm_content'), utm_term: val('utm_term') };
-            Object.entries(c).forEach(([k, v]) => { if (v) url.searchParams.set('checkout[custom][' + k + ']', v.slice(0, 500)); });
-            return url.toString();
+            Object.entries(custom).forEach(([k, v]) => { if (v) url.searchParams.set('checkout[custom][' + k + ']', v.slice(0, 500)); });
+            const raw = url.toString();
+            return checkoutUrlWithAttribution(raw, custom);
         }
-        document.querySelectorAll('[data-checkout]').forEach(el => el.addEventListener('click', e => {
-            e.preventDefault(); track('checkout_clicked', { button_id: el.dataset.checkout }); location.href = checkoutUrl(el.dataset.checkout);
-        }));
-        track('site_pageview', {});
+        function initialize() {
+            if (initialized) return;
+            initialized = true;
+
+            document.querySelectorAll('[data-checkout]').forEach(el => el.addEventListener('click', e => {
+                e.preventDefault(); track('checkout_clicked', { button_id: el.dataset.checkout }); location.href = checkoutUrl(el.dataset.checkout);
+            }));
+            track('site_pageview', {});
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize, { once: true });
+        } else {
+            initialize();
+        }
 
         // reveals
         addEventListener('load', () => document.querySelectorAll('.hero .rise').forEach((el, i) => setTimeout(() => el.classList.add('in'), 85 * i + 120)));
