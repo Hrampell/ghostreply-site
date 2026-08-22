@@ -30,7 +30,7 @@
       {"@type":"Question","name":"Can a Mac automatically reply to iMessages?","acceptedAnswer":{"@type":"Answer","text":"Yes, but Apple's built-in Smart Reply suggests text rather than sending it automatically. A third-party Mac app is needed for automatic AI replies that send while the app is running."}},
       {"@type":"Question","name":"Does Apple Intelligence send Smart Replies automatically?","acceptedAnswer":{"@type":"Answer","text":"No. Apple says Smart Reply drafts a response in the Messages text field. You review it and press Return when you are ready to send."}},
       {"@type":"Question","name":"Can I limit an automatic reply to one person?","acceptedAnswer":{"@type":"Answer","text":"GhostReply can watch one selected person or everyone in one-to-one conversations. It skips group chats, and a manual reply makes it step aside."}},
-      {"@type":"Question","name":"What does GhostReply require?","acceptedAnswer":{"@type":"Answer","text":"You need a Mac with Messages set up, a Terminal app with the required macOS permissions, an internet connection, and your own Groq API key. GhostReply must remain running to listen and reply."}},
+      {"@type":"Question","name":"What does GhostReply require?","acceptedAnswer":{"@type":"Answer","text":"You need a Mac with Messages set up, a Terminal app with the required macOS permissions, and an internet connection. No AI provider key is required. GhostReply must remain running to listen and reply."}},
       {"@type":"Question","name":"How does the GhostReply free trial work?","acceptedAnswer":{"@type":"Answer","text":"The trial includes 10 automatically sent replies and does not require a card. After those replies, a full GhostReply license costs $4.99 once."}}
     ]
   }
@@ -94,14 +94,14 @@
 
     <section id="setup">
       <h2>Method 3: set up automatic AI replies on Mac</h2>
-      <p>GhostReply is the focused option when you want actual automatic sending. Install it from Terminal, provide your Groq API key, grant the requested Full Disk Access and Messages Automation permissions, and choose whether it should listen to one person or everyone. It reads recent iMessage history on the Mac to build a local reply profile for each conversation.</p>
+      <p>GhostReply is the focused option when you want actual automatic sending. Install it from Terminal, choose the free trial or enter your license key, grant the requested Full Disk Access and Messages Automation permissions, and choose whether it should listen to one person or everyone. It reads recent iMessage history on the Mac to build a local reply profile for each conversation.</p>
       <ol class="steps">
         <li>Paste <code>curl -sL ghostreply.lol/install.sh | bash</code> into Terminal.</li>
-        <li>Choose the 10-reply free trial and add your Groq key.</li>
+        <li>Choose the 10-reply free trial. No AI API key is required.</li>
         <li>Select one contact or everyone, then choose the reply mode and speed.</li>
         <li>Leave GhostReply and Messages running. Close the app or take over manually when you want it off.</li>
       </ol>
-      <p>Message history and the learned profile stay local. Relevant context goes directly from your Mac to Groq for inference with your key, and message content does not pass through GhostReply's servers. This is cloud inference, so it should not be described as fully local.</p>
+      <p>Message history and the learned profile stay local. Relevant context is processed through GhostReply's Cloudflare backend and is not stored in its D1 records. This is cloud inference, so it should not be described as fully local.</p>
     </section>
 
     <section>
@@ -114,7 +114,7 @@
     <section class="cta">
       <p class="seo-hero__eyebrow">Try the automatic route</p>
       <h2>Test 10 replies before you buy</h2>
-      <p>GhostReply includes 10 free replies with no card. If it fits your workflow, unlock it for $4.99 once. You provide the Groq key and stay in control of when the listener runs.</p>
+      <p>GhostReply includes 10 free replies with no card. If it fits your workflow, buy a one-Mac license for $4.99 once. Hosted AI is included, and you stay in control of when the listener runs.</p>
       <div class="cta__actions">
         <button class="button button--primary" type="button" data-checkout="how_to_guide">Buy GhostReply for $4.99</button>
       </div>
@@ -129,7 +129,7 @@
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Can a Mac automatically reply to iMessages?</button><div data-disclosure-panel><p>Yes, but Apple's built-in Smart Reply suggests text rather than sending it automatically. A third-party Mac app is needed for automatic AI replies that send while the app is running.</p></div></div>
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Does Apple Intelligence send Smart Replies automatically?</button><div data-disclosure-panel><p>No. Apple says Smart Reply drafts a response in the Messages text field. You review it and press Return when you are ready to send.</p></div></div>
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Can I limit an automatic reply to one person?</button><div data-disclosure-panel><p>GhostReply can watch one selected person or everyone in one-to-one conversations. It skips group chats, and a manual reply makes it step aside.</p></div></div>
-      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">What does GhostReply require?</button><div data-disclosure-panel><p>You need a Mac with Messages set up, a Terminal app with the required macOS permissions, an internet connection, and your own Groq API key. GhostReply must remain running to listen and reply.</p></div></div>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">What does GhostReply require?</button><div data-disclosure-panel><p>You need a Mac with Messages set up, a Terminal app with the required macOS permissions, and an internet connection. No AI provider key is required. GhostReply must remain running to listen and reply.</p></div></div>
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">How does the GhostReply free trial work?</button><div data-disclosure-panel><p>The trial includes 10 automatically sent replies and does not require a card. After those replies, a full GhostReply license costs $4.99 once.</p></div></div>
     </section>
   </main>

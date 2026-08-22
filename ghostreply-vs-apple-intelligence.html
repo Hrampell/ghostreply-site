@@ -29,7 +29,7 @@
     "mainEntity":[
       {"@type":"Question","name":"Does Apple Intelligence automatically send iMessage replies?","acceptedAnswer":{"@type":"Answer","text":"No. Apple says Smart Reply drafts a response in the Messages text field. You can refine it, then press Return when you are ready to send."}},
       {"@type":"Question","name":"Is GhostReply a replacement for Apple Intelligence?","acceptedAnswer":{"@type":"Answer","text":"Not exactly. Apple Smart Reply is a built-in drafting assistant with a human send step. GhostReply is a separate Mac app for automatically sending one-to-one replies while it runs."}},
-      {"@type":"Question","name":"Does GhostReply keep every message on the Mac?","acceptedAnswer":{"@type":"Answer","text":"History and reply profiles are stored locally, but relevant message context is sent directly from your Mac to Groq for inference using your API key. Message content does not pass through GhostReply's servers."}},
+      {"@type":"Question","name":"Does GhostReply keep every message on the Mac?","acceptedAnswer":{"@type":"Answer","text":"History and reply profiles are stored locally, but relevant message context is processed through GhostReply's Cloudflare backend for hosted AI. Message text is not stored in GhostReply's D1 records."}},
       {"@type":"Question","name":"Which option is better for important conversations?","acceptedAnswer":{"@type":"Answer","text":"Apple Smart Reply's review-before-send workflow is the safer fit when exact wording matters. Automatic sending should be limited to routine, low-risk conversations even when safeguards are enabled."}},
       {"@type":"Question","name":"Can Apple Smart Reply match my writing style?","acceptedAnswer":{"@type":"Answer","text":"Apple announced that Smart Reply in Mail and Messages will draw on a user's personalized writing style with macOS 27, planned for autumn 2026. Apple's current instructions still require the user to send the draft."}}
     ]
@@ -71,7 +71,7 @@
             <tr><td>Style and tone</td><td>Contextual suggestions today; personalized writing style announced for macOS 27</td><td>Builds a local profile from how you text each contact</td></tr>
             <tr><td>Platform</td><td>Built into supported Apple devices</td><td>Mac only, through Messages</td></tr>
             <tr><td>Price</td><td>Included with a compatible Mac</td><td>10 free replies, then $4.99 once</td></tr>
-            <tr><td>AI processing</td><td>On-device first; some requests can use Private Cloud Compute</td><td>Relevant context goes directly to Groq with your key</td></tr>
+            <tr><td>AI processing</td><td>On-device first; some requests can use Private Cloud Compute</td><td>Cloudflare-hosted AI included</td></tr>
             <tr><td>Groups</td><td>Messages features vary by conversation and OS</td><td>Group chats are skipped</td></tr>
             <tr><td>Human control</td><td>Every Smart Reply waits for your send action</td><td>Manual takeover, stop command, or close the running app</td></tr>
           </tbody>
@@ -89,14 +89,14 @@
 
     <section>
       <h2>Where GhostReply is stronger</h2>
-      <p>GhostReply removes the open, choose, and send sequence. It can monitor one selected contact or all eligible one-to-one conversations, learn patterns from recent history, and send a contextual answer after a configurable delay. The Mac app must be running, Messages must be available, and the network and Groq request must work.</p>
-      <p>It also works on Macs that use Messages even when Apple Intelligence is not the preferred drafting workflow. Exact minimum macOS compatibility is not published on this comparison, so treat it as Unknown until the installer checks the machine. You still need Full Disk Access for the terminal app, Messages Automation permission, and your own Groq key.</p>
+      <p>GhostReply removes the open, choose, and send sequence. It can monitor one selected contact or all eligible one-to-one conversations, learn patterns from recent history, and send a contextual answer after a configurable delay. The Mac app must be running, Messages must be available, and the network and hosted AI request must work.</p>
+      <p>It also works on Macs that use Messages even when Apple Intelligence is not the preferred drafting workflow. Exact minimum macOS compatibility is not published on this comparison, so treat it as Unknown until the installer checks the machine. You still need Full Disk Access for the terminal app and Messages Automation permission, but no AI provider key.</p>
       <p>GhostReply's control model is designed around stopping. It skips group chats, attempts to identify urgent or sensitive terms, rejects obvious assistant-like replies, defers overnight messages, and steps aside when it detects your manual response. Those are heuristic safeguards, not proof that an automatic answer is appropriate.</p>
     </section>
 
     <section>
       <h2>Privacy is a data-flow question, not a slogan</h2>
-      <p>Apple says Apple Intelligence begins on-device and can use Private Cloud Compute for more complex requests. GhostReply reads iMessage history and stores the learned reply profile locally. For generation, the relevant context goes directly to Groq with the user's API key. GhostReply's backend does not receive message content, but Groq processes the inference request.</p>
+      <p>Apple says Apple Intelligence begins on-device and can use Private Cloud Compute for more complex requests. GhostReply reads iMessage history and stores the learned reply profile locally. For generation, relevant context is processed through GhostReply's Cloudflare backend. Message text is not stored in GhostReply's D1 records.</p>
       <p>That means GhostReply should not be called fully local. Before enabling either product, review the current vendor documentation and decide whether its processing path fits the conversation. You can compare other choices in the <a href="/best-ai-imessage-apps-mac.html">best AI iMessage apps guide</a>.</p>
     </section>
 
@@ -112,7 +112,7 @@
       <ul>
         <li>You specifically want automatic one-to-one iMessage replies.</li>
         <li>Your routine conversations are low risk enough for auto-send.</li>
-        <li>You accept Terminal setup, permissions, a Groq key, and keeping the app running.</li>
+        <li>You accept Terminal setup, permissions, hosted cloud AI, and keeping the app running.</li>
       </ul>
       <p>For setup details, read <a href="/how-to-auto-reply-imessage-mac.html">how to auto-reply to iMessage on Mac</a>. If you want another product that advertises auto-send, compare <a href="/ghostreply-vs-gabby.html">GhostReply and Gabby</a>.</p>
     </section>
@@ -120,7 +120,7 @@
     <section class="cta">
       <p class="seo-hero__eyebrow">When auto-send is the requirement</p>
       <h2>Try GhostReply for 10 real replies</h2>
-      <p>No card is required for the trial. If the automatic workflow fits, the license is $4.99 once. You provide the Groq key and decide when the app runs.</p>
+      <p>No card is required for the trial. If the automatic workflow fits, the license is $4.99 once. Hosted AI is included, and you decide when the app runs.</p>
       <div class="cta__actions">
         <button class="button button--primary" type="button" data-checkout="vs_apple">Buy for $4.99 once</button>
       </div>
@@ -134,7 +134,7 @@
       <h2 id="faq-title">Frequently asked questions</h2>
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Does Apple Intelligence automatically send iMessage replies?</button><div data-disclosure-panel><p>No. Apple says Smart Reply drafts a response in the Messages text field. You can refine it, then press Return when you are ready to send.</p></div></div>
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Is GhostReply a replacement for Apple Intelligence?</button><div data-disclosure-panel><p>Not exactly. Apple Smart Reply is a built-in drafting assistant with a human send step. GhostReply is a separate Mac app for automatically sending one-to-one replies while it runs.</p></div></div>
-      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply keep every message on the Mac?</button><div data-disclosure-panel><p>History and reply profiles are stored locally, but relevant message context is sent directly from your Mac to Groq for inference using your API key. Message content does not pass through GhostReply's servers.</p></div></div>
+      <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply keep every message on the Mac?</button><div data-disclosure-panel><p>History and reply profiles are stored locally, but relevant message context is processed through GhostReply's Cloudflare backend for hosted AI. Message text is not stored in GhostReply's D1 records.</p></div></div>
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Which option is better for important conversations?</button><div data-disclosure-panel><p>Apple Smart Reply's review-before-send workflow is the safer fit when exact wording matters. Automatic sending should be limited to routine, low-risk conversations even when safeguards are enabled.</p></div></div>
       <div data-disclosure><button type="button" data-disclosure-toggle aria-expanded="false">Can Apple Smart Reply match my writing style?</button><div data-disclosure-panel><p>Apple announced that Smart Reply in Mail and Messages will draw on a user's personalized writing style with macOS 27, planned for autumn 2026. Apple's current instructions still require the user to send the draft.</p></div></div>
     </section>

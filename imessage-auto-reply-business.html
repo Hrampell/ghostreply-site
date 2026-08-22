@@ -48,7 +48,7 @@
         "name": "Is the $4.99 price monthly?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. You can try 10 replies free, then a GhostReply license costs $4.99 once. Your separate Groq account and API usage remain subject to Groq's terms."
+          "text": "No. You can try 10 replies free, then a GhostReply license costs $4.99 once. Hosted AI usage is included and no provider API key is required."
         }
       },
       {
@@ -91,7 +91,7 @@
       <section>
         <h2>Keep simple client texts from becoming a backlog</h2>
         <p>Independent professionals often run real work through iMessage: confirming a showing, acknowledging a draft, moving an appointment, or telling a client when an update is coming. These messages are easy to answer, but they arrive while your attention belongs somewhere else.</p>
-        <p>GhostReply watches eligible one-to-one chats while it is running on your Mac. It reads local conversation history, combines the new message with relevant context, and asks Groq to generate a short response. The answer is sent through Messages, so the client receives an actual reply rather than a draft waiting for you to approve it.</p>
+        <p>GhostReply watches eligible one-to-one chats while it is running on your Mac. It reads local conversation history, combines the new message with relevant context, and asks GhostReply's hosted AI to generate a short response. The answer is sent through Messages, so the client receives an actual reply rather than a draft waiting for you to approve it.</p>
         <p>That automatic send is useful only when the cost of an imperfect reply is low. Use GhostReply for routine acknowledgments and low-stakes coordination. Keep it off for quotes, binding commitments, confidential details, regulated records, payment instructions, disputes, or anything that should be reviewed by a person.</p>
       </section>
 
@@ -125,9 +125,9 @@
           <li>An awake, internet-connected Mac with the Messages app signed in to iMessage.</li>
           <li>Full Disk Access for the terminal app that runs GhostReply, allowing it to read the local Messages database.</li>
           <li>macOS Automation permission for the terminal app to control Messages and send. Contacts permission helps map handles to names.</li>
-          <li>A Groq account and API key for the model request. Relevant context goes directly from your Mac to Groq.</li>
+          <li>An internet connection for hosted AI. Relevant context is sent through GhostReply's Cloudflare backend for processing.</li>
         </ul>
-        <p>GhostReply reads iMessage history locally and saves its profile, settings, and statistics under <code>~/.ghostreply</code>. Message content does not pass through GhostReply's servers. License validation, trial accounting, and analytics data can reach GhostReply services. Groq handles the inference request under its own policies, which you can review in <a href="https://console.groq.com/docs/your-data">Groq's data documentation</a>. The <a href="/privacy.html">GhostReply privacy page</a> explains the full product flow.</p>
+        <p>GhostReply reads iMessage history locally and saves its profile, settings, and statistics under <code>~/.ghostreply</code>. Relevant context is processed through GhostReply's Cloudflare backend and is not stored in its D1 records. License validation, trial accounting, and analytics data can reach GhostReply services. The <a href="/privacy.html">GhostReply privacy page</a> explains the full product flow.</p>
       </section>
 
       <section>
@@ -163,7 +163,7 @@
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">Is the $4.99 price monthly?</button>
-          <div data-disclosure-panel><p>No. You can try 10 replies free, then a GhostReply license costs $4.99 once. Your separate Groq account and API usage remain subject to Groq's terms.</p></div>
+          <div data-disclosure-panel><p>No. You can try 10 replies free, then a GhostReply license costs $4.99 once. Hosted AI usage is included and no provider API key is required.</p></div>
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">Can GhostReply guarantee correct or compliant business replies?</button>

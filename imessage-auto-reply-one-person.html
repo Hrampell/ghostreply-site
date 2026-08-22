@@ -40,7 +40,7 @@
         "name": "Does GhostReply keep working when my Mac sleeps?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Your Mac must be awake, online, signed in to iMessage, and running GhostReply for it to read a new message, ask Groq for a reply, and send it."
+          "text": "No. Your Mac must be awake, online, signed in to iMessage, and running GhostReply for it to read a new message, ask its hosted AI for a reply, and send it."
         }
       },
       {
@@ -84,14 +84,14 @@
         <button class="button" type="button" data-copy-command data-command="curl -sL ghostreply.lol/install.sh | bash" data-copy-install>Try 10 free replies</button>
         <button class="button button--primary" type="button" data-checkout="one_person_hero">Buy once for $4.99</button>
       </div>
-      <p class="seo-hero__note">No subscription. A Groq API key and Mac permissions are required.</p>
+      <p class="seo-hero__note">No subscription or AI API key. Mac permissions are required.</p>
     </section>
 
     <article class="content">
       <section>
         <h2>Why target one contact?</h2>
         <p>A broad away message can be useful, but it is often more automation than you want. Maybe one client is waiting for updates while you work. Maybe your partner is texting during a long meeting. Maybe a family member needs quick acknowledgments while you drive home. One-person mode keeps every other chat untouched.</p>
-        <p>GhostReply watches for new one-to-one iMessages from the contact you select. It reads recent history for that conversation from the Messages database on your Mac, builds the relevant context, and asks Groq for a reply in your established style. The result is sent through Messages while GhostReply remains open. It is an automatic sender, not merely a suggestion that waits in the text field.</p>
+        <p>GhostReply watches for new one-to-one iMessages from the contact you select. It reads recent history for that conversation from the Messages database on your Mac, builds the relevant context, and asks GhostReply's hosted AI for a reply in your established style. The result is sent through Messages while GhostReply remains open. It is an automatic sender, not merely a suggestion that waits in the text field.</p>
         <p>This narrow scope is also easier to supervise. You know exactly which relationship is automated, you can watch the live reply log in Terminal, and a manual message from you ends the session after GhostReply has replied. Run the command again whenever you want it back.</p>
       </section>
 
@@ -121,7 +121,7 @@
         <h2>Set up one-person mode</h2>
         <ol>
           <li>Install GhostReply, run <code>ghostreply</code>, and choose the 10-reply trial or enter a paid license.</li>
-          <li>Add your Groq API key when prompted. The key stays in your local GhostReply configuration.</li>
+          <li>Choose the free trial or enter your GhostReply license key. No AI provider key is required.</li>
           <li>Allow your terminal app to read Messages and control Messages when macOS asks.</li>
           <li>Choose Autopilot or another reply style, select <strong>One person</strong>, then choose the contact.</li>
           <li>Pick a reply speed and leave GhostReply running. Close it or press the stop control to turn it off.</li>
@@ -135,9 +135,9 @@
           <li>A Mac that is awake, online, and signed in to iMessage in the Messages app.</li>
           <li>Full Disk Access for the terminal app that runs GhostReply, so it can read the local Messages database.</li>
           <li>Automation permission for that terminal app to control Messages and send the reply. Contacts access helps show names instead of handles.</li>
-          <li>A Groq account and API key. Relevant message context travels directly from your Mac to Groq for inference.</li>
+          <li>An internet connection for hosted AI. Relevant message context is processed through GhostReply's Cloudflare backend.</li>
         </ul>
-        <p>Your reply profile, configuration, and usage statistics are stored under <code>~/.ghostreply</code>. Message content does not pass through GhostReply's servers. Trial state, license checks, and analytics data can reach GhostReply services. Review <a href="/privacy.html">the GhostReply privacy page</a> and <a href="https://console.groq.com/docs/your-data">Groq's current data documentation</a> before using real conversations.</p>
+        <p>Your reply profile, configuration, and usage statistics are stored under <code>~/.ghostreply</code>. Relevant message context is processed through GhostReply's Cloudflare backend and is not stored in its D1 records. Trial state, license checks, and analytics data can reach GhostReply services. Review <a href="/privacy.html">the GhostReply privacy page</a> before using real conversations.</p>
       </section>
 
       <section>
@@ -164,7 +164,7 @@
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply keep working when my Mac sleeps?</button>
-          <div data-disclosure-panel><p>No. Your Mac must be awake, online, signed in to iMessage, and running GhostReply for it to read a new message, ask Groq for a reply, and send it.</p></div>
+          <div data-disclosure-panel><p>No. Your Mac must be awake, online, signed in to iMessage, and running GhostReply for it to read a new message, ask its hosted AI for a reply, and send it.</p></div>
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">What happens if I reply to that person myself?</button>

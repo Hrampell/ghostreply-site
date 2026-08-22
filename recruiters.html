@@ -56,7 +56,7 @@
         "name": "How much does GhostReply cost for a recruiter?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms."
+          "text": "You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Hosted AI usage is included and no provider API key is required."
         }
       }
     ]
@@ -92,7 +92,7 @@
       <section>
         <h2>Reduce scheduling lag without automating judgment</h2>
         <p>Candidates often text while a recruiter is in an interview, on a call, or moving between meetings. A short acknowledgment can reduce uncertainty until the recruiter can check the calendar or open the candidate record.</p>
-        <p>GhostReply runs in Terminal on a Mac and watches eligible one-to-one iMessage conversations. It uses the local thread and relevant context to generate a response through Groq, then sends that response in Messages. This can help with ordinary coordination, but it is not a recruiting system and should not make or communicate employment decisions.</p>
+        <p>GhostReply runs in Terminal on a Mac and watches eligible one-to-one iMessage conversations. It uses the local thread and relevant context to generate a response through GhostReply's hosted AI, then sends that response in Messages. This can help with ordinary coordination, but it is not a recruiting system and should not make or communicate employment decisions.</p>
       </section>
 
       <section class="examples" id="examples" aria-labelledby="recruiter-examples-heading">
@@ -124,9 +124,9 @@
           <li>Use an awake, internet-connected Mac with Messages signed in to the iMessage account you intend to monitor.</li>
           <li>Install GhostReply in Terminal and give that terminal app Full Disk Access to read local Messages history.</li>
           <li>Grant Messages Automation permission so the terminal can send. Contacts access helps match handles to names.</li>
-          <li>Provide your own Groq API key, choose one person or all eligible one-to-one chats, and set a style and delay.</li>
+          <li>Choose one person or all eligible one-to-one chats, then set a style and delay. No AI provider key is required.</li>
         </ol>
-        <p>GhostReply keeps history access, the learned profile, configuration, and statistics local on your Mac. Selected conversation samples and relevant context go directly from the Mac to Groq for profile and reply generation. Message content does not pass through GhostReply servers. License validation, trial accounting, and analytics data can reach GhostReply services.</p>
+        <p>GhostReply keeps history access, the learned profile, configuration, and statistics local on your Mac. Selected conversation samples and relevant context are processed through GhostReply's Cloudflare backend for profile and reply generation and are not stored in its D1 records. License validation, trial accounting, and analytics data can reach GhostReply services.</p>
         <p>The app only sends while the Mac is awake, online, and running GhostReply. Close it to stop. See every step in <a href="/how-to-auto-reply-imessage-mac.html">the iMessage auto-reply setup guide for Mac</a>.</p>
       </section>
 
@@ -164,7 +164,7 @@
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">How much does GhostReply cost for a recruiter?</button>
-          <div data-disclosure-panel><p>You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms.</p></div>
+          <div data-disclosure-panel><p>You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Hosted AI usage is included and no provider API key is required.</p></div>
         </div>
       </section>
     </article>

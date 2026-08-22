@@ -56,7 +56,7 @@
         "name": "Does GhostReply use Apple Shortcuts?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. GhostReply runs on a Mac, reads eligible iMessage history locally, sends relevant context directly to Groq with your API key, and controls Messages after you grant macOS permission."
+          "text": "No. GhostReply runs on a Mac, reads eligible iMessage history locally, sends relevant context through its Cloudflare backend for hosted AI processing, and controls Messages after you grant macOS permission."
         }
       }
     ]
@@ -141,8 +141,8 @@
 
       <section id="requirements">
         <h2>GhostReply requirements and data path</h2>
-        <p>GhostReply needs an awake, online Mac with Messages signed in, Full Disk Access for the terminal app that reads the local Messages database, and Automation permission for that terminal app to control Messages. Contacts access helps resolve names. You also provide a Groq API key.</p>
-        <p>iMessage history is read locally. GhostReply stores its configuration, reply profile, and statistics under <code>~/.ghostreply</code>. Relevant context goes directly from your Mac to Groq for inference using your key. Message content does not pass through GhostReply's servers, although trial, license, and analytics data can reach those services. Read <a href="https://console.groq.com/docs/your-data">Groq's data documentation</a> and the <a href="/privacy.html">GhostReply privacy page</a>.</p>
+        <p>GhostReply needs an awake, online Mac with Messages signed in, Full Disk Access for the terminal app that reads the local Messages database, and Automation permission for that terminal app to control Messages. Contacts access helps resolve names. No AI provider key is required.</p>
+        <p>iMessage history is read locally. GhostReply stores its configuration, reply profile, and statistics under <code>~/.ghostreply</code>. Relevant context is processed through GhostReply's Cloudflare backend and is not stored in its D1 records. Trial, license, and analytics data can reach GhostReply services. Read the <a href="/privacy.html">GhostReply privacy page</a>.</p>
         <p>GhostReply runs only while the Mac is awake and the app is open. It can target one person or all one-to-one chats; group chats are skipped. After GhostReply has replied, your manual message stops one-person mode or pauses that contact for 30 minutes in all-contacts mode. Urgent and sensitive controls are keyword heuristics, not guarantees.</p>
       </section>
 
@@ -172,7 +172,7 @@
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply use Apple Shortcuts?</button>
-          <div data-disclosure-panel><p>No. GhostReply runs on a Mac, reads eligible iMessage history locally, sends relevant context directly to Groq with your API key, and controls Messages after you grant macOS permission.</p></div>
+          <div data-disclosure-panel><p>No. GhostReply runs on a Mac, reads eligible iMessage history locally, sends relevant context through its Cloudflare backend for hosted AI processing, and controls Messages after you grant macOS permission.</p></div>
         </div>
       </section>
 

@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GhostReply Support: Install, Permissions, Keys, and Stop</title>
-  <meta name="description" content="Install and run GhostReply on Mac, fix Full Disk Access or Messages Automation, troubleshoot Groq and license keys, stop replies, or uninstall.">
+  <meta name="description" content="Install and run GhostReply on Mac, fix Full Disk Access or Messages Automation, troubleshoot hosted AI or license keys, stop replies, or uninstall.">
   <link rel="canonical" href="https://ghostreply.lol/support.html">
   <meta property="og:site_name" content="GhostReply">
   <meta property="og:type" content="website">
   <meta property="og:title" content="GhostReply Installation and Support">
-  <meta property="og:description" content="Exact setup commands plus help with macOS permissions, Groq keys, license recovery, stopping, and uninstalling.">
+  <meta property="og:description" content="Exact setup commands plus help with macOS permissions, hosted AI, license recovery, stopping, and uninstalling.">
   <meta property="og:url" content="https://ghostreply.lol/support.html">
   <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
   <meta property="og:image:alt" content="GhostReply setup on a Mac">
@@ -49,7 +49,7 @@
   <header class="seo-hero">
     <p class="seo-hero__eyebrow">Mac setup and support</p>
     <h1>Install, Run, or Fix GhostReply</h1>
-    <p class="seo-hero__lead">Start with the exact Terminal command, then use the checks below for macOS permissions, Groq setup, license recovery, stopping, and removal.</p>
+    <p class="seo-hero__lead">Start with the exact Terminal command, then use the checks below for macOS permissions, hosted AI, license recovery, stopping, and removal.</p>
   </header>
 
   <main class="content" id="main">
@@ -59,7 +59,7 @@
       <ol class="steps">
         <li>Open Terminal or the terminal app you plan to use.</li>
         <li>Paste the command below and press Return. The installer verifies the downloaded app before it runs.</li>
-        <li>Follow the prompts for the 10-reply trial or license, your Groq API key, permissions, contact choice, reply mode, and speed.</li>
+        <li>Follow the prompts for the 10-reply trial or license, permissions, contact choice, reply mode, and speed. No AI API key is required.</li>
         <li>After setup, run <code>ghostreply</code> whenever you want the listener on. Keep that Terminal process running.</li>
       </ol>
       <div class="install-command">
@@ -86,13 +86,13 @@
     </section>
 
     <section>
-      <h2>Fix a Groq key</h2>
-      <p>Create or manage the key in the <a href="https://console.groq.com/keys">Groq console</a>. Paste it only into the GhostReply prompt. The key is stored in the local GhostReply configuration and used for requests sent directly from your Mac to Groq.</p>
+      <h2>Fix hosted AI</h2>
+      <p>GhostReply uses hosted AI through its Cloudflare backend, so there is no provider key to create. Check your internet connection, confirm <a href="https://ghostreply-api.rampell.workers.dev/health">the GhostReply service health endpoint</a> returns an OK status, and retry. A temporary provider failure does not consume a trial reply or paid reply credit.</p>
       <ul>
         <li>If a newly created key returns 403, wait about 30 seconds and try it again.</li>
         <li>If verification fails, copy the full key again without spaces or line breaks and confirm the Mac is online.</li>
         <li>For an SSL certificate error, follow the app's suggested certificate-package update, then restart setup.</li>
-        <li>Do not paste a Groq key into an email, screenshot, support form, public post, or shared terminal transcript.</li>
+        <li>Do not paste a GhostReply license key into an email, screenshot, support form, public post, or shared terminal transcript.</li>
       </ul>
     </section>
 
@@ -110,7 +110,7 @@
 
     <section>
       <h2>Contact support safely</h2>
-      <p>Email <a href="mailto:support@ghostreply.lol">support@ghostreply.lol</a> with the Mac version, terminal app, GhostReply version from <code>ghostreply --version</code>, the step that failed, and the exact error after removing personal data. Do not send message contents, phone numbers, contact names, Groq API keys, license keys, or unredacted screenshots. A cropped or redacted screenshot is useful only when the remaining text cannot identify a person or expose a secret.</p>
+      <p>Email <a href="mailto:support@ghostreply.lol">support@ghostreply.lol</a> with the Mac version, terminal app, GhostReply version from <code>ghostreply --version</code>, the step that failed, and the exact error after removing personal data. Do not send message contents, phone numbers, contact names, license keys, signed session tokens, or unredacted screenshots. A cropped or redacted screenshot is useful only when the remaining text cannot identify a person or expose a secret.</p>
     </section>
 
     <section class="faq" aria-labelledby="support-faq">

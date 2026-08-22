@@ -72,7 +72,7 @@
             <tr><td>Starting offer</td><td>10 automatically sent replies free</td><td>10 AI-drafted replies free</td></tr>
             <tr><td>Paid price</td><td>$4.99 once</td><td>$25/mo billed annually; FAQ also says $30/mo</td></tr>
             <tr><td>Mac requirement</td><td>Mac with Messages; exact minimum version Unknown</td><td>Apple silicon and macOS 14 or later</td></tr>
-            <tr><td>AI processing</td><td>Relevant context directly to Groq</td><td>Cloud models by default or optional on-device mode</td></tr>
+            <tr><td>AI processing</td><td>Cloudflare-hosted AI included</td><td>Cloud models by default or optional on-device mode</td></tr>
             <tr><td>Best control</td><td>One person or everyone, group skipping, manual takeover</td><td>Review, edit, approve, or ignore each suggestion</td></tr>
           </tbody>
         </table>
@@ -89,9 +89,9 @@
 
     <section>
       <h2>Why GhostReply is the focused alternative</h2>
-      <p>GhostReply is useful when ten platforms would be unnecessary overhead. It installs from Terminal, reads recent iMessage history locally, learns how you write to each person, and listens for incoming one-to-one messages. When a routine message arrives, it sends relevant context directly to Groq, cleans the generated answer, waits for the configured delay, and sends through Messages.</p>
+      <p>GhostReply is useful when ten platforms would be unnecessary overhead. It installs from Terminal, reads recent iMessage history locally, learns how you write to each person, and listens for incoming one-to-one messages. When a routine message arrives, it sends relevant context through GhostReply's Cloudflare backend, cleans the generated answer, waits for the configured delay, and sends through Messages.</p>
       <p>The app can target one contact or all eligible one-to-one conversations. It skips group chats, uses keyword heuristics to hold or skip some sensitive and urgent messages, rejects obvious AI framing, and steps aside if you reply manually. The Mac, Messages, network, and GhostReply process must remain available. These controls reduce risk but do not make automatic text generation infallible.</p>
-      <p>History and reply profiles remain on the Mac. The generation step is not fully local: relevant context goes directly to Groq with your API key. GhostReply's own servers do not receive message content. The purchase includes 10 free replies and then costs $4.99 once. Your Groq account and provider limits are separate from the license.</p>
+      <p>History and reply profiles remain on the Mac. The generation step is not fully local: relevant context is processed through GhostReply's Cloudflare backend and is not stored in its D1 records. The purchase includes 10 free replies and then costs $4.99 once. Hosted AI usage is included and no provider API key is required.</p>
     </section>
 
     <section>
@@ -110,7 +110,7 @@
         <li>You only need iMessage on a Mac.</li>
         <li>Automatic sending is the requirement, not an unwanted risk.</li>
         <li>You prefer 10 free replies and a $4.99 one-time license.</li>
-        <li>You accept Terminal permissions, a Groq key, and a running Mac app.</li>
+        <li>You accept Terminal permissions, hosted cloud AI, and a running Mac app.</li>
       </ul>
       <p>Before using auto-send, read <a href="/how-to-auto-reply-imessage-mac.html">how the Mac setup works</a> and compare the review-first path in <a href="/ghostreply-vs-apple-intelligence.html">GhostReply vs Apple Intelligence</a>. The <a href="/best-ai-imessage-apps-mac.html">full Mac app comparison</a> covers Gabby too.</p>
     </section>

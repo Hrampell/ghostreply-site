@@ -56,7 +56,7 @@
         "name": "How much does GhostReply cost for client texts?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms."
+          "text": "You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Hosted AI usage is included and no provider API key is required."
         }
       }
     ]
@@ -92,7 +92,7 @@
       <section>
         <h2>Keep small client questions from breaking focus</h2>
         <p>Freelancers, consultants, contractors, and local service providers often use iMessage as a lightweight client channel. A client may ask whether a file arrived or whether an appointment can move while you are doing the work they hired you to do.</p>
-        <p>GhostReply watches eligible incoming one-to-one chats while it runs on your Mac. It uses local conversation history and relevant context to generate a short reply through Groq, then sends the message automatically. That can cover simple acknowledgments, but it should not replace judgment where a wrong reply could change the scope, price, deadline, confidentiality, or outcome of the work.</p>
+        <p>GhostReply watches eligible incoming one-to-one chats while it runs on your Mac. It uses local conversation history and relevant context to generate a short reply through GhostReply's hosted AI, then sends the message automatically. That can cover simple acknowledgments, but it should not replace judgment where a wrong reply could change the scope, price, deadline, confidentiality, or outcome of the work.</p>
       </section>
 
       <section class="examples" id="examples" aria-labelledby="client-examples-heading">
@@ -124,9 +124,9 @@
           <li>Use an awake, internet-connected Mac with Messages signed in to the iMessage account you want to monitor.</li>
           <li>Install GhostReply in Terminal and grant that terminal app Full Disk Access to read local Messages history.</li>
           <li>Grant Messages Automation permission so the terminal can send. Contacts access helps identify saved clients.</li>
-          <li>Add your own Groq API key, select one person or all eligible one-to-one chats, and choose the reply style and delay.</li>
+          <li>Select one person or all eligible one-to-one chats, then choose the reply style and delay. No AI provider key is required.</li>
         </ol>
-        <p>GhostReply keeps history access, the learned profile, configuration, and statistics local on the Mac. Selected conversation samples and relevant context go directly from your Mac to Groq for profile and reply generation. Message content does not pass through GhostReply servers. License validation, trial accounting, and analytics data can reach GhostReply services.</p>
+        <p>GhostReply keeps history access, the learned profile, configuration, and statistics local on the Mac. Selected conversation samples and relevant context are processed through GhostReply's Cloudflare backend for profile and reply generation and are not stored in its D1 records. License validation, trial accounting, and analytics data can reach GhostReply services.</p>
         <p>The app can only send while the Mac is awake, online, and running GhostReply. Close it to stop. Use <a href="/how-to-auto-reply-imessage-mac.html">the Mac iMessage auto-reply setup guide</a> for the complete permission and trial steps.</p>
       </section>
 
@@ -164,7 +164,7 @@
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">How much does GhostReply cost for client texts?</button>
-          <div data-disclosure-panel><p>You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Your Groq account and API usage are separate and subject to Groq's terms.</p></div>
+          <div data-disclosure-panel><p>You can try 10 automatic replies free. After that, a GhostReply license costs $4.99 once. Hosted AI usage is included and no provider API key is required.</p></div>
         </div>
       </section>
     </article>

@@ -122,7 +122,7 @@
       <section>
         <h2>How to use it for a meeting or focus block</h2>
         <ol>
-          <li>Install GhostReply and enter your Groq API key during setup.</li>
+          <li>Install GhostReply and choose the free trial or enter your license key. No AI provider key is required.</li>
           <li>Run <code>ghostreply</code> just before you become unavailable.</li>
           <li>Choose Busy for brief acknowledgments, or Autopilot for replies closer to your usual style.</li>
           <li>Select One person for narrow coverage or Everyone for all eligible one-to-one chats.</li>
@@ -132,14 +132,14 @@
       </section>
 
       <section id="requirements">
-        <h2>Mac, permission, and Groq requirements</h2>
+        <h2>Mac, permission, and hosted AI requirements</h2>
         <ul>
           <li>A Mac that stays awake and online with iMessage active in Messages.</li>
           <li>Full Disk Access for your terminal app, which lets GhostReply read the local Messages database.</li>
           <li>Automation permission for the terminal app to control Messages. Contacts access is used for readable contact names when available.</li>
-          <li>Your own Groq API key for generating replies. Relevant context goes directly from the Mac to Groq.</li>
+          <li>An internet connection for hosted AI. Relevant context is processed through GhostReply's Cloudflare backend.</li>
         </ul>
-        <p>GhostReply stores its profile, configuration, and statistics under <code>~/.ghostreply</code>. Your message content does not pass through GhostReply's servers. Trial, licensing, and analytics data can reach GhostReply services. Groq is a separate processor with its own controls and policies, described in <a href="https://console.groq.com/docs/your-data">Groq's data documentation</a>. See the <a href="/privacy.html">GhostReply privacy page</a> for the product data flow.</p>
+        <p>GhostReply stores its profile, configuration, and statistics under <code>~/.ghostreply</code>. Relevant message context is processed through GhostReply's Cloudflare backend and is not stored in its D1 records. Trial, licensing, and analytics data can reach GhostReply services. See the <a href="/privacy.html">GhostReply privacy page</a> for the product data flow.</p>
       </section>
 
       <section>

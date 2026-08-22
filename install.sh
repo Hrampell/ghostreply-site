@@ -198,7 +198,6 @@ echo "[3/4] Installing dependencies..."
 dependencies_present() {
     "$PYTHON" - <<'PY' >/dev/null 2>&1
 import certifi
-import openai
 PY
 }
 
@@ -212,10 +211,10 @@ if dependencies_present; then
         || "$PYTHON" -m pip install -q rich 2>/dev/null ) &
 else
     # Run pip in background with spinner. Try Homebrew/PEP 668, user installs, then plain pip.
-    # 'rich' powers the polished terminal UI; openai + certifi are the hard requirements.
-    ( "$PYTHON" -m pip install --break-system-packages -q openai certifi rich 2>/dev/null \
-        || "$PYTHON" -m pip install --user -q openai certifi rich 2>/dev/null \
-        || "$PYTHON" -m pip install -q openai certifi rich 2>/dev/null ) &
+    # 'rich' powers the polished terminal UI; certifi is the only hard requirement.
+    ( "$PYTHON" -m pip install --break-system-packages -q certifi rich 2>/dev/null \
+        || "$PYTHON" -m pip install --user -q certifi rich 2>/dev/null \
+        || "$PYTHON" -m pip install -q certifi rich 2>/dev/null ) &
     PIP_PID=$!
 
     SPINNER='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
@@ -233,7 +232,7 @@ else
         echo ""
         echo "  ERROR: Failed to install dependencies."
         echo "  Run this manually, then run 'ghostreply':"
-        echo "    $PYTHON -m pip install --user openai certifi"
+        echo "    $PYTHON -m pip install --user certifi"
         exit 1
     fi
 fi

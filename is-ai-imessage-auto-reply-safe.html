@@ -10,7 +10,7 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://ghostreply.lol/is-ai-imessage-auto-reply-safe.html">
   <meta property="og:title" content="Is AI iMessage Auto-Reply Safe?">
-  <meta property="og:description" content="A plain-language look at local history access, Groq inference, automatic sending, human takeover, and the limits of heuristic safeguards.">
+  <meta property="og:description" content="A plain-language look at local history access, hosted AI, automatic sending, human takeover, and the limits of heuristic safeguards.">
   <meta property="og:image" content="https://ghostreply.lol/assets/ghostreply-demo-poster.jpg">
   <meta property="og:image:alt" content="GhostReply showing an automatic iMessage reply on a Mac">
   <meta name="twitter:card" content="summary_large_image">
@@ -32,7 +32,7 @@
         "name": "Does GhostReply upload my full iMessage history?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "GhostReply does not send your entire Messages database to GhostReply servers. It reads history locally, then sends selected conversation samples and relevant context directly from your Mac to Groq using your API key."
+          "text": "GhostReply does not upload your entire Messages database. It reads history locally, then sends selected conversation samples and relevant context through its Cloudflare backend for hosted AI processing."
         }
       },
       {
@@ -116,16 +116,16 @@
         <ol>
           <li>GhostReply reads the Messages database locally on your Mac after you grant Full Disk Access to the terminal app.</li>
           <li>It stores configuration, a reply profile, and local usage statistics under <code>~/.ghostreply</code>.</li>
-          <li>For profile and reply generation, selected conversation samples and relevant context go directly from your Mac to Groq using your API key.</li>
-          <li>Message content does not pass through GhostReply's servers. Trial accounting, license validation, and analytics data can reach GhostReply services.</li>
+          <li>For profile and reply generation, selected conversation samples and relevant context are processed through GhostReply's Cloudflare backend.</li>
+          <li>Relevant context is processed through GhostReply's Cloudflare backend for hosted AI and is not stored in its D1 records. Trial accounting, license validation, and analytics data can reach GhostReply services.</li>
         </ol>
-        <p>This means GhostReply is not a fully local AI system. History access and stored profile data are local, while inference is a cloud request to Groq. You should have the right to process the conversation content you send and consider whether the other person's expectations, your contracts, or applicable rules permit that processing.</p>
-        <p><a href="https://console.groq.com/docs/your-data">Groq's current data documentation</a> says usage metadata is retained and inference customer data is not retained by default, but it also describes limited temporary logging for reliability or abuse monitoring and optional account controls. Policies and settings can change. Review the current document and your Groq data controls instead of assuming zero retention. Also read the <a href="/privacy.html">GhostReply privacy page</a>.</p>
+        <p>This means GhostReply is not a fully local AI system. History access and stored profile data are local, while inference is processed through GhostReply's Cloudflare backend. You should have the right to process the conversation content you send and consider whether the other person's expectations, your contracts, or applicable rules permit that processing.</p>
+        <p>Cloud provider policies and settings can change. Review <a href="https://developers.cloudflare.com/workers-ai/platform/data-usage/">Cloudflare's current Workers AI data-usage documentation</a> instead of assuming zero retention. Also read the <a href="/privacy.html">GhostReply privacy page</a>.</p>
       </section>
 
       <section id="requirements">
         <h2>Permissions are powerful by design</h2>
-        <p>GhostReply needs a Mac signed in to Messages, Terminal or another supported terminal app, an internet connection, and your Groq key. Full Disk Access lets the terminal read the local Messages database. Messages Automation permission lets that terminal control Messages and send. Contacts access helps display names instead of raw handles.</p>
+        <p>GhostReply needs a Mac signed in to Messages, Terminal or another supported terminal app, and an internet connection. No AI provider key is required. Full Disk Access lets the terminal read the local Messages database. Messages Automation permission lets that terminal control Messages and send. Contacts access helps display names instead of raw handles.</p>
         <p>Only grant these permissions to a terminal and software source you trust. It auto-sends only while the Mac is awake and GhostReply is running. Closing the app stops the session. Revoke Full Disk Access or Automation in macOS System Settings if you no longer want the software to have that capability.</p>
       </section>
 
@@ -151,7 +151,7 @@
           <li>Avoid children, vulnerable people, strangers, disputes, sensitive personal data, and high-stakes topics.</li>
           <li>Do not treat urgent or sensitive heuristics as guaranteed detection.</li>
           <li>Stop GhostReply before a conversation becomes consequential or emotionally complex.</li>
-          <li>Review your local profile and configuration, Groq controls, and granted macOS permissions periodically.</li>
+          <li>Review your local profile, GhostReply settings, and granted macOS permissions periodically.</li>
         </ul>
       </section>
 
@@ -169,7 +169,7 @@
         <h2>AI iMessage safety FAQ</h2>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">Does GhostReply upload my full iMessage history?</button>
-          <div data-disclosure-panel><p>GhostReply does not send your entire Messages database to GhostReply servers. It reads history locally, then sends selected conversation samples and relevant context directly from your Mac to Groq using your API key.</p></div>
+          <div data-disclosure-panel><p>GhostReply does not upload your entire Messages database. It reads history locally, then sends selected conversation samples and relevant context through its Cloudflare backend for hosted AI processing.</p></div>
         </div>
         <div data-disclosure>
           <button type="button" data-disclosure-toggle aria-expanded="false">Can the AI send a wrong reply?</button>
