@@ -146,10 +146,42 @@ fi
 echo "  Using: $PYTHON"
 echo ""
 
-echo "[1/4] Setting up alias..."
+echo "[1/4] Installing command..."
 mkdir -p ~/.ghostreply
+chmod 700 ~/.ghostreply
 
-# Set up the alias FIRST so 'ghostreply' always works — even if later steps fail
+# Install a real command into a writable directory that is already on PATH.
+# Unlike an alias written to a shell startup file, this works immediately in
+# the same Terminal window after `curl ... | bash` returns.
+COMMAND_PATH_FILE="$HOME/.ghostreply/command_path"
+COMMAND_PATH=""
+for COMMAND_DIR in "$(dirname "$PYTHON")" "$HOME/.local/bin" "$HOME/bin" "/usr/local/bin" "/opt/homebrew/bin"; do
+    case ":$PATH:" in
+        *":$COMMAND_DIR:"*) ;;
+        *) continue ;;
+    esac
+    [[ -d "$COMMAND_DIR" && -w "$COMMAND_DIR" ]] || continue
+    CANDIDATE="$COMMAND_DIR/ghostreply"
+    if [[ -e "$CANDIDATE" ]] && ! grep -qF "$HOME/.ghostreply/ghostreply.py" "$CANDIDATE" 2>/dev/null; then
+        continue
+    fi
+    COMMAND_PATH="$CANDIDATE"
+    break
+done
+
+if [[ -n "$COMMAND_PATH" ]]; then
+    printf '%s\n' "$PYTHON" > "$HOME/.ghostreply/python_path"
+    cat > "$COMMAND_PATH" <<'GHOSTREPLY_COMMAND'
+#!/bin/sh
+PYTHON="$(cat "$HOME/.ghostreply/python_path")"
+exec "$PYTHON" "$HOME/.ghostreply/ghostreply.py" "$@"
+GHOSTREPLY_COMMAND
+    chmod 755 "$COMMAND_PATH"
+    printf '%s\n' "$COMMAND_PATH" > "$COMMAND_PATH_FILE"
+    chmod 600 "$COMMAND_PATH_FILE" "$HOME/.ghostreply/python_path"
+fi
+
+# Keep the alias as a fallback for Macs without a writable directory on PATH.
 if [[ "$SHELL" == */zsh ]]; then
     SHELL_RC="$HOME/.zshrc"
 elif [[ "$SHELL" == */bash ]]; then
