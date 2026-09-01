@@ -1,12 +1,18 @@
 #!/bin/bash
-# GhostReply Installer
 # One-liner: curl -sL ghostreply.lol/install.sh | bash
 
 echo ""
-echo "  ╔══════════════════════════════════╗"
-echo "  ║       GhostReply Installer        ║"
-echo "  ║   iMessage Auto-Reply on Mac     ║"
-echo "  ╚══════════════════════════════════╝"
+printf '\033[92m'
+cat <<'GHOSTREPLY_BANNER'
+ _____  _   _ _____ _____ ___________ ___________ _   __   __
+|  __ \| | | |  _  /  ___|_   _| ___ \  ___| ___ \ |  \ \ / /
+| |  \/| |_| | | | \ `--.  | | | |_/ / |__ | |_/ / |   \ V /
+| | __ |  _  | | | |`--. \ | | |    /|  __||  __/| |    \ /
+| |_\ \| | | \ \_/ /\__/ / | | | |\ \| |___| |   | |____| |
+ \____/\_| |_/\___/\____/  \_/ \_| \_\____/\_|   \_____/\_/
+GHOSTREPLY_BANNER
+printf '\033[0m'
+echo "              the AI that texts back, as you"
 echo ""
 
 # Analytics: track install event (non-blocking, best-effort)
